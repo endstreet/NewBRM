@@ -1,0 +1,2835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DCModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CUST_DISTRICT">
+          <Key>
+            <PropertyRef Name="DISTRICTID" />
+          </Key>
+          <Property Name="DISTRICTID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DISTRICT" Type="varchar2" MaxLength="50" />
+          <Property Name="REGNUM" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="CUST_LOCALOFFICE">
+          <Key>
+            <PropertyRef Name="LOCALID" />
+          </Key>
+          <Property Name="LOCALID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LOCALOFFICE" Type="varchar2" MaxLength="50" />
+          <Property Name="DISTRICTID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="CUST_REGIONS">
+          <Key>
+            <PropertyRef Name="REGNUM" />
+          </Key>
+          <Property Name="REGNUM" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="REGNAME" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DC_ACTIVITY">
+          <Key>
+            <PropertyRef Name="DC_ACTIVITY_ID" />
+          </Key>
+          <Property Name="DC_ACTIVITY_ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar2" MaxLength="50" Nullable="false" />
+          <Property Name="AREA" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="ACTIVITY" Type="nvarchar2" MaxLength="255" Nullable="false" />
+          <Property Name="RESULT" Type="nvarchar2" MaxLength="255" Nullable="false" />
+          <Property Name="USERID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ACTIVITY_DATE" Type="date" Nullable="false" />
+          <Property Name="REGION_ID" Type="nvarchar2" MaxLength="50" Nullable="false" />
+          <Property Name="OFFICE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="UNQ_FILE_NO" Type="nvarchar2" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6047: The Entity Framework provider in use reported the primary key column BATCH_NO on table DC_BATCH to be nullable. Entity Framework does not allow nullable primary keys, therefore it will assume the column is not nullable and any null values stored in this column may cause errors at runtime.-->
+        <EntityType Name="DC_BATCH">
+          <Key>
+            <PropertyRef Name="BATCH_NO" />
+          </Key>
+          <Property Name="BATCH_NO" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="OFFICE_ID" Type="varchar2" MaxLength="10" />
+          <Property Name="UPDATED_BY" Type="number" Precision="38" Scale="0" />
+          <Property Name="UPDATED_DATE" Type="date" />
+          <Property Name="BATCH_CURRENT" Type="char" MaxLength="1" />
+          <Property Name="BATCH_STATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="BATCH_COMMENT" Type="varchar2" MaxLength="500" />
+          <Property Name="WAYBILL_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="COURIER_NAME" Type="varchar2" MaxLength="255" />
+          <Property Name="WAYBILL_DATE" Type="date" />
+          <Property Name="UPDATED_BY_AD" Type="varchar2" MaxLength="225" />
+          <Property Name="REG_TYPE" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CONTENTSERVER.DC_BOX_TYPE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DC_BOX_TYPE">
+          <Key>
+            <PropertyRef Name="BOX_TYPE_ID" />
+            <PropertyRef Name="BOX_TYPE" />
+            <PropertyRef Name="IS_TRANSPORT" />
+          </Key>
+          <Property Name="BOX_TYPE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="BOX_TYPE" Type="varchar2" MaxLength="100" Nullable="false" />
+          <Property Name="IS_TRANSPORT" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DC_BOXPICKED">
+          <Key>
+            <PropertyRef Name="UNQ_NO" />
+          </Key>
+          <Property Name="UNQ_PICKLIST" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="BIN_NUMBER" Type="varchar2" MaxLength="10" />
+          <Property Name="BOX_NUMBER" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="BOX_RECEIVED" Type="char" MaxLength="1" />
+          <Property Name="BOX_COMPLETED" Type="char" MaxLength="1" />
+          <Property Name="ARCHIVE_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="UNQ_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DC_DESTRUCTION">
+          <Key>
+            <PropertyRef Name="PENSION_NO" />
+          </Key>
+          <Property Name="PENSION_NO" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DESTRUCTIO_DATE" Type="nvarchar2" MaxLength="20" />
+          <Property Name="STATUS_DATE" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="STATUS" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="60" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="60" />
+          <Property Name="GRANT_TYPE" Type="varchar2" MaxLength="5" />
+          <Property Name="REGION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="EXCLUSIONBATCH_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="DESTRUCTION_BATCH_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="DC_DESTRUCTION_BATCH">
+          <Key>
+            <PropertyRef Name="BATCH_ID" />
+          </Key>
+          <Property Name="BATCH_ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REGION_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="DESTRUCTION_YEAR" Type="varchar2" MaxLength="10" />
+          <Property Name="CREATED_BY" Type="varchar2" MaxLength="20" />
+          <Property Name="CREATED_DATE" Type="varchar2" MaxLength="8" />
+          <Property Name="APPROVED_BY" Type="varchar2" MaxLength="20" />
+          <Property Name="APPROVED_DATE" Type="varchar2" MaxLength="8" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CONTENTSERVER.DC_DISTRICT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DC_DISTRICT">
+          <Key>
+            <PropertyRef Name="DISTRICT" />
+          </Key>
+          <Property Name="DISTRICT" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DISTRICT_NAME" Type="varchar2" MaxLength="255" />
+          <Property Name="REGION_ID" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DC_DISTRICT_EC">
+          <Key>
+            <PropertyRef Name="DISTRICT_NUMBER" />
+          </Key>
+          <Property Name="DISTRICT_NUMBER" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DISTRICT_NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DISTRICT_CODE" Type="varchar2" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DC_DOCUMENT_TYPE">
+          <Key>
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="TYPE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TYPE_NAME" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DC_EXCLUSION_BATCH">
+          <Key>
+            <PropertyRef Name="BATCH_ID" />
+          </Key>
+          <Property Name="BATCH_ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REGION_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="EXCLUSION_YEAR" Type="varchar2" MaxLength="10" />
+          <Property Name="CREATED_BY" Type="varchar2" MaxLength="50" />
+          <Property Name="CREATED_DATE" Type="varchar2" MaxLength="8" />
+          <Property Name="APPROVED_BY" Type="varchar2" MaxLength="50" />
+          <Property Name="APPROVED_DATE" Type="varchar2" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="DC_EXCLUSIONS">
+          <Key>
+            <PropertyRef Name="ID_NO" />
+          </Key>
+          <Property Name="ID_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EXCL_DATE" Type="date" />
+          <Property Name="REGION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar2" MaxLength="40" Nullable="false" />
+          <Property Name="EXCLUSION_TYPE" Type="nvarchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EXCLUSION_BATCH_ID" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="DC_FILE">
+          <Key>
+            <PropertyRef Name="UNQ_FILE_NO" />
+          </Key>
+          <Property Name="UNQ_FILE_NO" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BATCH_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="OFFICE_ID" Type="varchar2" MaxLength="10" />
+          <Property Name="REGION_ID" Type="varchar2" MaxLength="10" />
+          <Property Name="APPLICANT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="GRANT_TYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="TRANS_TYPE" Type="number" Precision="38" Scale="0" />
+          <Property Name="DOCS_PRESENT" Type="varchar2" MaxLength="255" />
+          <Property Name="TRANS_DATE" Type="date" />
+          <Property Name="UPDATED_BY" Type="number" Precision="38" Scale="0" />
+          <Property Name="UPDATED_DATE" Type="date" />
+          <Property Name="BATCH_ADD_DATE" Type="date" />
+          <Property Name="FILE_STATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="FILE_COMMENT" Type="varchar2" MaxLength="255" />
+          <Property Name="USER_FIRSTNAME" Type="varchar2" MaxLength="255" />
+          <Property Name="USER_LASTNAME" Type="varchar2" MaxLength="255" />
+          <Property Name="APPLICATION_STATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="DOCS_SCANNED" Type="varchar2" MaxLength="255" />
+          <Property Name="SCAN_DATETIME" Type="date" />
+          <Property Name="BRM_BARCODE" Type="varchar2" MaxLength="20" />
+          <Property Name="TDW_BOXNO" Type="varchar2" MaxLength="20" />
+          <Property Name="NON_COMPLIANT" Type="varchar2" MaxLength="2" />
+          <Property Name="QC_USER_FN" Type="varchar2" MaxLength="255" />
+          <Property Name="QC_USER_LN" Type="varchar2" MaxLength="255" />
+          <Property Name="QC_DATE" Type="date" />
+          <Property Name="MIS_BOXNO" Type="varchar2" MaxLength="20" />
+          <Property Name="MIS_BOX_DATE" Type="date" />
+          <Property Name="MIS_REBOX_DATE" Type="date" />
+          <Property Name="MIS_BOX_STATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="MIS_REBOX_STATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="FILE_NUMBER" Type="varchar2" MaxLength="20" />
+          <Property Name="ARCHIVE_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="EXCLUSIONS" Type="varchar2" MaxLength="20" />
+          <Property Name="MISSING" Type="varchar2" MaxLength="2" />
+          <Property Name="TRANSFERRED" Type="varchar2" MaxLength="2" />
+          <Property Name="COMPLIANT" Type="varchar2" MaxLength="2" />
+          <Property Name="REGION_ID_FROM" Type="varchar2" MaxLength="10" />
+          <Property Name="TDW_BOX_TYPE_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="TDW_BOX_ARCHIVE_YEAR" Type="varchar2" MaxLength="4" />
+          <Property Name="ALT_BOX_NO" Type="varchar2" MaxLength="50" />
+          <Property Name="SRD_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="TEMP_BOX_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="UPDATED_BY_AD" Type="varchar2" MaxLength="225" />
+          <Property Name="CHILD_ID_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="PRINT_ORDER" Type="number" Precision="38" Scale="0" />
+          <Property Name="ISREVIEW" Type="varchar2" MaxLength="2" />
+          <Property Name="LASTREVIEWDATE" Type="date" />
+          <Property Name="LCTYPE" Type="number" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="DC_FILE_REQUEST">
+          <Key>
+            <PropertyRef Name="UNQ_FILE_NO" />
+          </Key>
+          <Property Name="UNQ_FILE_NO" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="MIS_FILE_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="NAME" Type="varchar2" MaxLength="50" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="200" />
+          <Property Name="REGION_ID" Type="varchar2" MaxLength="10" />
+          <Property Name="REQUESTED_BY" Type="number" Precision="38" Scale="0" />
+          <Property Name="REQUESTED_DATE" Type="date" />
+          <Property Name="REQUESTED_OFFICE_ID" Type="varchar2" MaxLength="10" />
+          <Property Name="SCANNED_BY" Type="number" Precision="38" Scale="0" />
+          <Property Name="SCANNED_DATE" Type="date" />
+          <Property Name="CLOSED_DATE" Type="date" />
+          <Property Name="CLOSED_BY" Type="number" Precision="38" Scale="0" />
+          <Property Name="RELATED_MIS_FILE_NO" Type="varchar2" MaxLength="255" />
+          <Property Name="GRANT_TYPE" Type="varchar2" MaxLength="2" />
+          <Property Name="APP_DATE" Type="date" />
+          <Property Name="SCANNED_PHYSICAL_IND" Type="char" MaxLength="1" />
+          <Property Name="REQ_CATEGORY" Type="number" Precision="38" Scale="0" />
+          <Property Name="REQ_CATEGORY_TYPE" Type="number" Precision="38" Scale="0" />
+          <Property Name="REQ_CATEGORY_DETAIL" Type="varchar2" MaxLength="1000" />
+          <Property Name="BRM_BARCODE" Type="varchar2" MaxLength="20" />
+          <Property Name="BIN_ID" Type="varchar2" MaxLength="10" />
+          <Property Name="BOX_NUMBER" Type="varchar2" MaxLength="10" />
+          <Property Name="POSITION" Type="varchar2" MaxLength="10" />
+          <Property Name="TDW_BOXNO" Type="varchar2" MaxLength="20" />
+          <Property Name="SENT_TDW" Type="char" MaxLength="1" />
+          <Property Name="RECEIVED_TDW" Type="char" MaxLength="1" />
+          <Property Name="FILE_RETRIEVED" Type="char" MaxLength="1" />
+          <Property Name="SEND_TO_REQUESTOR" Type="char" MaxLength="1" />
+          <Property Name="PICKLIST_NO" Type="number" Precision="38" Scale="0" />
+          <Property Name="PICKLIST_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="PICKLIST_STATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="PICKED_BY" Type="varchar2" MaxLength="20" />
+          <Property Name="CLM_NUMBER" Type="varchar2" MaxLength="20" />
+          <Property Name="REGION_ID_TO" Type="varchar2" MaxLength="10" />
+          <Property Name="STAKEHOLDER" Type="number" Precision="38" Scale="0" />
+          <Property Name="SERV_BY" Type="varchar2" MaxLength="50" />
+          <Property Name="REQUESTED_BY_AD" Type="varchar2" MaxLength="225" />
+          <Property Name="SCANNED_BY_AD" Type="varchar2" MaxLength="225" />
+          <Property Name="CLOSED_BY_AD" Type="varchar2" MaxLength="225" />
+          <Property Name="APPLICATION_STATUS" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DC_GRANT_DOC_LINK">
+          <Key>
+            <PropertyRef Name="GRANT_ID" />
+            <PropertyRef Name="TRANSACTION_ID" />
+            <PropertyRef Name="DOCUMENT_ID" />
+          </Key>
+          <Property Name="GRANT_ID" Type="varchar2" MaxLength="2" Nullable="false" />
+          <Property Name="TRANSACTION_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DOCUMENT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CRITICAL_FLAG" Type="char" MaxLength="1" />
+          <Property Name="SECTION" Type="varchar2" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DC_GRANT_TYPE">
+          <Key>
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="TYPE_ID" Type="varchar2" MaxLength="2" Nullable="false" />
+          <Property Name="TYPE_NAME" Type="varchar2" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DC_LC_TYPE">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DC_LOCAL_OFFICE">
+          <Key>
+            <PropertyRef Name="OFFICE_ID" />
+          </Key>
+          <Property Name="OFFICE_ID" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="OFFICE_NAME" Type="varchar2" MaxLength="255" />
+          <Property Name="REGION_ID" Type="varchar2" MaxLength="20" />
+          <Property Name="OFFICE_TYPE" Type="varchar2" MaxLength="3" />
+          <Property Name="DISTRICT" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DC_MERGE">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BRM_BARCODE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PARENT_BRM_BARCODE" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DC_OFFICE_KUAF_LINK">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="OFFICE_ID" Type="varchar2" MaxLength="10" />
+          <Property Name="KUAF_ID" Type="number" Precision="38" Scale="0" />
+          <Property Name="SUPERVISOR" Type="varchar2" MaxLength="10" />
+          <Property Name="USERNAME" Type="varchar2" MaxLength="225" />
+          <Property Name="PK" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DC_PICKLIST">
+          <Key>
+            <PropertyRef Name="UNQ_PICKLIST" />
+          </Key>
+          <Property Name="UNQ_PICKLIST" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="REGION_ID" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="REGISTRY_TYPE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="USERID" Type="number" Precision="38" Scale="0" />
+          <Property Name="PICKLIST_DATE" Type="date" />
+          <Property Name="PICKLIST_STATUS" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="DC_REGION">
+          <Key>
+            <PropertyRef Name="REGION_ID" />
+          </Key>
+          <Property Name="REGION_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="REGION_NAME" Type="varchar2" MaxLength="100" />
+          <Property Name="REGION_CODE" Type="varchar2" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="DC_REQ_CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CATEGORY_DESCR" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DC_REQ_CATEGORY_TYPE">
+          <Key>
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="TYPE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TYPE_DESCR" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DC_REQ_CATEGORY_TYPE_LINK">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TYPE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DC_STAKEHOLDER">
+          <Key>
+            <PropertyRef Name="STAKEHOLDER_ID" />
+          </Key>
+          <Property Name="STAKEHOLDER_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DEPARTMENT_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="64" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="64" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="225" Nullable="false" />
+          <Property Name="REGION_ID" Type="varchar2" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DC_TRANSACTION_TYPE">
+          <Key>
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="TYPE_ID" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TYPE_NAME" Type="varchar2" MaxLength="255" />
+          <Property Name="SERVICE_CATEGORY" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CONTENTSERVER.KUAF' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="KUAF">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="OWNERID" />
+            <PropertyRef Name="TYPE" />
+            <PropertyRef Name="SPACEID" />
+            <PropertyRef Name="NAME" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="OWNERID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="TYPE" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="SPACEID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="NAME" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="USERDATA" Type="varchar2" MaxLength="4000" />
+          <Property Name="LEADERID" Type="number" Precision="19" Scale="0" />
+          <Property Name="DELETED" Type="number" Precision="3" Scale="0" />
+          <Property Name="USERPWD" Type="varchar2" MaxLength="255" />
+          <Property Name="GROUPID" Type="number" Precision="19" Scale="0" />
+          <Property Name="USERPRIVILEGES" Type="number" Precision="10" Scale="0" />
+          <Property Name="LASTNAME" Type="varchar2" MaxLength="64" />
+          <Property Name="MIDDLENAME" Type="varchar2" MaxLength="32" />
+          <Property Name="FIRSTNAME" Type="varchar2" MaxLength="64" />
+          <Property Name="MAILADDRESS" Type="varchar2" MaxLength="255" />
+          <Property Name="CONTACT" Type="varchar2" MaxLength="128" />
+          <Property Name="TITLE" Type="varchar2" MaxLength="64" />
+          <Property Name="PWDEXPIREDATE" Type="date" />
+          <Property Name="PWDEXPIREMODE" Type="number" Precision="10" Scale="0" />
+          <Property Name="SETTINGSNUM" Type="number" Precision="5" Scale="0" />
+          <Property Name="FAX" Type="varchar2" MaxLength="64" />
+          <Property Name="OFFICELOCATION" Type="varchar2" MaxLength="255" />
+          <Property Name="TIMEZONE" Type="number" Precision="5" Scale="0" />
+          <Property Name="PHOTOID" Type="number" Precision="19" Scale="0" />
+          <Property Name="GENDER" Type="number" Precision="3" Scale="0" />
+          <Property Name="BIRTHDAY" Type="date" />
+          <Property Name="PERSONALEMAIL" Type="varchar2" MaxLength="255" />
+          <Property Name="HOMEADDRESS1" Type="varchar2" MaxLength="255" />
+          <Property Name="HOMEADDRESS2" Type="varchar2" MaxLength="255" />
+          <Property Name="HOMEPHONE" Type="varchar2" MaxLength="64" />
+          <Property Name="HOMEFAX" Type="varchar2" MaxLength="64" />
+          <Property Name="CELLULARPHONE" Type="varchar2" MaxLength="64" />
+          <Property Name="PAGER" Type="varchar2" MaxLength="64" />
+          <Property Name="HOMEPAGE" Type="varchar2" MaxLength="255" />
+          <Property Name="FAVORITES1" Type="varchar2" MaxLength="255" />
+          <Property Name="FAVORITES2" Type="varchar2" MaxLength="255" />
+          <Property Name="FAVORITES3" Type="varchar2" MaxLength="255" />
+          <Property Name="INTERESTS" Type="varchar2" MaxLength="4000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CONTENTSERVER.KUAFCHILDREN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="KUAFCHILDREN">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CHILDID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="19" Scale="0" Nullable="false" />
+          <Property Name="CHILDID" Type="number" Precision="19" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CONTENTSERVER.SOCPENBRM' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SOCPENBRM">
+          <Key>
+            <PropertyRef Name="PENSION_NO" />
+          </Key>
+          <Property Name="FILE_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="REC_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="PENSION_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="PAYPOINT" Type="varchar2" MaxLength="20" />
+          <Property Name="GRANT_TYPE1" Type="varchar2" MaxLength="20" />
+          <Property Name="GRANT_TYPE2" Type="varchar2" MaxLength="20" />
+          <Property Name="GRANT_TYPE3" Type="varchar2" MaxLength="20" />
+          <Property Name="GRANT_TYPE4" Type="varchar2" MaxLength="20" />
+          <Property Name="PRIM_STATUS1" Type="varchar2" MaxLength="20" />
+          <Property Name="PRIM_STATUS2" Type="varchar2" MaxLength="20" />
+          <Property Name="PRIM_STATUS3" Type="varchar2" MaxLength="20" />
+          <Property Name="PRIM_STATUS4" Type="varchar2" MaxLength="20" />
+          <Property Name="SEC_STATUS1" Type="varchar2" MaxLength="20" />
+          <Property Name="SEC_STATUS2" Type="varchar2" MaxLength="20" />
+          <Property Name="SEC_STATUS3" Type="varchar2" MaxLength="20" />
+          <Property Name="SEC_STATUS4" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_DATE1" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_DATE2" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_DATE3" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_DATE4" Type="varchar2" MaxLength="20" />
+          <Property Name="APP_DATE1" Type="varchar2" MaxLength="20" />
+          <Property Name="APP_DATE2" Type="varchar2" MaxLength="20" />
+          <Property Name="APP_DATE3" Type="varchar2" MaxLength="20" />
+          <Property Name="APP_DATE4" Type="varchar2" MaxLength="20" />
+          <Property Name="REVIEW_CODE1" Type="varchar2" MaxLength="20" />
+          <Property Name="REVIEW_CODE2" Type="varchar2" MaxLength="20" />
+          <Property Name="REVIEW_CODE3" Type="varchar2" MaxLength="20" />
+          <Property Name="REVIEW_CODE4" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_REASON1" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_REASON2" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_REASON3" Type="varchar2" MaxLength="20" />
+          <Property Name="STATUS_REASON4" Type="varchar2" MaxLength="20" />
+          <Property Name="STAT_PER1" Type="varchar2" MaxLength="20" />
+          <Property Name="STAT_PER2" Type="varchar2" MaxLength="20" />
+          <Property Name="STAT_PER3" Type="varchar2" MaxLength="20" />
+          <Property Name="STAT_PER4" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ACCEPT1" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ACCEPT2" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ACCEPT3" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_ACCEPT4" Type="varchar2" MaxLength="20" />
+          <Property Name="ORIG_APP_DATE1" Type="varchar2" MaxLength="20" />
+          <Property Name="ORIG_APP_DATE2" Type="varchar2" MaxLength="20" />
+          <Property Name="ORIG_APP_DATE3" Type="varchar2" MaxLength="20" />
+          <Property Name="ORIG_APP_DATE4" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID1" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID2" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID3" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID4" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID5" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID6" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID7" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID8" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID9" Type="varchar2" MaxLength="20" />
+          <Property Name="OLD_ID10" Type="varchar2" MaxLength="20" />
+          <Property Name="BRANCH" Type="varchar2" MaxLength="20" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="60" />
+          <Property Name="NAME" Type="varchar2" MaxLength="60" />
+          <Property Name="ADDRESS" Type="varchar2" MaxLength="60" />
+          <Property Name="POSTAL_ADDRESS" Type="varchar2" MaxLength="60" />
+          <Property Name="POSTAL_CODE" Type="varchar2" MaxLength="60" />
+          <Property Name="NO_KIDS" Type="varchar2" MaxLength="60" />
+          <Property Name="PAYMENT_METHOD" Type="varchar2" MaxLength="60" />
+          <Property Name="SEX" Type="varchar2" MaxLength="60" />
+          <Property Name="MARITAL_STATUS" Type="varchar2" MaxLength="60" />
+          <Property Name="BIRTHDATE" Type="varchar2" MaxLength="60" />
+          <Property Name="KIDS_INVOLVED" Type="varchar2" MaxLength="20" />
+          <Property Name="NO_CARE_DEP" Type="varchar2" MaxLength="60" />
+          <Property Name="ACCOUNT_NO" Type="varchar2" MaxLength="20" />
+          <Property Name="SEC_PAYPOINT" Type="varchar2" MaxLength="60" />
+          <Property Name="PAYMENT_MODE" Type="varchar2" MaxLength="60" />
+          <Property Name="RE_REGISTERED" Type="varchar2" MaxLength="20" />
+          <Property Name="NO_KIDS_OWN" Type="varchar2" MaxLength="20" />
+          <Property Name="NO_KIDS_OTHER" Type="varchar2" MaxLength="20" />
+          <Property Name="PROVINCE" Type="varchar2" MaxLength="60" />
+          <Property Name="TELNO" Type="varchar2" MaxLength="20" />
+          <Property Name="CELLNO" Type="varchar2" MaxLength="20" />
+          <Property Name="REVIEWPERIOD" Type="varchar2" MaxLength="20" />
+          <Property Name="MEDICALPERIOD" Type="varchar2" MaxLength="20" />
+          <Property Name="LIFECERTPERIOD" Type="varchar2" MaxLength="20" />
+          <Property Name="DOCS_PRESENT" Type="varchar2" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CONTENTSERVER.SS_APPLICATION' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SS_APPLICATION">
+          <Key>
+            <PropertyRef Name="FORM_NUMBER" />
+            <PropertyRef Name="FORM_TYPE" />
+          </Key>
+          <Property Name="APP_ID" Type="number" Precision="10" Scale="0" />
+          <Property Name="FORM_NUMBER" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="ID_NUMBER" Type="char" MaxLength="25" />
+          <Property Name="SOCPEN_ID_NUMBER" Type="varchar2" MaxLength="13" />
+          <Property Name="ALT_ID_NUMBER_1" Type="varchar2" MaxLength="13" />
+          <Property Name="ALT_ID_NUMBER_2" Type="varchar2" MaxLength="13" />
+          <Property Name="ALT_ID_NUMBER_3" Type="varchar2" MaxLength="13" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="50" />
+          <Property Name="NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="APPLICATION_DATE" Type="varchar2" MaxLength="50" />
+          <Property Name="GRANT_TYPE" Type="varchar2" MaxLength="10" />
+          <Property Name="FORM_TYPE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DISABILITY_TYPE" Type="varchar2" MaxLength="15" />
+          <Property Name="DISABILITY_DESC" Type="varchar2" MaxLength="70" />
+          <Property Name="MED_FORM" Type="varchar2" MaxLength="15" />
+          <Property Name="DOC_NAME" Type="varchar2" MaxLength="30" />
+          <Property Name="GENDER" Type="varchar2" MaxLength="6" />
+          <Property Name="RACE" Type="number" Precision="10" Scale="0" />
+          <Property Name="PAYPOINT" Type="varchar2" MaxLength="30" />
+          <Property Name="TOWN" Type="number" Precision="10" Scale="0" />
+          <Property Name="REGION_CODE" Type="char" MaxLength="10" />
+          <Property Name="SERVICE_ID" Type="number" Precision="10" Scale="0" />
+          <Property Name="DISTRICT_OFFICE" Type="varchar2" MaxLength="5" />
+          <Property Name="BOX" Type="varchar2" MaxLength="10" />
+          <Property Name="POSITN" Type="varchar2" MaxLength="20" />
+          <Property Name="A_YEAR" Type="char" MaxLength="20" />
+          <Property Name="BOX_TYPE" Type="varchar2" MaxLength="30" />
+          <Property Name="LETTER_GEN_DATE" Type="varchar2" MaxLength="50" />
+          <Property Name="LETTER_SENT_DATE" Type="varchar2" MaxLength="50" />
+          <Property Name="ON_PERSAL" Type="varchar2" MaxLength="30" />
+          <Property Name="ON_GEPF" Type="varchar2" MaxLength="30" />
+          <Property Name="ON_MUNI" Type="varchar2" MaxLength="30" />
+          <Property Name="PERSAL_NO" Type="varchar2" MaxLength="8" />
+          <Property Name="APPL_STATUS" Type="varchar2" MaxLength="20" />
+          <Property Name="DATE_IN" Type="varchar2" MaxLength="50" />
+          <Property Name="ACTION_DATE" Type="varchar2" MaxLength="50" />
+          <Property Name="ACTION_RESULT" Type="varchar2" MaxLength="20" />
+          <Property Name="REASON" Type="varchar2" MaxLength="300" />
+          <Property Name="MATCH_TYPE" Type="varchar2" MaxLength="20" />
+          <Property Name="REGISTRY_REMOVAL" Type="varchar2" MaxLength="30" />
+          <Property Name="APPLICATION_DOC" Type="varchar2" MaxLength="30" />
+          <Property Name="ID_BOOK" Type="varchar2" MaxLength="30" />
+          <Property Name="MEDICAL_CERT" Type="varchar2" MaxLength="30" />
+          <Property Name="BIRTH_CERT" Type="varchar2" MaxLength="30" />
+          <Property Name="COURT_ORD" Type="varchar2" MaxLength="30" />
+          <Property Name="WAR_PAPERS" Type="varchar2" MaxLength="30" />
+          <Property Name="USER_ID_CREATED" Type="varchar2" MaxLength="8" />
+          <Property Name="OLD_POSITION" Type="number" Precision="10" Scale="0" />
+          <Property Name="APPROVED_AMOUNT" Type="number" Precision="18" Scale="0" />
+          <Property Name="ONE_OFF_PAYMENT" Type="number" Precision="18" Scale="0" />
+          <Property Name="PAYMENT_DATE" Type="varchar2" MaxLength="50" />
+          <Property Name="DC_PERSAL_NO" Type="number" Precision="10" Scale="0" />
+          <Property Name="DC_ACTION" Type="varchar2" MaxLength="10" />
+          <Property Name="DC_ACTION_DATE" Type="varchar2" MaxLength="50" />
+          <Property Name="DC_COMPLETE" Type="varchar2" MaxLength="30" />
+          <Property Name="LETTER" Type="varchar2" MaxLength="50" />
+          <Property Name="LETTER_MEMO" Type="varchar2" MaxLength="255" />
+          <Property Name="COPY_PRINT_DATE" Type="varchar2" MaxLength="50" />
+          <Property Name="BANKNAME" Type="varchar2" MaxLength="20" />
+          <Property Name="ANNEXURE_A" Type="varchar2" MaxLength="50" />
+          <Property Name="ANNEXURE_B" Type="varchar2" MaxLength="50" />
+          <Property Name="HOME_AFFAIRS_REF1" Type="varchar2" MaxLength="50" />
+          <Property Name="HOME_AFFAIRS_REF2" Type="varchar2" MaxLength="50" />
+          <Property Name="ID_DOC" Type="number" Precision="1" Scale="0" />
+          <Property Name="PROOF_ID" Type="number" Precision="1" Scale="0" />
+          <Property Name="BIRTH_CERTIFICATE" Type="number" Precision="1" Scale="0" />
+          <Property Name="PROOF_BIRTH" Type="number" Precision="1" Scale="0" />
+          <Property Name="SOCPEN_REF" Type="varchar2" MaxLength="13" />
+          <Property Name="REFUGEE_GRANT" Type="number" Precision="1" Scale="0" />
+          <Property Name="DATE_EXPIRY_OF_TEMP_ID" Type="varchar2" MaxLength="50" />
+          <Property Name="PAYMENT_METHOD" Type="number" Precision="10" Scale="0" />
+          <Property Name="CLIENT_DOB" Type="varchar2" MaxLength="50" />
+          <Property Name="FLAG_ADMIN_REVIEW" Type="number" Precision="1" Scale="0" />
+          <Property Name="QA_AMENDMENTS" Type="number" Precision="1" Scale="0" />
+          <Property Name="VERSION" Type="varchar2" MaxLength="50" />
+          <Property Name="SERVICE_POINT_ID" Type="number" Precision="10" Scale="0" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CONTENTSERVER.DC_BOXPICKLIST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DC_BOXPICKLIST">
+          <Key>
+            <PropertyRef Name="UNQ_PICKLIST" />
+            <PropertyRef Name="REGION_ID" />
+            <PropertyRef Name="REGISTRY_TYPE" />
+            <PropertyRef Name="UNQ_NO" />
+            <PropertyRef Name="BOX_NUMBER" />
+          </Key>
+          <Property Name="UNQ_PICKLIST" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="REGION_ID" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="REGISTRY_TYPE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="USERID" Type="number" Precision="38" Scale="0" />
+          <Property Name="PICKLIST_DATE" Type="date" />
+          <Property Name="PICKLIST_STATUS" Type="char" MaxLength="1" />
+          <Property Name="UNQ_NO" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="BIN_NUMBER" Type="varchar2" MaxLength="10" />
+          <Property Name="BOX_NUMBER" Type="varchar2" MaxLength="10" Nullable="false" />
+          <Property Name="BOX_RECEIVED" Type="char" MaxLength="1" />
+          <Property Name="BOX_COMPLETED" Type="char" MaxLength="1" />
+          <Property Name="ARCHIVE_YEAR" Type="varchar2" MaxLength="4" />
+        </EntityType>
+        <Association Name="DC_FILE_REQUEST_FK1">
+          <End Role="DC_STAKEHOLDER" Type="Self.DC_STAKEHOLDER" Multiplicity="0..1" />
+          <End Role="DC_FILE_REQUEST" Type="Self.DC_FILE_REQUEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_STAKEHOLDER">
+              <PropertyRef Name="STAKEHOLDER_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE_REQUEST">
+              <PropertyRef Name="STAKEHOLDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DC_STAKEHOLDER_FK1">
+          <End Role="DC_REQ_CATEGORY" Type="Self.DC_REQ_CATEGORY" Multiplicity="1" />
+          <End Role="DC_STAKEHOLDER" Type="Self.DC_STAKEHOLDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REQ_CATEGORY">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="DC_STAKEHOLDER">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BATCH_LOCAL_OFFICE">
+          <End Role="DC_LOCAL_OFFICE" Type="Self.DC_LOCAL_OFFICE" Multiplicity="0..1" />
+          <End Role="DC_BATCH" Type="Self.DC_BATCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_LOCAL_OFFICE">
+              <PropertyRef Name="OFFICE_ID" />
+            </Principal>
+            <Dependent Role="DC_BATCH">
+              <PropertyRef Name="OFFICE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY">
+          <End Role="DC_REQ_CATEGORY" Type="Self.DC_REQ_CATEGORY" Multiplicity="1" />
+          <End Role="DC_REQ_CATEGORY_TYPE_LINK" Type="Self.DC_REQ_CATEGORY_TYPE_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REQ_CATEGORY">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="DC_REQ_CATEGORY_TYPE_LINK">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY_TYPE">
+          <End Role="DC_REQ_CATEGORY_TYPE" Type="Self.DC_REQ_CATEGORY_TYPE" Multiplicity="1" />
+          <End Role="DC_REQ_CATEGORY_TYPE_LINK" Type="Self.DC_REQ_CATEGORY_TYPE_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REQ_CATEGORY_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_REQ_CATEGORY_TYPE_LINK">
+              <PropertyRef Name="TYPE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DC_BATCH">
+          <End Role="DC_BATCH" Type="Self.DC_BATCH" Multiplicity="0..1" />
+          <End Role="DC_FILE" Type="Self.DC_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_BATCH">
+              <PropertyRef Name="BATCH_NO" />
+            </Principal>
+            <Dependent Role="DC_FILE">
+              <PropertyRef Name="BATCH_NO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DC_FILE_GRANT">
+          <End Role="DC_GRANT_TYPE" Type="Self.DC_GRANT_TYPE" Multiplicity="0..1" />
+          <End Role="DC_FILE" Type="Self.DC_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_GRANT_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE">
+              <PropertyRef Name="GRANT_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DC_FILE_TRANS_TYPE">
+          <End Role="DC_TRANSACTION_TYPE" Type="Self.DC_TRANSACTION_TYPE" Multiplicity="0..1" />
+          <End Role="DC_FILE" Type="Self.DC_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_TRANSACTION_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE">
+              <PropertyRef Name="TRANS_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DC_TRANS_TYPE">
+          <End Role="DC_TRANSACTION_TYPE" Type="Self.DC_TRANSACTION_TYPE" Multiplicity="1" />
+          <End Role="DC_GRANT_DOC_LINK" Type="Self.DC_GRANT_DOC_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_TRANSACTION_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_GRANT_DOC_LINK">
+              <PropertyRef Name="TRANSACTION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCUMENT_TYPE_LINK">
+          <End Role="DC_DOCUMENT_TYPE" Type="Self.DC_DOCUMENT_TYPE" Multiplicity="1" />
+          <End Role="DC_GRANT_DOC_LINK" Type="Self.DC_GRANT_DOC_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_DOCUMENT_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_GRANT_DOC_LINK">
+              <PropertyRef Name="DOCUMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FILE_REQUEST_REGION_ID">
+          <End Role="DC_REGION" Type="Self.DC_REGION" Multiplicity="0..1" />
+          <End Role="DC_FILE_REQUEST" Type="Self.DC_FILE_REQUEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REGION">
+              <PropertyRef Name="REGION_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE_REQUEST">
+              <PropertyRef Name="REGION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRANT_TYPE_GRANT">
+          <End Role="DC_GRANT_TYPE" Type="Self.DC_GRANT_TYPE" Multiplicity="1" />
+          <End Role="DC_GRANT_DOC_LINK" Type="Self.DC_GRANT_DOC_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_GRANT_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_GRANT_DOC_LINK">
+              <PropertyRef Name="GRANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_OFFICE">
+          <End Role="DC_LOCAL_OFFICE" Type="Self.DC_LOCAL_OFFICE" Multiplicity="0..1" />
+          <End Role="DC_OFFICE_KUAF_LINK" Type="Self.DC_OFFICE_KUAF_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_LOCAL_OFFICE">
+              <PropertyRef Name="OFFICE_ID" />
+            </Principal>
+            <Dependent Role="DC_OFFICE_KUAF_LINK">
+              <PropertyRef Name="OFFICE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_OFFICE_REGION">
+          <End Role="DC_REGION" Type="Self.DC_REGION" Multiplicity="0..1" />
+          <End Role="DC_LOCAL_OFFICE" Type="Self.DC_LOCAL_OFFICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REGION">
+              <PropertyRef Name="REGION_ID" />
+            </Principal>
+            <Dependent Role="DC_LOCAL_OFFICE">
+              <PropertyRef Name="REGION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OFFICE_ID_FILE">
+          <End Role="DC_LOCAL_OFFICE" Type="Self.DC_LOCAL_OFFICE" Multiplicity="0..1" />
+          <End Role="DC_FILE" Type="Self.DC_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_LOCAL_OFFICE">
+              <PropertyRef Name="OFFICE_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE">
+              <PropertyRef Name="OFFICE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REQUEST_CATEGORY">
+          <End Role="DC_REQ_CATEGORY_TYPE_LINK" Type="Self.DC_REQ_CATEGORY_TYPE_LINK" Multiplicity="0..1" />
+          <End Role="DC_FILE_REQUEST" Type="Self.DC_FILE_REQUEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REQ_CATEGORY_TYPE_LINK">
+              <PropertyRef Name="CATEGORY_ID" />
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE_REQUEST">
+              <PropertyRef Name="REQ_CATEGORY" />
+              <PropertyRef Name="REQ_CATEGORY_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C0084094">
+          <End Role="CUST_REGIONS" Type="Self.CUST_REGIONS" Multiplicity="0..1" />
+          <End Role="CUST_DISTRICT" Type="Self.CUST_DISTRICT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUST_REGIONS">
+              <PropertyRef Name="REGNUM" />
+            </Principal>
+            <Dependent Role="CUST_DISTRICT">
+              <PropertyRef Name="REGNUM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C0084099">
+          <End Role="CUST_DISTRICT" Type="Self.CUST_DISTRICT" Multiplicity="0..1" />
+          <End Role="CUST_LOCALOFFICE" Type="Self.CUST_LOCALOFFICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUST_DISTRICT">
+              <PropertyRef Name="DISTRICTID" />
+            </Principal>
+            <Dependent Role="CUST_LOCALOFFICE">
+              <PropertyRef Name="DISTRICTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DCModelStoreContainer">
+          <EntitySet Name="CUST_DISTRICT" EntityType="Self.CUST_DISTRICT" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="CUST_LOCALOFFICE" EntityType="Self.CUST_LOCALOFFICE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="CUST_REGIONS" EntityType="Self.CUST_REGIONS" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_ACTIVITY" EntityType="Self.DC_ACTIVITY" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_BATCH" EntityType="Self.DC_BATCH" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_BOXPICKED" EntityType="Self.DC_BOXPICKED" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_DESTRUCTION" EntityType="Self.DC_DESTRUCTION" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_DESTRUCTION_BATCH" EntityType="Self.DC_DESTRUCTION_BATCH" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_DISTRICT_EC" EntityType="Self.DC_DISTRICT_EC" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_DOCUMENT_TYPE" EntityType="Self.DC_DOCUMENT_TYPE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_EXCLUSION_BATCH" EntityType="Self.DC_EXCLUSION_BATCH" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_EXCLUSIONS" EntityType="Self.DC_EXCLUSIONS" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_FILE" EntityType="Self.DC_FILE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_FILE_REQUEST" EntityType="Self.DC_FILE_REQUEST" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_GRANT_DOC_LINK" EntityType="Self.DC_GRANT_DOC_LINK" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_GRANT_TYPE" EntityType="Self.DC_GRANT_TYPE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_LC_TYPE" EntityType="Self.DC_LC_TYPE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_LOCAL_OFFICE" EntityType="Self.DC_LOCAL_OFFICE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_MERGE" EntityType="Self.DC_MERGE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_OFFICE_KUAF_LINK" EntityType="Self.DC_OFFICE_KUAF_LINK" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_PICKLIST" EntityType="Self.DC_PICKLIST" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_REGION" EntityType="Self.DC_REGION" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_REQ_CATEGORY" EntityType="Self.DC_REQ_CATEGORY" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_REQ_CATEGORY_TYPE" EntityType="Self.DC_REQ_CATEGORY_TYPE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_REQ_CATEGORY_TYPE_LINK" EntityType="Self.DC_REQ_CATEGORY_TYPE_LINK" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_STAKEHOLDER" EntityType="Self.DC_STAKEHOLDER" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_TRANSACTION_TYPE" EntityType="Self.DC_TRANSACTION_TYPE" Schema="CONTENTSERVER" store:Type="Tables" />
+          <EntitySet Name="DC_BOX_TYPE" EntityType="Self.DC_BOX_TYPE" store:Type="Tables" store:Schema="CONTENTSERVER">
+            <DefiningQuery>SELECT 
+"DC_BOX_TYPE"."BOX_TYPE_ID" AS "BOX_TYPE_ID", 
+"DC_BOX_TYPE"."BOX_TYPE" AS "BOX_TYPE", 
+"DC_BOX_TYPE"."IS_TRANSPORT" AS "IS_TRANSPORT"
+FROM "CONTENTSERVER"."DC_BOX_TYPE" "DC_BOX_TYPE"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DC_DISTRICT" EntityType="Self.DC_DISTRICT" store:Type="Tables" store:Schema="CONTENTSERVER">
+            <DefiningQuery>SELECT 
+"DC_DISTRICT"."DISTRICT" AS "DISTRICT", 
+"DC_DISTRICT"."DISTRICT_NAME" AS "DISTRICT_NAME", 
+"DC_DISTRICT"."REGION_ID" AS "REGION_ID"
+FROM "CONTENTSERVER"."DC_DISTRICT" "DC_DISTRICT"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="KUAF" EntityType="Self.KUAF" store:Type="Tables" store:Schema="CONTENTSERVER">
+            <DefiningQuery>SELECT 
+"KUAF"."ID" AS "ID", 
+"KUAF"."OWNERID" AS "OWNERID", 
+"KUAF"."TYPE" AS "TYPE", 
+"KUAF"."SPACEID" AS "SPACEID", 
+"KUAF"."NAME" AS "NAME", 
+"KUAF"."USERDATA" AS "USERDATA", 
+"KUAF"."LEADERID" AS "LEADERID", 
+"KUAF"."DELETED" AS "DELETED", 
+"KUAF"."USERPWD" AS "USERPWD", 
+"KUAF"."GROUPID" AS "GROUPID", 
+"KUAF"."USERPRIVILEGES" AS "USERPRIVILEGES", 
+"KUAF"."LASTNAME" AS "LASTNAME", 
+"KUAF"."MIDDLENAME" AS "MIDDLENAME", 
+"KUAF"."FIRSTNAME" AS "FIRSTNAME", 
+"KUAF"."MAILADDRESS" AS "MAILADDRESS", 
+"KUAF"."CONTACT" AS "CONTACT", 
+"KUAF"."TITLE" AS "TITLE", 
+"KUAF"."PWDEXPIREDATE" AS "PWDEXPIREDATE", 
+"KUAF"."PWDEXPIREMODE" AS "PWDEXPIREMODE", 
+"KUAF"."SETTINGSNUM" AS "SETTINGSNUM", 
+"KUAF"."FAX" AS "FAX", 
+"KUAF"."OFFICELOCATION" AS "OFFICELOCATION", 
+"KUAF"."TIMEZONE" AS "TIMEZONE", 
+"KUAF"."PHOTOID" AS "PHOTOID", 
+"KUAF"."GENDER" AS "GENDER", 
+"KUAF"."BIRTHDAY" AS "BIRTHDAY", 
+"KUAF"."PERSONALEMAIL" AS "PERSONALEMAIL", 
+"KUAF"."HOMEADDRESS1" AS "HOMEADDRESS1", 
+"KUAF"."HOMEADDRESS2" AS "HOMEADDRESS2", 
+"KUAF"."HOMEPHONE" AS "HOMEPHONE", 
+"KUAF"."HOMEFAX" AS "HOMEFAX", 
+"KUAF"."CELLULARPHONE" AS "CELLULARPHONE", 
+"KUAF"."PAGER" AS "PAGER", 
+"KUAF"."HOMEPAGE" AS "HOMEPAGE", 
+"KUAF"."FAVORITES1" AS "FAVORITES1", 
+"KUAF"."FAVORITES2" AS "FAVORITES2", 
+"KUAF"."FAVORITES3" AS "FAVORITES3", 
+"KUAF"."INTERESTS" AS "INTERESTS"
+FROM "CONTENTSERVER"."KUAF" "KUAF"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="KUAFCHILDREN" EntityType="Self.KUAFCHILDREN" store:Type="Tables" store:Schema="CONTENTSERVER">
+            <DefiningQuery>SELECT 
+"KUAFCHILDREN"."ID" AS "ID", 
+"KUAFCHILDREN"."CHILDID" AS "CHILDID"
+FROM "CONTENTSERVER"."KUAFCHILDREN" "KUAFCHILDREN"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SOCPENBRM" EntityType="Self.SOCPENBRM" store:Type="Tables" store:Schema="CONTENTSERVER">
+            <DefiningQuery>SELECT 
+"SOCPENBRM"."FILE_TYPE" AS "FILE_TYPE", 
+"SOCPENBRM"."REC_TYPE" AS "REC_TYPE", 
+"SOCPENBRM"."PENSION_NO" AS "PENSION_NO", 
+"SOCPENBRM"."PAYPOINT" AS "PAYPOINT", 
+"SOCPENBRM"."GRANT_TYPE1" AS "GRANT_TYPE1", 
+"SOCPENBRM"."GRANT_TYPE2" AS "GRANT_TYPE2", 
+"SOCPENBRM"."GRANT_TYPE3" AS "GRANT_TYPE3", 
+"SOCPENBRM"."GRANT_TYPE4" AS "GRANT_TYPE4", 
+"SOCPENBRM"."PRIM_STATUS1" AS "PRIM_STATUS1", 
+"SOCPENBRM"."PRIM_STATUS2" AS "PRIM_STATUS2", 
+"SOCPENBRM"."PRIM_STATUS3" AS "PRIM_STATUS3", 
+"SOCPENBRM"."PRIM_STATUS4" AS "PRIM_STATUS4", 
+"SOCPENBRM"."SEC_STATUS1" AS "SEC_STATUS1", 
+"SOCPENBRM"."SEC_STATUS2" AS "SEC_STATUS2", 
+"SOCPENBRM"."SEC_STATUS3" AS "SEC_STATUS3", 
+"SOCPENBRM"."SEC_STATUS4" AS "SEC_STATUS4", 
+"SOCPENBRM"."STATUS_DATE1" AS "STATUS_DATE1", 
+"SOCPENBRM"."STATUS_DATE2" AS "STATUS_DATE2", 
+"SOCPENBRM"."STATUS_DATE3" AS "STATUS_DATE3", 
+"SOCPENBRM"."STATUS_DATE4" AS "STATUS_DATE4", 
+"SOCPENBRM"."APP_DATE1" AS "APP_DATE1", 
+"SOCPENBRM"."APP_DATE2" AS "APP_DATE2", 
+"SOCPENBRM"."APP_DATE3" AS "APP_DATE3", 
+"SOCPENBRM"."APP_DATE4" AS "APP_DATE4", 
+"SOCPENBRM"."REVIEW_CODE1" AS "REVIEW_CODE1", 
+"SOCPENBRM"."REVIEW_CODE2" AS "REVIEW_CODE2", 
+"SOCPENBRM"."REVIEW_CODE3" AS "REVIEW_CODE3", 
+"SOCPENBRM"."REVIEW_CODE4" AS "REVIEW_CODE4", 
+"SOCPENBRM"."STATUS_REASON1" AS "STATUS_REASON1", 
+"SOCPENBRM"."STATUS_REASON2" AS "STATUS_REASON2", 
+"SOCPENBRM"."STATUS_REASON3" AS "STATUS_REASON3", 
+"SOCPENBRM"."STATUS_REASON4" AS "STATUS_REASON4", 
+"SOCPENBRM"."STAT_PER1" AS "STAT_PER1", 
+"SOCPENBRM"."STAT_PER2" AS "STAT_PER2", 
+"SOCPENBRM"."STAT_PER3" AS "STAT_PER3", 
+"SOCPENBRM"."STAT_PER4" AS "STAT_PER4", 
+"SOCPENBRM"."DATE_ACCEPT1" AS "DATE_ACCEPT1", 
+"SOCPENBRM"."DATE_ACCEPT2" AS "DATE_ACCEPT2", 
+"SOCPENBRM"."DATE_ACCEPT3" AS "DATE_ACCEPT3", 
+"SOCPENBRM"."DATE_ACCEPT4" AS "DATE_ACCEPT4", 
+"SOCPENBRM"."ORIG_APP_DATE1" AS "ORIG_APP_DATE1", 
+"SOCPENBRM"."ORIG_APP_DATE2" AS "ORIG_APP_DATE2", 
+"SOCPENBRM"."ORIG_APP_DATE3" AS "ORIG_APP_DATE3", 
+"SOCPENBRM"."ORIG_APP_DATE4" AS "ORIG_APP_DATE4", 
+"SOCPENBRM"."OLD_ID1" AS "OLD_ID1", 
+"SOCPENBRM"."OLD_ID2" AS "OLD_ID2", 
+"SOCPENBRM"."OLD_ID3" AS "OLD_ID3", 
+"SOCPENBRM"."OLD_ID4" AS "OLD_ID4", 
+"SOCPENBRM"."OLD_ID5" AS "OLD_ID5", 
+"SOCPENBRM"."OLD_ID6" AS "OLD_ID6", 
+"SOCPENBRM"."OLD_ID7" AS "OLD_ID7", 
+"SOCPENBRM"."OLD_ID8" AS "OLD_ID8", 
+"SOCPENBRM"."OLD_ID9" AS "OLD_ID9", 
+"SOCPENBRM"."OLD_ID10" AS "OLD_ID10", 
+"SOCPENBRM"."BRANCH" AS "BRANCH", 
+"SOCPENBRM"."SURNAME" AS "SURNAME", 
+"SOCPENBRM"."NAME" AS "NAME", 
+"SOCPENBRM"."ADDRESS" AS "ADDRESS", 
+"SOCPENBRM"."POSTAL_ADDRESS" AS "POSTAL_ADDRESS", 
+"SOCPENBRM"."POSTAL_CODE" AS "POSTAL_CODE", 
+"SOCPENBRM"."NO_KIDS" AS "NO_KIDS", 
+"SOCPENBRM"."PAYMENT_METHOD" AS "PAYMENT_METHOD", 
+"SOCPENBRM"."SEX" AS "SEX", 
+"SOCPENBRM"."MARITAL_STATUS" AS "MARITAL_STATUS", 
+"SOCPENBRM"."BIRTHDATE" AS "BIRTHDATE", 
+"SOCPENBRM"."KIDS_INVOLVED" AS "KIDS_INVOLVED", 
+"SOCPENBRM"."NO_CARE_DEP" AS "NO_CARE_DEP", 
+"SOCPENBRM"."ACCOUNT_NO" AS "ACCOUNT_NO", 
+"SOCPENBRM"."SEC_PAYPOINT" AS "SEC_PAYPOINT", 
+"SOCPENBRM"."PAYMENT_MODE" AS "PAYMENT_MODE", 
+"SOCPENBRM"."RE_REGISTERED" AS "RE_REGISTERED", 
+"SOCPENBRM"."NO_KIDS_OWN" AS "NO_KIDS_OWN", 
+"SOCPENBRM"."NO_KIDS_OTHER" AS "NO_KIDS_OTHER", 
+"SOCPENBRM"."PROVINCE" AS "PROVINCE", 
+"SOCPENBRM"."TELNO" AS "TELNO", 
+"SOCPENBRM"."CELLNO" AS "CELLNO", 
+"SOCPENBRM"."REVIEWPERIOD" AS "REVIEWPERIOD", 
+"SOCPENBRM"."MEDICALPERIOD" AS "MEDICALPERIOD", 
+"SOCPENBRM"."LIFECERTPERIOD" AS "LIFECERTPERIOD", 
+"SOCPENBRM"."DOCS_PRESENT" AS "DOCS_PRESENT"
+FROM "CONTENTSERVER"."SOCPENBRM" "SOCPENBRM"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SS_APPLICATION" EntityType="Self.SS_APPLICATION" store:Type="Tables" store:Schema="CONTENTSERVER">
+            <DefiningQuery>SELECT 
+"SS_APPLICATION"."APP_ID" AS "APP_ID", 
+"SS_APPLICATION"."FORM_NUMBER" AS "FORM_NUMBER", 
+"SS_APPLICATION"."ID_NUMBER" AS "ID_NUMBER", 
+"SS_APPLICATION"."SOCPEN_ID_NUMBER" AS "SOCPEN_ID_NUMBER", 
+"SS_APPLICATION"."ALT_ID_NUMBER_1" AS "ALT_ID_NUMBER_1", 
+"SS_APPLICATION"."ALT_ID_NUMBER_2" AS "ALT_ID_NUMBER_2", 
+"SS_APPLICATION"."ALT_ID_NUMBER_3" AS "ALT_ID_NUMBER_3", 
+"SS_APPLICATION"."SURNAME" AS "SURNAME", 
+"SS_APPLICATION"."NAME" AS "NAME", 
+"SS_APPLICATION"."APPLICATION_DATE" AS "APPLICATION_DATE", 
+"SS_APPLICATION"."GRANT_TYPE" AS "GRANT_TYPE", 
+"SS_APPLICATION"."FORM_TYPE" AS "FORM_TYPE", 
+"SS_APPLICATION"."DISABILITY_TYPE" AS "DISABILITY_TYPE", 
+"SS_APPLICATION"."DISABILITY_DESC" AS "DISABILITY_DESC", 
+"SS_APPLICATION"."MED_FORM" AS "MED_FORM", 
+"SS_APPLICATION"."DOC_NAME" AS "DOC_NAME", 
+"SS_APPLICATION"."GENDER" AS "GENDER", 
+"SS_APPLICATION"."RACE" AS "RACE", 
+"SS_APPLICATION"."PAYPOINT" AS "PAYPOINT", 
+"SS_APPLICATION"."TOWN" AS "TOWN", 
+"SS_APPLICATION"."REGION_CODE" AS "REGION_CODE", 
+"SS_APPLICATION"."SERVICE_ID" AS "SERVICE_ID", 
+"SS_APPLICATION"."DISTRICT_OFFICE" AS "DISTRICT_OFFICE", 
+"SS_APPLICATION"."BOX" AS "BOX", 
+"SS_APPLICATION"."POSITN" AS "POSITN", 
+"SS_APPLICATION"."A_YEAR" AS "A_YEAR", 
+"SS_APPLICATION"."BOX_TYPE" AS "BOX_TYPE", 
+"SS_APPLICATION"."LETTER_GEN_DATE" AS "LETTER_GEN_DATE", 
+"SS_APPLICATION"."LETTER_SENT_DATE" AS "LETTER_SENT_DATE", 
+"SS_APPLICATION"."ON_PERSAL" AS "ON_PERSAL", 
+"SS_APPLICATION"."ON_GEPF" AS "ON_GEPF", 
+"SS_APPLICATION"."ON_MUNI" AS "ON_MUNI", 
+"SS_APPLICATION"."PERSAL_NO" AS "PERSAL_NO", 
+"SS_APPLICATION"."APPL_STATUS" AS "APPL_STATUS", 
+"SS_APPLICATION"."DATE_IN" AS "DATE_IN", 
+"SS_APPLICATION"."ACTION_DATE" AS "ACTION_DATE", 
+"SS_APPLICATION"."ACTION_RESULT" AS "ACTION_RESULT", 
+"SS_APPLICATION"."REASON" AS "REASON", 
+"SS_APPLICATION"."MATCH_TYPE" AS "MATCH_TYPE", 
+"SS_APPLICATION"."REGISTRY_REMOVAL" AS "REGISTRY_REMOVAL", 
+"SS_APPLICATION"."APPLICATION_DOC" AS "APPLICATION_DOC", 
+"SS_APPLICATION"."ID_BOOK" AS "ID_BOOK", 
+"SS_APPLICATION"."MEDICAL_CERT" AS "MEDICAL_CERT", 
+"SS_APPLICATION"."BIRTH_CERT" AS "BIRTH_CERT", 
+"SS_APPLICATION"."COURT_ORD" AS "COURT_ORD", 
+"SS_APPLICATION"."WAR_PAPERS" AS "WAR_PAPERS", 
+"SS_APPLICATION"."USER_ID_CREATED" AS "USER_ID_CREATED", 
+"SS_APPLICATION"."OLD_POSITION" AS "OLD_POSITION", 
+"SS_APPLICATION"."APPROVED_AMOUNT" AS "APPROVED_AMOUNT", 
+"SS_APPLICATION"."ONE_OFF_PAYMENT" AS "ONE_OFF_PAYMENT", 
+"SS_APPLICATION"."PAYMENT_DATE" AS "PAYMENT_DATE", 
+"SS_APPLICATION"."DC_PERSAL_NO" AS "DC_PERSAL_NO", 
+"SS_APPLICATION"."DC_ACTION" AS "DC_ACTION", 
+"SS_APPLICATION"."DC_ACTION_DATE" AS "DC_ACTION_DATE", 
+"SS_APPLICATION"."DC_COMPLETE" AS "DC_COMPLETE", 
+"SS_APPLICATION"."LETTER" AS "LETTER", 
+"SS_APPLICATION"."LETTER_MEMO" AS "LETTER_MEMO", 
+"SS_APPLICATION"."COPY_PRINT_DATE" AS "COPY_PRINT_DATE", 
+"SS_APPLICATION"."BANKNAME" AS "BANKNAME", 
+"SS_APPLICATION"."ANNEXURE_A" AS "ANNEXURE_A", 
+"SS_APPLICATION"."ANNEXURE_B" AS "ANNEXURE_B", 
+"SS_APPLICATION"."HOME_AFFAIRS_REF1" AS "HOME_AFFAIRS_REF1", 
+"SS_APPLICATION"."HOME_AFFAIRS_REF2" AS "HOME_AFFAIRS_REF2", 
+"SS_APPLICATION"."ID_DOC" AS "ID_DOC", 
+"SS_APPLICATION"."PROOF_ID" AS "PROOF_ID", 
+"SS_APPLICATION"."BIRTH_CERTIFICATE" AS "BIRTH_CERTIFICATE", 
+"SS_APPLICATION"."PROOF_BIRTH" AS "PROOF_BIRTH", 
+"SS_APPLICATION"."SOCPEN_REF" AS "SOCPEN_REF", 
+"SS_APPLICATION"."REFUGEE_GRANT" AS "REFUGEE_GRANT", 
+"SS_APPLICATION"."DATE_EXPIRY_OF_TEMP_ID" AS "DATE_EXPIRY_OF_TEMP_ID", 
+"SS_APPLICATION"."PAYMENT_METHOD" AS "PAYMENT_METHOD", 
+"SS_APPLICATION"."CLIENT_DOB" AS "CLIENT_DOB", 
+"SS_APPLICATION"."FLAG_ADMIN_REVIEW" AS "FLAG_ADMIN_REVIEW", 
+"SS_APPLICATION"."QA_AMENDMENTS" AS "QA_AMENDMENTS", 
+"SS_APPLICATION"."VERSION" AS "VERSION", 
+"SS_APPLICATION"."SERVICE_POINT_ID" AS "SERVICE_POINT_ID"
+FROM "CONTENTSERVER"."SS_APPLICATION" "SS_APPLICATION"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DC_BOXPICKLIST" EntityType="Self.DC_BOXPICKLIST" store:Type="Views" store:Schema="CONTENTSERVER">
+            <DefiningQuery>SELECT 
+"DC_BOXPICKLIST"."UNQ_PICKLIST" AS "UNQ_PICKLIST", 
+"DC_BOXPICKLIST"."REGION_ID" AS "REGION_ID", 
+"DC_BOXPICKLIST"."REGISTRY_TYPE" AS "REGISTRY_TYPE", 
+"DC_BOXPICKLIST"."USERID" AS "USERID", 
+"DC_BOXPICKLIST"."PICKLIST_DATE" AS "PICKLIST_DATE", 
+"DC_BOXPICKLIST"."PICKLIST_STATUS" AS "PICKLIST_STATUS", 
+"DC_BOXPICKLIST"."UNQ_NO" AS "UNQ_NO", 
+"DC_BOXPICKLIST"."BIN_NUMBER" AS "BIN_NUMBER", 
+"DC_BOXPICKLIST"."BOX_NUMBER" AS "BOX_NUMBER", 
+"DC_BOXPICKLIST"."BOX_RECEIVED" AS "BOX_RECEIVED", 
+"DC_BOXPICKLIST"."BOX_COMPLETED" AS "BOX_COMPLETED", 
+"DC_BOXPICKLIST"."ARCHIVE_YEAR" AS "ARCHIVE_YEAR"
+FROM "CONTENTSERVER"."DC_BOXPICKLIST" "DC_BOXPICKLIST"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="DC_FILE_REQUEST_FK1" Association="Self.DC_FILE_REQUEST_FK1">
+            <End Role="DC_STAKEHOLDER" EntitySet="DC_STAKEHOLDER" />
+            <End Role="DC_FILE_REQUEST" EntitySet="DC_FILE_REQUEST" />
+          </AssociationSet>
+          <AssociationSet Name="DC_STAKEHOLDER_FK1" Association="Self.DC_STAKEHOLDER_FK1">
+            <End Role="DC_REQ_CATEGORY" EntitySet="DC_REQ_CATEGORY" />
+            <End Role="DC_STAKEHOLDER" EntitySet="DC_STAKEHOLDER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BATCH_LOCAL_OFFICE" Association="Self.FK_BATCH_LOCAL_OFFICE">
+            <End Role="DC_LOCAL_OFFICE" EntitySet="DC_LOCAL_OFFICE" />
+            <End Role="DC_BATCH" EntitySet="DC_BATCH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY" Association="Self.FK_CATEGORY">
+            <End Role="DC_REQ_CATEGORY" EntitySet="DC_REQ_CATEGORY" />
+            <End Role="DC_REQ_CATEGORY_TYPE_LINK" EntitySet="DC_REQ_CATEGORY_TYPE_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY_TYPE" Association="Self.FK_CATEGORY_TYPE">
+            <End Role="DC_REQ_CATEGORY_TYPE" EntitySet="DC_REQ_CATEGORY_TYPE" />
+            <End Role="DC_REQ_CATEGORY_TYPE_LINK" EntitySet="DC_REQ_CATEGORY_TYPE_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DC_BATCH" Association="Self.FK_DC_BATCH">
+            <End Role="DC_BATCH" EntitySet="DC_BATCH" />
+            <End Role="DC_FILE" EntitySet="DC_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DC_FILE_GRANT" Association="Self.FK_DC_FILE_GRANT">
+            <End Role="DC_GRANT_TYPE" EntitySet="DC_GRANT_TYPE" />
+            <End Role="DC_FILE" EntitySet="DC_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DC_FILE_TRANS_TYPE" Association="Self.FK_DC_FILE_TRANS_TYPE">
+            <End Role="DC_TRANSACTION_TYPE" EntitySet="DC_TRANSACTION_TYPE" />
+            <End Role="DC_FILE" EntitySet="DC_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DC_TRANS_TYPE" Association="Self.FK_DC_TRANS_TYPE">
+            <End Role="DC_TRANSACTION_TYPE" EntitySet="DC_TRANSACTION_TYPE" />
+            <End Role="DC_GRANT_DOC_LINK" EntitySet="DC_GRANT_DOC_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOCUMENT_TYPE_LINK" Association="Self.FK_DOCUMENT_TYPE_LINK">
+            <End Role="DC_DOCUMENT_TYPE" EntitySet="DC_DOCUMENT_TYPE" />
+            <End Role="DC_GRANT_DOC_LINK" EntitySet="DC_GRANT_DOC_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FILE_REQUEST_REGION_ID" Association="Self.FK_FILE_REQUEST_REGION_ID">
+            <End Role="DC_REGION" EntitySet="DC_REGION" />
+            <End Role="DC_FILE_REQUEST" EntitySet="DC_FILE_REQUEST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRANT_TYPE_GRANT" Association="Self.FK_GRANT_TYPE_GRANT">
+            <End Role="DC_GRANT_TYPE" EntitySet="DC_GRANT_TYPE" />
+            <End Role="DC_GRANT_DOC_LINK" EntitySet="DC_GRANT_DOC_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_OFFICE" Association="Self.FK_LOCAL_OFFICE">
+            <End Role="DC_LOCAL_OFFICE" EntitySet="DC_LOCAL_OFFICE" />
+            <End Role="DC_OFFICE_KUAF_LINK" EntitySet="DC_OFFICE_KUAF_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_OFFICE_REGION" Association="Self.FK_LOCAL_OFFICE_REGION">
+            <End Role="DC_REGION" EntitySet="DC_REGION" />
+            <End Role="DC_LOCAL_OFFICE" EntitySet="DC_LOCAL_OFFICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OFFICE_ID_FILE" Association="Self.FK_OFFICE_ID_FILE">
+            <End Role="DC_LOCAL_OFFICE" EntitySet="DC_LOCAL_OFFICE" />
+            <End Role="DC_FILE" EntitySet="DC_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REQUEST_CATEGORY" Association="Self.FK_REQUEST_CATEGORY">
+            <End Role="DC_REQ_CATEGORY_TYPE_LINK" EntitySet="DC_REQ_CATEGORY_TYPE_LINK" />
+            <End Role="DC_FILE_REQUEST" EntitySet="DC_FILE_REQUEST" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C0084094" Association="Self.SYS_C0084094">
+            <End Role="CUST_REGIONS" EntitySet="CUST_REGIONS" />
+            <End Role="CUST_DISTRICT" EntitySet="CUST_DISTRICT" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C0084099" Association="Self.SYS_C0084099">
+            <End Role="CUST_DISTRICT" EntitySet="CUST_DISTRICT" />
+            <End Role="CUST_LOCALOFFICE" EntitySet="CUST_LOCALOFFICE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CUST_DISTRICT">
+          <Key>
+            <PropertyRef Name="DISTRICTID" />
+          </Key>
+          <Property Name="DISTRICTID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DISTRICT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REGNUM" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CUST_REGIONS" Relationship="Self.SYS_C0010814" FromRole="CUST_DISTRICT" ToRole="CUST_REGIONS" />
+          <NavigationProperty Name="CUST_LOCALOFFICE" Relationship="Self.SYS_C0010815" FromRole="CUST_DISTRICT" ToRole="CUST_LOCALOFFICE" />
+        </EntityType>
+        <EntityType Name="CUST_LOCALOFFICE">
+          <Key>
+            <PropertyRef Name="LOCALID" />
+          </Key>
+          <Property Name="LOCALID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="LOCALOFFICE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTRICTID" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="CUST_DISTRICT" Relationship="Self.SYS_C0010815" FromRole="CUST_LOCALOFFICE" ToRole="CUST_DISTRICT" />
+        </EntityType>
+        <EntityType Name="CUST_REGIONS">
+          <Key>
+            <PropertyRef Name="REGNUM" />
+          </Key>
+          <Property Name="REGNUM" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="REGNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CUST_DISTRICT" Relationship="Self.SYS_C0010814" FromRole="CUST_REGIONS" ToRole="CUST_DISTRICT" />
+        </EntityType>
+        <EntityType Name="DC_BATCH">
+          <Key>
+            <PropertyRef Name="BATCH_NO" />
+          </Key>
+          <Property Name="BATCH_NO" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="OFFICE_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UPDATED_BY" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="UPDATED_DATE" Type="DateTime" Nullable="false" />
+          <Property Name="BATCH_CURRENT" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BATCH_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BATCH_COMMENT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="WAYBILL_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="COURIER_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="WAYBILL_DATE" Type="DateTime" />
+          <NavigationProperty Name="DC_LOCAL_OFFICE" Relationship="Self.FK_BATCH_LOCAL_OFFICE" FromRole="DC_BATCH" ToRole="DC_LOCAL_OFFICE" />
+          <NavigationProperty Name="DC_FILE" Relationship="Self.FK_DC_BATCH" FromRole="DC_BATCH" ToRole="DC_FILE" />
+          <Property Name="UPDATED_BY_AD" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <Property Name="REG_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_DOCUMENT_TYPE">
+          <Key>
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="TYPE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TYPE_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_GRANT_DOC_LINK" Relationship="Self.FK_DOCUMENT_TYPE_LINK" FromRole="DC_DOCUMENT_TYPE" ToRole="DC_GRANT_DOC_LINK" />
+        </EntityType>
+        <EntityType Name="DC_FILE">
+          <Key>
+            <PropertyRef Name="UNQ_FILE_NO" />
+          </Key>
+          <Property Name="UNQ_FILE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BATCH_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="OFFICE_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="APPLICANT_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GRANT_TYPE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="TRANS_TYPE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DOCS_PRESENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TRANS_DATE" Type="DateTime" />
+          <Property Name="UPDATED_BY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="UPDATED_DATE" Type="DateTime" />
+          <Property Name="BATCH_ADD_DATE" Type="DateTime" />
+          <Property Name="FILE_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FILE_COMMENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="USER_FIRSTNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="USER_LASTNAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="APPLICATION_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DOCS_SCANNED" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SCAN_DATETIME" Type="DateTime" />
+          <Property Name="BRM_BARCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TDW_BOXNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="QC_USER_FN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="QC_USER_LN" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="QC_DATE" Type="DateTime" />
+          <NavigationProperty Name="DC_BATCH" Relationship="Self.FK_DC_BATCH" FromRole="DC_FILE" ToRole="DC_BATCH" />
+          <NavigationProperty Name="DC_GRANT_TYPE" Relationship="Self.FK_DC_FILE_GRANT" FromRole="DC_FILE" ToRole="DC_GRANT_TYPE" />
+          <NavigationProperty Name="DC_TRANSACTION_TYPE" Relationship="Self.FK_DC_FILE_TRANS_TYPE" FromRole="DC_FILE" ToRole="DC_TRANSACTION_TYPE" />
+          <NavigationProperty Name="DC_LOCAL_OFFICE" Relationship="Self.FK_OFFICE_ID_FILE" FromRole="DC_FILE" ToRole="DC_LOCAL_OFFICE" />
+          <Property Name="MIS_BOXNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MIS_BOX_DATE" Type="DateTime" />
+          <Property Name="MIS_REBOX_DATE" Type="DateTime" />
+          <Property Name="MIS_BOX_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MIS_REBOX_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FILE_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NON_COMPLIANT" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ARCHIVE_YEAR" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="EXCLUSIONS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MISSING" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="TRANSFERRED" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="COMPLIANT" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID_FROM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TDW_BOX_TYPE_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="TDW_BOX_ARCHIVE_YEAR" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="SRD_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_BOX_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ALT_BOX_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UPDATED_BY_AD" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <Property Name="CHILD_ID_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRINT_ORDER" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ISREVIEW" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="LASTREVIEWDATE" Type="DateTime" />
+          <Property Name="LCTYPE" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="DC_GRANT_DOC_LINK">
+          <Key>
+            <PropertyRef Name="GRANT_ID" />
+            <PropertyRef Name="TRANSACTION_ID" />
+            <PropertyRef Name="DOCUMENT_ID" />
+          </Key>
+          <Property Name="GRANT_ID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TRANSACTION_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="DOCUMENT_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CRITICAL_FLAG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="SECTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_DOCUMENT_TYPE" Relationship="Self.FK_DOCUMENT_TYPE_LINK" FromRole="DC_GRANT_DOC_LINK" ToRole="DC_DOCUMENT_TYPE" />
+          <NavigationProperty Name="DC_TRANSACTION_TYPE" Relationship="Self.FK_DC_TRANS_TYPE" FromRole="DC_GRANT_DOC_LINK" ToRole="DC_TRANSACTION_TYPE" />
+          <NavigationProperty Name="DC_GRANT_TYPE" Relationship="Self.FK_GRANT_TYPE_GRANT" FromRole="DC_GRANT_DOC_LINK" ToRole="DC_GRANT_TYPE" />
+        </EntityType>
+        <EntityType Name="DC_GRANT_TYPE">
+          <Key>
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="TYPE_ID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_FILE" Relationship="Self.FK_DC_FILE_GRANT" FromRole="DC_GRANT_TYPE" ToRole="DC_FILE" />
+          <NavigationProperty Name="DC_GRANT_DOC_LINK" Relationship="Self.FK_GRANT_TYPE_GRANT" FromRole="DC_GRANT_TYPE" ToRole="DC_GRANT_DOC_LINK" />
+        </EntityType>
+        <EntityType Name="DC_LOCAL_OFFICE">
+          <Key>
+            <PropertyRef Name="OFFICE_ID" />
+          </Key>
+          <Property Name="OFFICE_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OFFICE_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OFFICE_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="DISTRICT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_BATCH" Relationship="Self.FK_BATCH_LOCAL_OFFICE" FromRole="DC_LOCAL_OFFICE" ToRole="DC_BATCH" />
+          <NavigationProperty Name="DC_FILE" Relationship="Self.FK_OFFICE_ID_FILE" FromRole="DC_LOCAL_OFFICE" ToRole="DC_FILE" />
+          <NavigationProperty Name="DC_OFFICE_KUAF_LINK" Relationship="Self.FK_LOCAL_OFFICE" FromRole="DC_LOCAL_OFFICE" ToRole="DC_OFFICE_KUAF_LINK" />
+          <NavigationProperty Name="DC_REGION" Relationship="Self.FK_LOCAL_OFFICE_REGION" FromRole="DC_LOCAL_OFFICE" ToRole="DC_REGION" />
+        </EntityType>
+        <EntityType Name="DC_OFFICE_KUAF_LINK">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="OFFICE_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="KUAF_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="SUPERVISOR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_LOCAL_OFFICE" Relationship="Self.FK_LOCAL_OFFICE" FromRole="DC_OFFICE_KUAF_LINK" ToRole="DC_LOCAL_OFFICE" />
+          <Property Name="USERNAME" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <Property Name="PK" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DC_REGION">
+          <Key>
+            <PropertyRef Name="REGION_ID" />
+          </Key>
+          <Property Name="REGION_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REGION_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_LOCAL_OFFICE" Relationship="Self.FK_LOCAL_OFFICE_REGION" FromRole="DC_REGION" ToRole="DC_LOCAL_OFFICE" />
+          <NavigationProperty Name="DC_FILE_REQUEST" Relationship="DCModel.FK_FILE_REQUEST_REGION_ID" FromRole="DC_REGION" ToRole="DC_FILE_REQUEST" />
+          <NavigationProperty Name="DC_STAKEHOLDER" Relationship="DCModel.FK_DC_REGION" FromRole="DC_REGION" ToRole="DC_STAKEHOLDER" />
+        </EntityType>
+        <EntityType Name="DC_REQ_CATEGORY">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="CATEGORY_DESCR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_REQ_CATEGORY_TYPE_LINK" Relationship="Self.FK_CATEGORY" FromRole="DC_REQ_CATEGORY" ToRole="DC_REQ_CATEGORY_TYPE_LINK" />
+          <NavigationProperty Name="DC_STAKEHOLDER" Relationship="DCModel.DC_STAKEHOLDER_FK1" FromRole="DC_REQ_CATEGORY" ToRole="DC_STAKEHOLDER" />
+        </EntityType>
+        <EntityType Name="DC_REQ_CATEGORY_TYPE">
+          <Key>
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="TYPE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TYPE_DESCR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_REQ_CATEGORY_TYPE_LINK" Relationship="Self.FK_CATEGORY_TYPE" FromRole="DC_REQ_CATEGORY_TYPE" ToRole="DC_REQ_CATEGORY_TYPE_LINK" />
+        </EntityType>
+        <EntityType Name="DC_REQ_CATEGORY_TYPE_LINK">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TYPE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <NavigationProperty Name="DC_REQ_CATEGORY" Relationship="Self.FK_CATEGORY" FromRole="DC_REQ_CATEGORY_TYPE_LINK" ToRole="DC_REQ_CATEGORY" />
+          <NavigationProperty Name="DC_REQ_CATEGORY_TYPE" Relationship="Self.FK_CATEGORY_TYPE" FromRole="DC_REQ_CATEGORY_TYPE_LINK" ToRole="DC_REQ_CATEGORY_TYPE" />
+          <NavigationProperty Name="DC_FILE_REQUEST" Relationship="DCModel.FK_REQUEST_CATEGORY" FromRole="DC_REQ_CATEGORY_TYPE_LINK" ToRole="DC_FILE_REQUEST" />
+        </EntityType>
+        <EntityType Name="DC_TRANSACTION_TYPE">
+          <Key>
+            <PropertyRef Name="TYPE_ID" />
+          </Key>
+          <Property Name="TYPE_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="TYPE_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SERVICE_CATEGORY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_FILE" Relationship="Self.FK_DC_FILE_TRANS_TYPE" FromRole="DC_TRANSACTION_TYPE" ToRole="DC_FILE" />
+          <NavigationProperty Name="DC_GRANT_DOC_LINK" Relationship="Self.FK_DC_TRANS_TYPE" FromRole="DC_TRANSACTION_TYPE" ToRole="DC_GRANT_DOC_LINK" />
+        </EntityType>
+        <EntityType Name="KUAFCHILDREN">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CHILDID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CHILDID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="SYS_C0010814">
+          <End Role="CUST_REGIONS" Type="Self.CUST_REGIONS" Multiplicity="0..1" />
+          <End Role="CUST_DISTRICT" Type="Self.CUST_DISTRICT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUST_REGIONS">
+              <PropertyRef Name="REGNUM" />
+            </Principal>
+            <Dependent Role="CUST_DISTRICT">
+              <PropertyRef Name="REGNUM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C0010815">
+          <End Role="CUST_DISTRICT" Type="Self.CUST_DISTRICT" Multiplicity="0..1" />
+          <End Role="CUST_LOCALOFFICE" Type="Self.CUST_LOCALOFFICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUST_DISTRICT">
+              <PropertyRef Name="DISTRICTID" />
+            </Principal>
+            <Dependent Role="CUST_LOCALOFFICE">
+              <PropertyRef Name="DISTRICTID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BATCH_LOCAL_OFFICE">
+          <End Role="DC_LOCAL_OFFICE" Type="Self.DC_LOCAL_OFFICE" Multiplicity="1" />
+          <End Role="DC_BATCH" Type="Self.DC_BATCH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_LOCAL_OFFICE">
+              <PropertyRef Name="OFFICE_ID" />
+            </Principal>
+            <Dependent Role="DC_BATCH">
+              <PropertyRef Name="OFFICE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DC_BATCH">
+          <End Role="DC_BATCH" Type="Self.DC_BATCH" Multiplicity="0..1" />
+          <End Role="DC_FILE" Type="Self.DC_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_BATCH">
+              <PropertyRef Name="BATCH_NO" />
+            </Principal>
+            <Dependent Role="DC_FILE">
+              <PropertyRef Name="BATCH_NO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DOCUMENT_TYPE_LINK">
+          <End Role="DC_DOCUMENT_TYPE" Type="Self.DC_DOCUMENT_TYPE" Multiplicity="1" />
+          <End Role="DC_GRANT_DOC_LINK" Type="Self.DC_GRANT_DOC_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_DOCUMENT_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_GRANT_DOC_LINK">
+              <PropertyRef Name="DOCUMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DC_FILE_GRANT">
+          <End Role="DC_GRANT_TYPE" Type="Self.DC_GRANT_TYPE" Multiplicity="0..1" />
+          <End Role="DC_FILE" Type="Self.DC_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_GRANT_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE">
+              <PropertyRef Name="GRANT_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DC_FILE_TRANS_TYPE">
+          <End Role="DC_TRANSACTION_TYPE" Type="Self.DC_TRANSACTION_TYPE" Multiplicity="0..1" />
+          <End Role="DC_FILE" Type="Self.DC_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_TRANSACTION_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE">
+              <PropertyRef Name="TRANS_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OFFICE_ID_FILE">
+          <End Role="DC_LOCAL_OFFICE" Type="Self.DC_LOCAL_OFFICE" Multiplicity="0..1" />
+          <End Role="DC_FILE" Type="Self.DC_FILE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_LOCAL_OFFICE">
+              <PropertyRef Name="OFFICE_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE">
+              <PropertyRef Name="OFFICE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DC_TRANS_TYPE">
+          <End Role="DC_TRANSACTION_TYPE" Type="Self.DC_TRANSACTION_TYPE" Multiplicity="1" />
+          <End Role="DC_GRANT_DOC_LINK" Type="Self.DC_GRANT_DOC_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_TRANSACTION_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_GRANT_DOC_LINK">
+              <PropertyRef Name="TRANSACTION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRANT_TYPE_GRANT">
+          <End Role="DC_GRANT_TYPE" Type="Self.DC_GRANT_TYPE" Multiplicity="1" />
+          <End Role="DC_GRANT_DOC_LINK" Type="Self.DC_GRANT_DOC_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_GRANT_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_GRANT_DOC_LINK">
+              <PropertyRef Name="GRANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_OFFICE">
+          <End Role="DC_LOCAL_OFFICE" Type="Self.DC_LOCAL_OFFICE" Multiplicity="0..1" />
+          <End Role="DC_OFFICE_KUAF_LINK" Type="Self.DC_OFFICE_KUAF_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_LOCAL_OFFICE">
+              <PropertyRef Name="OFFICE_ID" />
+            </Principal>
+            <Dependent Role="DC_OFFICE_KUAF_LINK">
+              <PropertyRef Name="OFFICE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOCAL_OFFICE_REGION">
+          <End Role="DC_REGION" Type="Self.DC_REGION" Multiplicity="0..1" />
+          <End Role="DC_LOCAL_OFFICE" Type="Self.DC_LOCAL_OFFICE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REGION">
+              <PropertyRef Name="REGION_ID" />
+            </Principal>
+            <Dependent Role="DC_LOCAL_OFFICE">
+              <PropertyRef Name="REGION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY">
+          <End Role="DC_REQ_CATEGORY" Type="Self.DC_REQ_CATEGORY" Multiplicity="1" />
+          <End Role="DC_REQ_CATEGORY_TYPE_LINK" Type="Self.DC_REQ_CATEGORY_TYPE_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REQ_CATEGORY">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="DC_REQ_CATEGORY_TYPE_LINK">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CATEGORY_TYPE">
+          <End Role="DC_REQ_CATEGORY_TYPE" Type="Self.DC_REQ_CATEGORY_TYPE" Multiplicity="1" />
+          <End Role="DC_REQ_CATEGORY_TYPE_LINK" Type="Self.DC_REQ_CATEGORY_TYPE_LINK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REQ_CATEGORY_TYPE">
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_REQ_CATEGORY_TYPE_LINK">
+              <PropertyRef Name="TYPE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CUST_DISTRICT" EntityType="Self.CUST_DISTRICT" />
+          <EntitySet Name="CUST_LOCALOFFICE" EntityType="Self.CUST_LOCALOFFICE" />
+          <EntitySet Name="CUST_REGIONS" EntityType="Self.CUST_REGIONS" />
+          <EntitySet Name="DC_BATCH" EntityType="Self.DC_BATCH" />
+          <EntitySet Name="DC_DOCUMENT_TYPE" EntityType="Self.DC_DOCUMENT_TYPE" />
+          <EntitySet Name="DC_FILE" EntityType="Self.DC_FILE" />
+          <EntitySet Name="DC_GRANT_DOC_LINK" EntityType="Self.DC_GRANT_DOC_LINK" />
+          <EntitySet Name="DC_GRANT_TYPE" EntityType="Self.DC_GRANT_TYPE" />
+          <EntitySet Name="DC_LOCAL_OFFICE" EntityType="Self.DC_LOCAL_OFFICE" />
+          <EntitySet Name="DC_OFFICE_KUAF_LINK" EntityType="Self.DC_OFFICE_KUAF_LINK" />
+          <EntitySet Name="DC_REGION" EntityType="Self.DC_REGION" />
+          <EntitySet Name="DC_REQ_CATEGORY" EntityType="Self.DC_REQ_CATEGORY" />
+          <EntitySet Name="DC_REQ_CATEGORY_TYPE" EntityType="Self.DC_REQ_CATEGORY_TYPE" />
+          <EntitySet Name="DC_REQ_CATEGORY_TYPE_LINK" EntityType="Self.DC_REQ_CATEGORY_TYPE_LINK" />
+          <EntitySet Name="DC_TRANSACTION_TYPE" EntityType="Self.DC_TRANSACTION_TYPE" />
+          <EntitySet Name="KUAFCHILDRENs" EntityType="Self.KUAFCHILDREN" />
+          <AssociationSet Name="SYS_C0010814" Association="Self.SYS_C0010814">
+            <End Role="CUST_REGIONS" EntitySet="CUST_REGIONS" />
+            <End Role="CUST_DISTRICT" EntitySet="CUST_DISTRICT" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C0010815" Association="Self.SYS_C0010815">
+            <End Role="CUST_DISTRICT" EntitySet="CUST_DISTRICT" />
+            <End Role="CUST_LOCALOFFICE" EntitySet="CUST_LOCALOFFICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BATCH_LOCAL_OFFICE" Association="Self.FK_BATCH_LOCAL_OFFICE">
+            <End Role="DC_LOCAL_OFFICE" EntitySet="DC_LOCAL_OFFICE" />
+            <End Role="DC_BATCH" EntitySet="DC_BATCH" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DC_BATCH" Association="Self.FK_DC_BATCH">
+            <End Role="DC_BATCH" EntitySet="DC_BATCH" />
+            <End Role="DC_FILE" EntitySet="DC_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DOCUMENT_TYPE_LINK" Association="Self.FK_DOCUMENT_TYPE_LINK">
+            <End Role="DC_DOCUMENT_TYPE" EntitySet="DC_DOCUMENT_TYPE" />
+            <End Role="DC_GRANT_DOC_LINK" EntitySet="DC_GRANT_DOC_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DC_FILE_GRANT" Association="Self.FK_DC_FILE_GRANT">
+            <End Role="DC_GRANT_TYPE" EntitySet="DC_GRANT_TYPE" />
+            <End Role="DC_FILE" EntitySet="DC_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DC_FILE_TRANS_TYPE" Association="Self.FK_DC_FILE_TRANS_TYPE">
+            <End Role="DC_TRANSACTION_TYPE" EntitySet="DC_TRANSACTION_TYPE" />
+            <End Role="DC_FILE" EntitySet="DC_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OFFICE_ID_FILE" Association="Self.FK_OFFICE_ID_FILE">
+            <End Role="DC_LOCAL_OFFICE" EntitySet="DC_LOCAL_OFFICE" />
+            <End Role="DC_FILE" EntitySet="DC_FILE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DC_TRANS_TYPE" Association="Self.FK_DC_TRANS_TYPE">
+            <End Role="DC_TRANSACTION_TYPE" EntitySet="DC_TRANSACTION_TYPE" />
+            <End Role="DC_GRANT_DOC_LINK" EntitySet="DC_GRANT_DOC_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRANT_TYPE_GRANT" Association="Self.FK_GRANT_TYPE_GRANT">
+            <End Role="DC_GRANT_TYPE" EntitySet="DC_GRANT_TYPE" />
+            <End Role="DC_GRANT_DOC_LINK" EntitySet="DC_GRANT_DOC_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_OFFICE" Association="Self.FK_LOCAL_OFFICE">
+            <End Role="DC_LOCAL_OFFICE" EntitySet="DC_LOCAL_OFFICE" />
+            <End Role="DC_OFFICE_KUAF_LINK" EntitySet="DC_OFFICE_KUAF_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOCAL_OFFICE_REGION" Association="Self.FK_LOCAL_OFFICE_REGION">
+            <End Role="DC_REGION" EntitySet="DC_REGION" />
+            <End Role="DC_LOCAL_OFFICE" EntitySet="DC_LOCAL_OFFICE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY" Association="Self.FK_CATEGORY">
+            <End Role="DC_REQ_CATEGORY" EntitySet="DC_REQ_CATEGORY" />
+            <End Role="DC_REQ_CATEGORY_TYPE_LINK" EntitySet="DC_REQ_CATEGORY_TYPE_LINK" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CATEGORY_TYPE" Association="Self.FK_CATEGORY_TYPE">
+            <End Role="DC_REQ_CATEGORY_TYPE" EntitySet="DC_REQ_CATEGORY_TYPE" />
+            <End Role="DC_REQ_CATEGORY_TYPE_LINK" EntitySet="DC_REQ_CATEGORY_TYPE_LINK" />
+          </AssociationSet>
+          <EntitySet Name="DC_PICKLIST" EntityType="DCModel.DC_PICKLIST" />
+          <EntitySet Name="DC_DISTRICT" EntityType="DCModel.DC_DISTRICT" />
+          <EntitySet Name="DC_BOXPICKED" EntityType="DCModel.DC_BOXPICKED" />
+          <EntitySet Name="DC_BOXPICKLIST" EntityType="DCModel.DC_BOXPICKLIST" />
+          <EntitySet Name="DC_DISTRICT_EC" EntityType="DCModel.DC_DISTRICT_EC" />
+          <EntitySet Name="SOCPENBRMs" EntityType="DCModel.SOCPENBRM" />
+          <EntitySet Name="DC_BOX_TYPE" EntityType="DCModel.DC_BOX_TYPE" />
+          <EntitySet Name="DC_FILE_REQUEST" EntityType="DCModel.DC_FILE_REQUEST" />
+          <EntitySet Name="DC_STAKEHOLDER" EntityType="DCModel.DC_STAKEHOLDER" />
+          <AssociationSet Name="DC_FILE_REQUEST_FK1" Association="DCModel.DC_FILE_REQUEST_FK1">
+            <End Role="DC_STAKEHOLDER" EntitySet="DC_STAKEHOLDER" />
+            <End Role="DC_FILE_REQUEST" EntitySet="DC_FILE_REQUEST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FILE_REQUEST_REGION_ID" Association="DCModel.FK_FILE_REQUEST_REGION_ID">
+            <End Role="DC_REGION" EntitySet="DC_REGION" />
+            <End Role="DC_FILE_REQUEST" EntitySet="DC_FILE_REQUEST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REQUEST_CATEGORY" Association="DCModel.FK_REQUEST_CATEGORY">
+            <End Role="DC_REQ_CATEGORY_TYPE_LINK" EntitySet="DC_REQ_CATEGORY_TYPE_LINK" />
+            <End Role="DC_FILE_REQUEST" EntitySet="DC_FILE_REQUEST" />
+          </AssociationSet>
+          <AssociationSet Name="DC_STAKEHOLDER_FK1" Association="DCModel.DC_STAKEHOLDER_FK1">
+            <End Role="DC_REQ_CATEGORY" EntitySet="DC_REQ_CATEGORY" />
+            <End Role="DC_STAKEHOLDER" EntitySet="DC_STAKEHOLDER" />
+          </AssociationSet>
+          <EntitySet Name="DC_MERGE" EntityType="DCModel.DC_MERGE" />
+          <AssociationSet Name="FK_DC_REGION" Association="DCModel.FK_DC_REGION">
+            <End Role="DC_REGION" EntitySet="DC_REGION" />
+            <End Role="DC_STAKEHOLDER" EntitySet="DC_STAKEHOLDER" />
+          </AssociationSet>
+          <EntitySet Name="DC_LC_TYPE" EntityType="DCModel.DC_LC_TYPE" />
+          <EntitySet Name="DC_ACTIVITY" EntityType="DCModel.DC_ACTIVITY" />
+          <EntitySet Name="DC_DESTRUCTION" EntityType="DCModel.DC_DESTRUCTION" />
+          <EntitySet Name="DC_EXCLUSIONS" EntityType="DCModel.DC_EXCLUSIONS" />
+          <EntitySet Name="DC_DESTRUCTION_BATCH" EntityType="DCModel.DC_DESTRUCTION_BATCH" />
+          <EntitySet Name="DC_EXCLUSION_BATCH" EntityType="DCModel.DC_EXCLUSION_BATCH" />
+          <EntitySet Name="SS_APPLICATION" EntityType="DCModel.SS_APPLICATION" />
+          <EntitySet Name="KUAFs" EntityType="DCModel.KUAF" />
+          </EntityContainer>
+        <EntityType Name="DC_PICKLIST">
+          <Key>
+            <PropertyRef Name="UNQ_PICKLIST" />
+          </Key>
+          <Property Name="UNQ_PICKLIST" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="REGISTRY_TYPE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="USERID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PICKLIST_DATE" Type="DateTime" />
+          <Property Name="PICKLIST_STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_DISTRICT">
+          <Key>
+            <PropertyRef Name="DISTRICT" />
+          </Key>
+          <Property Name="DISTRICT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DISTRICT_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_BOXPICKED">
+          <Key>
+            <PropertyRef Name="UNQ_NO" />
+          </Key>
+          <Property Name="UNQ_PICKLIST" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BIN_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BOX_NUMBER" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BOX_RECEIVED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BOX_COMPLETED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ARCHIVE_YEAR" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="UNQ_NO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_BOXPICKLIST">
+          <Key>
+            <PropertyRef Name="UNQ_PICKLIST" />
+            <PropertyRef Name="REGION_ID" />
+            <PropertyRef Name="REGISTRY_TYPE" />
+            <PropertyRef Name="UNQ_NO" />
+            <PropertyRef Name="BOX_NUMBER" />
+          </Key>
+          <Property Name="UNQ_PICKLIST" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="REGISTRY_TYPE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="USERID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PICKLIST_DATE" Type="DateTime" />
+          <Property Name="PICKLIST_STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="UNQ_NO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BIN_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BOX_NUMBER" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BOX_RECEIVED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="BOX_COMPLETED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ARCHIVE_YEAR" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_DISTRICT_EC">
+          <Key>
+            <PropertyRef Name="DISTRICT_NUMBER" />
+          </Key>
+          <Property Name="DISTRICT_NUMBER" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="DISTRICT_NAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DISTRICT_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SOCPENBRM">
+          <Key>
+            <PropertyRef Name="PENSION_NO" />
+          </Key>
+          <Property Name="FILE_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REC_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PENSION_NO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PAYPOINT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GRANT_TYPE1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GRANT_TYPE2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GRANT_TYPE3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GRANT_TYPE4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRIM_STATUS1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRIM_STATUS2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRIM_STATUS3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PRIM_STATUS4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SEC_STATUS1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SEC_STATUS2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SEC_STATUS3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SEC_STATUS4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_DATE1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_DATE2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_DATE3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_DATE4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="APP_DATE1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="APP_DATE2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="APP_DATE3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="APP_DATE4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REVIEW_CODE1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REVIEW_CODE2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REVIEW_CODE3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REVIEW_CODE4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_REASON1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_REASON2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_REASON3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_REASON4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STAT_PER1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STAT_PER2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STAT_PER3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STAT_PER4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_ACCEPT1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_ACCEPT2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_ACCEPT3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_ACCEPT4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ORIG_APP_DATE1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ORIG_APP_DATE2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ORIG_APP_DATE3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ORIG_APP_DATE4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID4" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID5" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID6" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID7" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID8" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID9" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_ID10" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BRANCH" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="ADDRESS" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="POSTAL_ADDRESS" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="POSTAL_CODE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="NO_KIDS" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="PAYMENT_METHOD" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="SEX" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="MARITAL_STATUS" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="BIRTHDATE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="KIDS_INVOLVED" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NO_CARE_DEP" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="ACCOUNT_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SEC_PAYPOINT" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="PAYMENT_MODE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="RE_REGISTERED" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NO_KIDS_OWN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NO_KIDS_OTHER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PROVINCE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="TELNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CELLNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REVIEWPERIOD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MEDICALPERIOD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LIFECERTPERIOD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DOCS_PRESENT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_BOX_TYPE">
+          <Key>
+            <PropertyRef Name="BOX_TYPE_ID" />
+            <PropertyRef Name="BOX_TYPE" />
+            <PropertyRef Name="IS_TRANSPORT" />
+          </Key>
+          <Property Name="BOX_TYPE_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="BOX_TYPE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IS_TRANSPORT" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_FILE_REQUEST">
+          <Key>
+            <PropertyRef Name="UNQ_FILE_NO" />
+          </Key>
+          <Property Name="UNQ_FILE_NO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MIS_FILE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTED_BY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="REQUESTED_DATE" Type="DateTime" />
+          <Property Name="REQUESTED_OFFICE_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SCANNED_BY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="SCANNED_DATE" Type="DateTime" />
+          <Property Name="CLOSED_DATE" Type="DateTime" />
+          <Property Name="CLOSED_BY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="RELATED_MIS_FILE_NO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GRANT_TYPE" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="APP_DATE" Type="DateTime" />
+          <Property Name="SCANNED_PHYSICAL_IND" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="REQ_CATEGORY" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="REQ_CATEGORY_TYPE" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="REQ_CATEGORY_DETAIL" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="BRM_BARCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="BIN_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BOX_NUMBER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="POSITION" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TDW_BOXNO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SENT_TDW" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="RECEIVED_TDW" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="FILE_RETRIEVED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="SEND_TO_REQUESTOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PICKLIST_NO" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PICKLIST_TYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PICKLIST_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PICKED_BY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CLM_NUMBER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID_TO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="STAKEHOLDER" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="DC_STAKEHOLDER" Relationship="DCModel.DC_FILE_REQUEST_FK1" FromRole="DC_FILE_REQUEST" ToRole="DC_STAKEHOLDER" />
+          <NavigationProperty Name="DC_REGION" Relationship="DCModel.FK_FILE_REQUEST_REGION_ID" FromRole="DC_FILE_REQUEST" ToRole="DC_REGION" />
+          <NavigationProperty Name="DC_REQ_CATEGORY_TYPE_LINK" Relationship="DCModel.FK_REQUEST_CATEGORY" FromRole="DC_FILE_REQUEST" ToRole="DC_REQ_CATEGORY_TYPE_LINK" />
+          <Property Name="SERV_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTED_BY_AD" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <Property Name="SCANNED_BY_AD" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <Property Name="CLOSED_BY_AD" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <Property Name="APPLICATION_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_STAKEHOLDER">
+          <Key>
+            <PropertyRef Name="STAKEHOLDER_ID" />
+          </Key>
+          <Property Name="STAKEHOLDER_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="DEPARTMENT_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="SURNAME" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_FILE_REQUEST" Relationship="DCModel.DC_FILE_REQUEST_FK1" FromRole="DC_STAKEHOLDER" ToRole="DC_FILE_REQUEST" />
+          <NavigationProperty Name="DC_REQ_CATEGORY" Relationship="DCModel.DC_STAKEHOLDER_FK1" FromRole="DC_STAKEHOLDER" ToRole="DC_REQ_CATEGORY" />
+          <Property Name="REGION_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DC_REGION" Relationship="DCModel.FK_DC_REGION" FromRole="DC_STAKEHOLDER" ToRole="DC_REGION" />
+        </EntityType>
+        <Association Name="DC_FILE_REQUEST_FK1">
+          <End Type="DCModel.DC_STAKEHOLDER" Role="DC_STAKEHOLDER" Multiplicity="0..1" />
+          <End Type="DCModel.DC_FILE_REQUEST" Role="DC_FILE_REQUEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_STAKEHOLDER">
+              <PropertyRef Name="STAKEHOLDER_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE_REQUEST">
+              <PropertyRef Name="STAKEHOLDER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FILE_REQUEST_REGION_ID">
+          <End Type="DCModel.DC_REGION" Role="DC_REGION" Multiplicity="0..1" />
+          <End Type="DCModel.DC_FILE_REQUEST" Role="DC_FILE_REQUEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REGION">
+              <PropertyRef Name="REGION_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE_REQUEST">
+              <PropertyRef Name="REGION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REQUEST_CATEGORY">
+          <End Type="DCModel.DC_REQ_CATEGORY_TYPE_LINK" Role="DC_REQ_CATEGORY_TYPE_LINK" Multiplicity="0..1" />
+          <End Type="DCModel.DC_FILE_REQUEST" Role="DC_FILE_REQUEST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REQ_CATEGORY_TYPE_LINK">
+              <PropertyRef Name="CATEGORY_ID" />
+              <PropertyRef Name="TYPE_ID" />
+            </Principal>
+            <Dependent Role="DC_FILE_REQUEST">
+              <PropertyRef Name="REQ_CATEGORY" />
+              <PropertyRef Name="REQ_CATEGORY_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DC_STAKEHOLDER_FK1">
+          <End Type="DCModel.DC_REQ_CATEGORY" Role="DC_REQ_CATEGORY" Multiplicity="1" />
+          <End Type="DCModel.DC_STAKEHOLDER" Role="DC_STAKEHOLDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REQ_CATEGORY">
+              <PropertyRef Name="CATEGORY_ID" />
+            </Principal>
+            <Dependent Role="DC_STAKEHOLDER">
+              <PropertyRef Name="DEPARTMENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DC_MERGE">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="BRM_BARCODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PARENT_BRM_BARCODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_DC_REGION">
+          <End Type="DCModel.DC_REGION" Role="DC_REGION" Multiplicity="0..1" />
+          <End Type="DCModel.DC_STAKEHOLDER" Role="DC_STAKEHOLDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DC_REGION">
+              <PropertyRef Name="REGION_ID" />
+            </Principal>
+            <Dependent Role="DC_STAKEHOLDER">
+              <PropertyRef Name="REGION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DC_LC_TYPE">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_ACTIVITY">
+          <Key>
+            <PropertyRef Name="DC_ACTIVITY_ID" />
+          </Key>
+          <Property Name="DC_ACTIVITY_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AREA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVITY" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RESULT" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="USERID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ACTIVITY_DATE" Type="DateTime" Nullable="false" />
+	  <Property Name="REGION_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OFFICE_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="UNQ_FILE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DC_DESTRUCTION">
+          <Key>
+            <PropertyRef Name="PENSION_NO" />
+          </Key>
+          <Property Name="PENSION_NO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DESTRUCTIO_DATE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS_DATE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NAME" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="GRANT_TYPE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="REGION_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="EXCLUSIONBATCH_ID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="DESTRUCTION_BATCH_ID" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="DC_EXCLUSIONS">
+          <Key>
+            <PropertyRef Name="ID_NO" />
+          </Key>
+          <Property Name="ID_NO" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EXCL_DATE" Type="DateTime" />
+          <Property Name="REGION_ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="USERNAME" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="EXCLUSION_TYPE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXCLUSION_BATCH_ID" Type="Decimal" Precision="38" Scale="0" />
+        </EntityType>
+        <EntityType Name="DC_DESTRUCTION_BATCH">
+          <Key>
+            <PropertyRef Name="BATCH_ID" />
+          </Key>
+          <Property Name="BATCH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REGION_ID" Type="Int32" />
+          <Property Name="DESTRUCTION_YEAR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVED_BY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVED_DATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DC_EXCLUSION_BATCH">
+          <Key>
+            <PropertyRef Name="BATCH_ID" />
+          </Key>
+          <Property Name="BATCH_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REGION_ID" Type="Int32" />
+          <Property Name="EXCLUSION_YEAR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APPROVED_DATE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SS_APPLICATION">
+          <Key>
+            <PropertyRef Name="FORM_NUMBER" />
+            <PropertyRef Name="FORM_TYPE" />
+          </Key>
+          <Property Name="APP_ID" Type="Int32" />
+          <Property Name="FORM_NUMBER" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ID_NUMBER" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="SOCPEN_ID_NUMBER" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ALT_ID_NUMBER_1" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ALT_ID_NUMBER_2" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="ALT_ID_NUMBER_3" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="APPLICATION_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GRANT_TYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FORM_TYPE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DISABILITY_TYPE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DISABILITY_DESC" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="MED_FORM" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="DOC_NAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="GENDER" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="RACE" Type="Int32" />
+          <Property Name="PAYPOINT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TOWN" Type="Int32" />
+          <Property Name="REGION_CODE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="SERVICE_ID" Type="Int32" />
+          <Property Name="DISTRICT_OFFICE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="BOX" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="POSITN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="A_YEAR" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="BOX_TYPE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LETTER_GEN_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LETTER_SENT_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ON_PERSAL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ON_GEPF" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ON_MUNI" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PERSAL_NO" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="APPL_STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DATE_IN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTION_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTION_RESULT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REASON" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="MATCH_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REGISTRY_REMOVAL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="APPLICATION_DOC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ID_BOOK" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MEDICAL_CERT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BIRTH_CERT" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="COURT_ORD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="WAR_PAPERS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="USER_ID_CREATED" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="OLD_POSITION" Type="Int32" />
+          <Property Name="APPROVED_AMOUNT" Type="Int64" />
+          <Property Name="ONE_OFF_PAYMENT" Type="Int64" />
+          <Property Name="PAYMENT_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DC_PERSAL_NO" Type="Int32" />
+          <Property Name="DC_ACTION" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DC_ACTION_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DC_COMPLETE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LETTER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LETTER_MEMO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="COPY_PRINT_DATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BANKNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ANNEXURE_A" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ANNEXURE_B" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HOME_AFFAIRS_REF1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HOME_AFFAIRS_REF2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_DOC" Type="Boolean" />
+          <Property Name="PROOF_ID" Type="Boolean" />
+          <Property Name="BIRTH_CERTIFICATE" Type="Boolean" />
+          <Property Name="PROOF_BIRTH" Type="Boolean" />
+          <Property Name="SOCPEN_REF" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="REFUGEE_GRANT" Type="Boolean" />
+          <Property Name="DATE_EXPIRY_OF_TEMP_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PAYMENT_METHOD" Type="Int32" />
+          <Property Name="CLIENT_DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FLAG_ADMIN_REVIEW" Type="Boolean" />
+          <Property Name="QA_AMENDMENTS" Type="Boolean" />
+          <Property Name="VERSION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SERVICE_POINT_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KUAF">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="OWNERID" />
+            <PropertyRef Name="TYPE" />
+            <PropertyRef Name="SPACEID" />
+            <PropertyRef Name="NAME" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="OWNERID" Type="Int64" Nullable="false" />
+          <Property Name="TYPE" Type="Int64" Nullable="false" />
+          <Property Name="SPACEID" Type="Int64" Nullable="false" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="USERDATA" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="LEADERID" Type="Int64" />
+          <Property Name="DELETED" Type="Byte" />
+          <Property Name="USERPWD" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="GROUPID" Type="Int64" />
+          <Property Name="USERPRIVILEGES" Type="Int32" />
+          <Property Name="LASTNAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="MIDDLENAME" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="FIRSTNAME" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="MAILADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CONTACT" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="TITLE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PWDEXPIREDATE" Type="DateTime" />
+          <Property Name="PWDEXPIREMODE" Type="Int32" />
+          <Property Name="SETTINGSNUM" Type="Int16" />
+          <Property Name="FAX" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="OFFICELOCATION" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TIMEZONE" Type="Int16" />
+          <Property Name="PHOTOID" Type="Int64" />
+          <Property Name="GENDER" Type="Byte" />
+          <Property Name="BIRTHDAY" Type="DateTime" />
+          <Property Name="PERSONALEMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HOMEADDRESS1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HOMEADDRESS2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="HOMEPHONE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="HOMEFAX" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CELLULARPHONE" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PAGER" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="HOMEPAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FAVORITES1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FAVORITES2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FAVORITES3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="INTERESTS" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DCModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="CUST_DISTRICT">
+            <EntityTypeMapping TypeName="DCModel.CUST_DISTRICT">
+              <MappingFragment StoreEntitySet="CUST_DISTRICT">
+                <ScalarProperty Name="DISTRICTID" ColumnName="DISTRICTID" />
+                <ScalarProperty Name="DISTRICT" ColumnName="DISTRICT" />
+                <ScalarProperty Name="REGNUM" ColumnName="REGNUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUST_LOCALOFFICE">
+            <EntityTypeMapping TypeName="DCModel.CUST_LOCALOFFICE">
+              <MappingFragment StoreEntitySet="CUST_LOCALOFFICE">
+                <ScalarProperty Name="LOCALID" ColumnName="LOCALID" />
+                <ScalarProperty Name="LOCALOFFICE" ColumnName="LOCALOFFICE" />
+                <ScalarProperty Name="DISTRICTID" ColumnName="DISTRICTID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUST_REGIONS">
+            <EntityTypeMapping TypeName="DCModel.CUST_REGIONS">
+              <MappingFragment StoreEntitySet="CUST_REGIONS">
+                <ScalarProperty Name="REGNUM" ColumnName="REGNUM" />
+                <ScalarProperty Name="REGNAME" ColumnName="REGNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_BATCH">
+            <EntityTypeMapping TypeName="DCModel.DC_BATCH">
+              <MappingFragment StoreEntitySet="DC_BATCH">
+                <ScalarProperty Name="REG_TYPE" ColumnName="REG_TYPE" />
+                <ScalarProperty Name="UPDATED_BY_AD" ColumnName="UPDATED_BY_AD" />
+                <ScalarProperty Name="BATCH_NO" ColumnName="BATCH_NO" />
+                <ScalarProperty Name="OFFICE_ID" ColumnName="OFFICE_ID" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="BATCH_CURRENT" ColumnName="BATCH_CURRENT" />
+                <ScalarProperty Name="BATCH_STATUS" ColumnName="BATCH_STATUS" />
+                <ScalarProperty Name="BATCH_COMMENT" ColumnName="BATCH_COMMENT" />
+                <ScalarProperty Name="WAYBILL_NO" ColumnName="WAYBILL_NO" />
+                <ScalarProperty Name="COURIER_NAME" ColumnName="COURIER_NAME" />
+                <ScalarProperty Name="WAYBILL_DATE" ColumnName="WAYBILL_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_DOCUMENT_TYPE">
+            <EntityTypeMapping TypeName="DCModel.DC_DOCUMENT_TYPE">
+              <MappingFragment StoreEntitySet="DC_DOCUMENT_TYPE">
+                <ScalarProperty Name="TYPE_ID" ColumnName="TYPE_ID" />
+                <ScalarProperty Name="TYPE_NAME" ColumnName="TYPE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_FILE">
+            <EntityTypeMapping TypeName="DCModel.DC_FILE">
+              <MappingFragment StoreEntitySet="DC_FILE">
+                <ScalarProperty Name="LCTYPE" ColumnName="LCTYPE" />
+                <ScalarProperty Name="LASTREVIEWDATE" ColumnName="LASTREVIEWDATE" />
+                <ScalarProperty Name="ISREVIEW" ColumnName="ISREVIEW" />
+                <ScalarProperty Name="PRINT_ORDER" ColumnName="PRINT_ORDER" />
+                <ScalarProperty Name="CHILD_ID_NO" ColumnName="CHILD_ID_NO" />
+                <ScalarProperty Name="UPDATED_BY_AD" ColumnName="UPDATED_BY_AD" />
+                <ScalarProperty Name="ALT_BOX_NO" ColumnName="ALT_BOX_NO" />
+                <ScalarProperty Name="TEMP_BOX_NO" ColumnName="TEMP_BOX_NO" />
+                <ScalarProperty Name="SRD_NO" ColumnName="SRD_NO" />
+                <ScalarProperty Name="TDW_BOX_ARCHIVE_YEAR" ColumnName="TDW_BOX_ARCHIVE_YEAR" />
+                <ScalarProperty Name="TDW_BOX_TYPE_ID" ColumnName="TDW_BOX_TYPE_ID" />
+                <ScalarProperty Name="REGION_ID_FROM" ColumnName="REGION_ID_FROM" />
+                <ScalarProperty Name="COMPLIANT" ColumnName="COMPLIANT" />
+                <ScalarProperty Name="TRANSFERRED" ColumnName="TRANSFERRED" />
+                <ScalarProperty Name="MISSING" ColumnName="MISSING" />
+                <ScalarProperty Name="EXCLUSIONS" ColumnName="EXCLUSIONS" />
+                <ScalarProperty Name="ARCHIVE_YEAR" ColumnName="ARCHIVE_YEAR" />
+                <ScalarProperty Name="NON_COMPLIANT" ColumnName="NON_COMPLIANT" />
+                <ScalarProperty Name="FILE_NUMBER" ColumnName="FILE_NUMBER" />
+                <ScalarProperty Name="MIS_REBOX_STATUS" ColumnName="MIS_REBOX_STATUS" />
+                <ScalarProperty Name="MIS_BOX_STATUS" ColumnName="MIS_BOX_STATUS" />
+                <ScalarProperty Name="MIS_REBOX_DATE" ColumnName="MIS_REBOX_DATE" />
+                <ScalarProperty Name="MIS_BOX_DATE" ColumnName="MIS_BOX_DATE" />
+                <ScalarProperty Name="MIS_BOXNO" ColumnName="MIS_BOXNO" />
+                <ScalarProperty Name="UNQ_FILE_NO" ColumnName="UNQ_FILE_NO" />
+                <ScalarProperty Name="BATCH_NO" ColumnName="BATCH_NO" />
+                <ScalarProperty Name="OFFICE_ID" ColumnName="OFFICE_ID" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="APPLICANT_NO" ColumnName="APPLICANT_NO" />
+                <ScalarProperty Name="GRANT_TYPE" ColumnName="GRANT_TYPE" />
+                <ScalarProperty Name="TRANS_TYPE" ColumnName="TRANS_TYPE" />
+                <ScalarProperty Name="DOCS_PRESENT" ColumnName="DOCS_PRESENT" />
+                <ScalarProperty Name="TRANS_DATE" ColumnName="TRANS_DATE" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="UPDATED_DATE" ColumnName="UPDATED_DATE" />
+                <ScalarProperty Name="BATCH_ADD_DATE" ColumnName="BATCH_ADD_DATE" />
+                <ScalarProperty Name="FILE_STATUS" ColumnName="FILE_STATUS" />
+                <ScalarProperty Name="FILE_COMMENT" ColumnName="FILE_COMMENT" />
+                <ScalarProperty Name="USER_FIRSTNAME" ColumnName="USER_FIRSTNAME" />
+                <ScalarProperty Name="USER_LASTNAME" ColumnName="USER_LASTNAME" />
+                <ScalarProperty Name="APPLICATION_STATUS" ColumnName="APPLICATION_STATUS" />
+                <ScalarProperty Name="DOCS_SCANNED" ColumnName="DOCS_SCANNED" />
+                <ScalarProperty Name="SCAN_DATETIME" ColumnName="SCAN_DATETIME" />
+                <ScalarProperty Name="BRM_BARCODE" ColumnName="BRM_BARCODE" />
+                <ScalarProperty Name="TDW_BOXNO" ColumnName="TDW_BOXNO" />
+                <ScalarProperty Name="QC_USER_FN" ColumnName="QC_USER_FN" />
+                <ScalarProperty Name="QC_USER_LN" ColumnName="QC_USER_LN" />
+                <ScalarProperty Name="QC_DATE" ColumnName="QC_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_GRANT_DOC_LINK">
+            <EntityTypeMapping TypeName="DCModel.DC_GRANT_DOC_LINK">
+              <MappingFragment StoreEntitySet="DC_GRANT_DOC_LINK">
+                <ScalarProperty Name="GRANT_ID" ColumnName="GRANT_ID" />
+                <ScalarProperty Name="TRANSACTION_ID" ColumnName="TRANSACTION_ID" />
+                <ScalarProperty Name="DOCUMENT_ID" ColumnName="DOCUMENT_ID" />
+                <ScalarProperty Name="CRITICAL_FLAG" ColumnName="CRITICAL_FLAG" />
+                <ScalarProperty Name="SECTION" ColumnName="SECTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_GRANT_TYPE">
+            <EntityTypeMapping TypeName="DCModel.DC_GRANT_TYPE">
+              <MappingFragment StoreEntitySet="DC_GRANT_TYPE">
+                <ScalarProperty Name="TYPE_ID" ColumnName="TYPE_ID" />
+                <ScalarProperty Name="TYPE_NAME" ColumnName="TYPE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_LOCAL_OFFICE">
+            <EntityTypeMapping TypeName="DCModel.DC_LOCAL_OFFICE">
+              <MappingFragment StoreEntitySet="DC_LOCAL_OFFICE">
+                <ScalarProperty Name="OFFICE_ID" ColumnName="OFFICE_ID" />
+                <ScalarProperty Name="OFFICE_NAME" ColumnName="OFFICE_NAME" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="OFFICE_TYPE" ColumnName="OFFICE_TYPE" />
+                <ScalarProperty Name="DISTRICT" ColumnName="DISTRICT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_OFFICE_KUAF_LINK">
+            <EntityTypeMapping TypeName="DCModel.DC_OFFICE_KUAF_LINK">
+              <MappingFragment StoreEntitySet="DC_OFFICE_KUAF_LINK">
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="OFFICE_ID" ColumnName="OFFICE_ID" />
+                <ScalarProperty Name="KUAF_ID" ColumnName="KUAF_ID" />
+                <ScalarProperty Name="SUPERVISOR" ColumnName="SUPERVISOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_REGION">
+            <EntityTypeMapping TypeName="DCModel.DC_REGION">
+              <MappingFragment StoreEntitySet="DC_REGION">
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="REGION_NAME" ColumnName="REGION_NAME" />
+                <ScalarProperty Name="REGION_CODE" ColumnName="REGION_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_REQ_CATEGORY">
+            <EntityTypeMapping TypeName="DCModel.DC_REQ_CATEGORY">
+              <MappingFragment StoreEntitySet="DC_REQ_CATEGORY">
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+                <ScalarProperty Name="CATEGORY_DESCR" ColumnName="CATEGORY_DESCR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_REQ_CATEGORY_TYPE">
+            <EntityTypeMapping TypeName="DCModel.DC_REQ_CATEGORY_TYPE">
+              <MappingFragment StoreEntitySet="DC_REQ_CATEGORY_TYPE">
+                <ScalarProperty Name="TYPE_ID" ColumnName="TYPE_ID" />
+                <ScalarProperty Name="TYPE_DESCR" ColumnName="TYPE_DESCR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_REQ_CATEGORY_TYPE_LINK">
+            <EntityTypeMapping TypeName="DCModel.DC_REQ_CATEGORY_TYPE_LINK">
+              <MappingFragment StoreEntitySet="DC_REQ_CATEGORY_TYPE_LINK">
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+                <ScalarProperty Name="TYPE_ID" ColumnName="TYPE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_TRANSACTION_TYPE">
+            <EntityTypeMapping TypeName="DCModel.DC_TRANSACTION_TYPE">
+              <MappingFragment StoreEntitySet="DC_TRANSACTION_TYPE">
+                <ScalarProperty Name="TYPE_ID" ColumnName="TYPE_ID" />
+                <ScalarProperty Name="TYPE_NAME" ColumnName="TYPE_NAME" />
+                <ScalarProperty Name="SERVICE_CATEGORY" ColumnName="SERVICE_CATEGORY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KUAFCHILDRENs">
+            <EntityTypeMapping TypeName="DCModel.KUAFCHILDREN">
+              <MappingFragment StoreEntitySet="KUAFCHILDREN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CHILDID" ColumnName="CHILDID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_PICKLIST">
+            <EntityTypeMapping TypeName="DCModel.DC_PICKLIST">
+              <MappingFragment StoreEntitySet="DC_PICKLIST">
+                <ScalarProperty Name="PICKLIST_STATUS" ColumnName="PICKLIST_STATUS" />
+                <ScalarProperty Name="PICKLIST_DATE" ColumnName="PICKLIST_DATE" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="REGISTRY_TYPE" ColumnName="REGISTRY_TYPE" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="UNQ_PICKLIST" ColumnName="UNQ_PICKLIST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_DISTRICT">
+            <EntityTypeMapping TypeName="DCModel.DC_DISTRICT">
+              <MappingFragment StoreEntitySet="DC_DISTRICT">
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="DISTRICT_NAME" ColumnName="DISTRICT_NAME" />
+                <ScalarProperty Name="DISTRICT" ColumnName="DISTRICT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_BOXPICKED">
+            <EntityTypeMapping TypeName="DCModel.DC_BOXPICKED">
+              <MappingFragment StoreEntitySet="DC_BOXPICKED">
+                <ScalarProperty Name="UNQ_NO" ColumnName="UNQ_NO" />
+                <ScalarProperty Name="ARCHIVE_YEAR" ColumnName="ARCHIVE_YEAR" />
+                <ScalarProperty Name="BOX_COMPLETED" ColumnName="BOX_COMPLETED" />
+                <ScalarProperty Name="BOX_RECEIVED" ColumnName="BOX_RECEIVED" />
+                <ScalarProperty Name="BOX_NUMBER" ColumnName="BOX_NUMBER" />
+                <ScalarProperty Name="BIN_NUMBER" ColumnName="BIN_NUMBER" />
+                <ScalarProperty Name="UNQ_PICKLIST" ColumnName="UNQ_PICKLIST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_BOXPICKLIST">
+            <EntityTypeMapping TypeName="DCModel.DC_BOXPICKLIST">
+              <MappingFragment StoreEntitySet="DC_BOXPICKLIST">
+                <ScalarProperty Name="ARCHIVE_YEAR" ColumnName="ARCHIVE_YEAR" />
+                <ScalarProperty Name="BOX_COMPLETED" ColumnName="BOX_COMPLETED" />
+                <ScalarProperty Name="BOX_RECEIVED" ColumnName="BOX_RECEIVED" />
+                <ScalarProperty Name="BOX_NUMBER" ColumnName="BOX_NUMBER" />
+                <ScalarProperty Name="BIN_NUMBER" ColumnName="BIN_NUMBER" />
+                <ScalarProperty Name="UNQ_NO" ColumnName="UNQ_NO" />
+                <ScalarProperty Name="PICKLIST_STATUS" ColumnName="PICKLIST_STATUS" />
+                <ScalarProperty Name="PICKLIST_DATE" ColumnName="PICKLIST_DATE" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="REGISTRY_TYPE" ColumnName="REGISTRY_TYPE" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="UNQ_PICKLIST" ColumnName="UNQ_PICKLIST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_DISTRICT_EC">
+            <EntityTypeMapping TypeName="DCModel.DC_DISTRICT_EC">
+              <MappingFragment StoreEntitySet="DC_DISTRICT_EC">
+                <ScalarProperty Name="DISTRICT_CODE" ColumnName="DISTRICT_CODE" />
+                <ScalarProperty Name="DISTRICT_NAME" ColumnName="DISTRICT_NAME" />
+                <ScalarProperty Name="DISTRICT_NUMBER" ColumnName="DISTRICT_NUMBER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOCPENBRMs">
+            <EntityTypeMapping TypeName="DCModel.SOCPENBRM">
+              <MappingFragment StoreEntitySet="SOCPENBRM">
+                <ScalarProperty Name="DOCS_PRESENT" ColumnName="DOCS_PRESENT" />
+                <ScalarProperty Name="LIFECERTPERIOD" ColumnName="LIFECERTPERIOD" />
+                <ScalarProperty Name="MEDICALPERIOD" ColumnName="MEDICALPERIOD" />
+                <ScalarProperty Name="REVIEWPERIOD" ColumnName="REVIEWPERIOD" />
+                <ScalarProperty Name="CELLNO" ColumnName="CELLNO" />
+                <ScalarProperty Name="TELNO" ColumnName="TELNO" />
+                <ScalarProperty Name="PROVINCE" ColumnName="PROVINCE" />
+                <ScalarProperty Name="NO_KIDS_OTHER" ColumnName="NO_KIDS_OTHER" />
+                <ScalarProperty Name="NO_KIDS_OWN" ColumnName="NO_KIDS_OWN" />
+                <ScalarProperty Name="RE_REGISTERED" ColumnName="RE_REGISTERED" />
+                <ScalarProperty Name="PAYMENT_MODE" ColumnName="PAYMENT_MODE" />
+                <ScalarProperty Name="SEC_PAYPOINT" ColumnName="SEC_PAYPOINT" />
+                <ScalarProperty Name="ACCOUNT_NO" ColumnName="ACCOUNT_NO" />
+                <ScalarProperty Name="NO_CARE_DEP" ColumnName="NO_CARE_DEP" />
+                <ScalarProperty Name="KIDS_INVOLVED" ColumnName="KIDS_INVOLVED" />
+                <ScalarProperty Name="BIRTHDATE" ColumnName="BIRTHDATE" />
+                <ScalarProperty Name="MARITAL_STATUS" ColumnName="MARITAL_STATUS" />
+                <ScalarProperty Name="SEX" ColumnName="SEX" />
+                <ScalarProperty Name="PAYMENT_METHOD" ColumnName="PAYMENT_METHOD" />
+                <ScalarProperty Name="NO_KIDS" ColumnName="NO_KIDS" />
+                <ScalarProperty Name="POSTAL_CODE" ColumnName="POSTAL_CODE" />
+                <ScalarProperty Name="POSTAL_ADDRESS" ColumnName="POSTAL_ADDRESS" />
+                <ScalarProperty Name="ADDRESS" ColumnName="ADDRESS" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="BRANCH" ColumnName="BRANCH" />
+                <ScalarProperty Name="OLD_ID10" ColumnName="OLD_ID10" />
+                <ScalarProperty Name="OLD_ID9" ColumnName="OLD_ID9" />
+                <ScalarProperty Name="OLD_ID8" ColumnName="OLD_ID8" />
+                <ScalarProperty Name="OLD_ID7" ColumnName="OLD_ID7" />
+                <ScalarProperty Name="OLD_ID6" ColumnName="OLD_ID6" />
+                <ScalarProperty Name="OLD_ID5" ColumnName="OLD_ID5" />
+                <ScalarProperty Name="OLD_ID4" ColumnName="OLD_ID4" />
+                <ScalarProperty Name="OLD_ID3" ColumnName="OLD_ID3" />
+                <ScalarProperty Name="OLD_ID2" ColumnName="OLD_ID2" />
+                <ScalarProperty Name="OLD_ID1" ColumnName="OLD_ID1" />
+                <ScalarProperty Name="ORIG_APP_DATE4" ColumnName="ORIG_APP_DATE4" />
+                <ScalarProperty Name="ORIG_APP_DATE3" ColumnName="ORIG_APP_DATE3" />
+                <ScalarProperty Name="ORIG_APP_DATE2" ColumnName="ORIG_APP_DATE2" />
+                <ScalarProperty Name="ORIG_APP_DATE1" ColumnName="ORIG_APP_DATE1" />
+                <ScalarProperty Name="DATE_ACCEPT4" ColumnName="DATE_ACCEPT4" />
+                <ScalarProperty Name="DATE_ACCEPT3" ColumnName="DATE_ACCEPT3" />
+                <ScalarProperty Name="DATE_ACCEPT2" ColumnName="DATE_ACCEPT2" />
+                <ScalarProperty Name="DATE_ACCEPT1" ColumnName="DATE_ACCEPT1" />
+                <ScalarProperty Name="STAT_PER4" ColumnName="STAT_PER4" />
+                <ScalarProperty Name="STAT_PER3" ColumnName="STAT_PER3" />
+                <ScalarProperty Name="STAT_PER2" ColumnName="STAT_PER2" />
+                <ScalarProperty Name="STAT_PER1" ColumnName="STAT_PER1" />
+                <ScalarProperty Name="STATUS_REASON4" ColumnName="STATUS_REASON4" />
+                <ScalarProperty Name="STATUS_REASON3" ColumnName="STATUS_REASON3" />
+                <ScalarProperty Name="STATUS_REASON2" ColumnName="STATUS_REASON2" />
+                <ScalarProperty Name="STATUS_REASON1" ColumnName="STATUS_REASON1" />
+                <ScalarProperty Name="REVIEW_CODE4" ColumnName="REVIEW_CODE4" />
+                <ScalarProperty Name="REVIEW_CODE3" ColumnName="REVIEW_CODE3" />
+                <ScalarProperty Name="REVIEW_CODE2" ColumnName="REVIEW_CODE2" />
+                <ScalarProperty Name="REVIEW_CODE1" ColumnName="REVIEW_CODE1" />
+                <ScalarProperty Name="APP_DATE4" ColumnName="APP_DATE4" />
+                <ScalarProperty Name="APP_DATE3" ColumnName="APP_DATE3" />
+                <ScalarProperty Name="APP_DATE2" ColumnName="APP_DATE2" />
+                <ScalarProperty Name="APP_DATE1" ColumnName="APP_DATE1" />
+                <ScalarProperty Name="STATUS_DATE4" ColumnName="STATUS_DATE4" />
+                <ScalarProperty Name="STATUS_DATE3" ColumnName="STATUS_DATE3" />
+                <ScalarProperty Name="STATUS_DATE2" ColumnName="STATUS_DATE2" />
+                <ScalarProperty Name="STATUS_DATE1" ColumnName="STATUS_DATE1" />
+                <ScalarProperty Name="SEC_STATUS4" ColumnName="SEC_STATUS4" />
+                <ScalarProperty Name="SEC_STATUS3" ColumnName="SEC_STATUS3" />
+                <ScalarProperty Name="SEC_STATUS2" ColumnName="SEC_STATUS2" />
+                <ScalarProperty Name="SEC_STATUS1" ColumnName="SEC_STATUS1" />
+                <ScalarProperty Name="PRIM_STATUS4" ColumnName="PRIM_STATUS4" />
+                <ScalarProperty Name="PRIM_STATUS3" ColumnName="PRIM_STATUS3" />
+                <ScalarProperty Name="PRIM_STATUS2" ColumnName="PRIM_STATUS2" />
+                <ScalarProperty Name="PRIM_STATUS1" ColumnName="PRIM_STATUS1" />
+                <ScalarProperty Name="GRANT_TYPE4" ColumnName="GRANT_TYPE4" />
+                <ScalarProperty Name="GRANT_TYPE3" ColumnName="GRANT_TYPE3" />
+                <ScalarProperty Name="GRANT_TYPE2" ColumnName="GRANT_TYPE2" />
+                <ScalarProperty Name="GRANT_TYPE1" ColumnName="GRANT_TYPE1" />
+                <ScalarProperty Name="PAYPOINT" ColumnName="PAYPOINT" />
+                <ScalarProperty Name="PENSION_NO" ColumnName="PENSION_NO" />
+                <ScalarProperty Name="REC_TYPE" ColumnName="REC_TYPE" />
+                <ScalarProperty Name="FILE_TYPE" ColumnName="FILE_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_BOX_TYPE">
+            <EntityTypeMapping TypeName="DCModel.DC_BOX_TYPE">
+              <MappingFragment StoreEntitySet="DC_BOX_TYPE">
+                <ScalarProperty Name="IS_TRANSPORT" ColumnName="IS_TRANSPORT" />
+                <ScalarProperty Name="BOX_TYPE" ColumnName="BOX_TYPE" />
+                <ScalarProperty Name="BOX_TYPE_ID" ColumnName="BOX_TYPE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_FILE_REQUEST">
+            <EntityTypeMapping TypeName="DCModel.DC_FILE_REQUEST">
+              <MappingFragment StoreEntitySet="DC_FILE_REQUEST">
+                <ScalarProperty Name="APPLICATION_STATUS" ColumnName="APPLICATION_STATUS" />
+                <ScalarProperty Name="CLOSED_BY_AD" ColumnName="CLOSED_BY_AD" />
+                <ScalarProperty Name="SCANNED_BY_AD" ColumnName="SCANNED_BY_AD" />
+                <ScalarProperty Name="REQUESTED_BY_AD" ColumnName="REQUESTED_BY_AD" />
+                <ScalarProperty Name="SERV_BY" ColumnName="SERV_BY" />
+                <ScalarProperty Name="STAKEHOLDER" ColumnName="STAKEHOLDER" />
+                <ScalarProperty Name="REGION_ID_TO" ColumnName="REGION_ID_TO" />
+                <ScalarProperty Name="CLM_NUMBER" ColumnName="CLM_NUMBER" />
+                <ScalarProperty Name="PICKED_BY" ColumnName="PICKED_BY" />
+                <ScalarProperty Name="PICKLIST_STATUS" ColumnName="PICKLIST_STATUS" />
+                <ScalarProperty Name="PICKLIST_TYPE" ColumnName="PICKLIST_TYPE" />
+                <ScalarProperty Name="PICKLIST_NO" ColumnName="PICKLIST_NO" />
+                <ScalarProperty Name="SEND_TO_REQUESTOR" ColumnName="SEND_TO_REQUESTOR" />
+                <ScalarProperty Name="FILE_RETRIEVED" ColumnName="FILE_RETRIEVED" />
+                <ScalarProperty Name="RECEIVED_TDW" ColumnName="RECEIVED_TDW" />
+                <ScalarProperty Name="SENT_TDW" ColumnName="SENT_TDW" />
+                <ScalarProperty Name="TDW_BOXNO" ColumnName="TDW_BOXNO" />
+                <ScalarProperty Name="POSITION" ColumnName="POSITION" />
+                <ScalarProperty Name="BOX_NUMBER" ColumnName="BOX_NUMBER" />
+                <ScalarProperty Name="BIN_ID" ColumnName="BIN_ID" />
+                <ScalarProperty Name="BRM_BARCODE" ColumnName="BRM_BARCODE" />
+                <ScalarProperty Name="REQ_CATEGORY_DETAIL" ColumnName="REQ_CATEGORY_DETAIL" />
+                <ScalarProperty Name="REQ_CATEGORY_TYPE" ColumnName="REQ_CATEGORY_TYPE" />
+                <ScalarProperty Name="REQ_CATEGORY" ColumnName="REQ_CATEGORY" />
+                <ScalarProperty Name="SCANNED_PHYSICAL_IND" ColumnName="SCANNED_PHYSICAL_IND" />
+                <ScalarProperty Name="APP_DATE" ColumnName="APP_DATE" />
+                <ScalarProperty Name="GRANT_TYPE" ColumnName="GRANT_TYPE" />
+                <ScalarProperty Name="RELATED_MIS_FILE_NO" ColumnName="RELATED_MIS_FILE_NO" />
+                <ScalarProperty Name="CLOSED_BY" ColumnName="CLOSED_BY" />
+                <ScalarProperty Name="CLOSED_DATE" ColumnName="CLOSED_DATE" />
+                <ScalarProperty Name="SCANNED_DATE" ColumnName="SCANNED_DATE" />
+                <ScalarProperty Name="SCANNED_BY" ColumnName="SCANNED_BY" />
+                <ScalarProperty Name="REQUESTED_OFFICE_ID" ColumnName="REQUESTED_OFFICE_ID" />
+                <ScalarProperty Name="REQUESTED_DATE" ColumnName="REQUESTED_DATE" />
+                <ScalarProperty Name="REQUESTED_BY" ColumnName="REQUESTED_BY" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="MIS_FILE_NO" ColumnName="MIS_FILE_NO" />
+                <ScalarProperty Name="ID_NO" ColumnName="ID_NO" />
+                <ScalarProperty Name="UNQ_FILE_NO" ColumnName="UNQ_FILE_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_STAKEHOLDER">
+            <EntityTypeMapping TypeName="DCModel.DC_STAKEHOLDER">
+              <MappingFragment StoreEntitySet="DC_STAKEHOLDER">
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="DEPARTMENT_ID" ColumnName="DEPARTMENT_ID" />
+                <ScalarProperty Name="STAKEHOLDER_ID" ColumnName="STAKEHOLDER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_MERGE">
+            <EntityTypeMapping TypeName="DCModel.DC_MERGE">
+              <MappingFragment StoreEntitySet="DC_MERGE">
+                <ScalarProperty Name="PARENT_BRM_BARCODE" ColumnName="PARENT_BRM_BARCODE" />
+                <ScalarProperty Name="BRM_BARCODE" ColumnName="BRM_BARCODE" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_LC_TYPE">
+            <EntityTypeMapping TypeName="DCModel.DC_LC_TYPE">
+              <MappingFragment StoreEntitySet="DC_LC_TYPE">
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_ACTIVITY">
+            <EntityTypeMapping TypeName="DCModel.DC_ACTIVITY">
+              <MappingFragment StoreEntitySet="DC_ACTIVITY">
+                <ScalarProperty Name="UNQ_FILE_NO" ColumnName="UNQ_FILE_NO" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="OFFICE_ID" ColumnName="OFFICE_ID" />
+                <ScalarProperty Name="ACTIVITY_DATE" ColumnName="ACTIVITY_DATE" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="RESULT" ColumnName="RESULT" />
+                <ScalarProperty Name="ACTIVITY" ColumnName="ACTIVITY" />
+                <ScalarProperty Name="AREA" ColumnName="AREA" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="DC_ACTIVITY_ID" ColumnName="DC_ACTIVITY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_DESTRUCTION">
+            <EntityTypeMapping TypeName="DCModel.DC_DESTRUCTION">
+              <MappingFragment StoreEntitySet="DC_DESTRUCTION">
+                <ScalarProperty Name="DESTRUCTION_BATCH_ID" ColumnName="DESTRUCTION_BATCH_ID" />
+                <ScalarProperty Name="EXCLUSIONBATCH_ID" ColumnName="EXCLUSIONBATCH_ID" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="GRANT_TYPE" ColumnName="GRANT_TYPE" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="STATUS_DATE" ColumnName="STATUS_DATE" />
+                <ScalarProperty Name="DESTRUCTIO_DATE" ColumnName="DESTRUCTIO_DATE" />
+                <ScalarProperty Name="PENSION_NO" ColumnName="PENSION_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_EXCLUSIONS">
+            <EntityTypeMapping TypeName="DCModel.DC_EXCLUSIONS">
+              <MappingFragment StoreEntitySet="DC_EXCLUSIONS">
+                <ScalarProperty Name="EXCLUSION_BATCH_ID" ColumnName="EXCLUSION_BATCH_ID" />
+                <ScalarProperty Name="EXCLUSION_TYPE" ColumnName="EXCLUSION_TYPE" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="EXCL_DATE" ColumnName="EXCL_DATE" />
+                <ScalarProperty Name="ID_NO" ColumnName="ID_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_DESTRUCTION_BATCH">
+            <EntityTypeMapping TypeName="DCModel.DC_DESTRUCTION_BATCH">
+              <MappingFragment StoreEntitySet="DC_DESTRUCTION_BATCH">
+                <ScalarProperty Name="APPROVED_DATE" ColumnName="APPROVED_DATE" />
+                <ScalarProperty Name="APPROVED_BY" ColumnName="APPROVED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="DESTRUCTION_YEAR" ColumnName="DESTRUCTION_YEAR" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="BATCH_ID" ColumnName="BATCH_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DC_EXCLUSION_BATCH">
+            <EntityTypeMapping TypeName="DCModel.DC_EXCLUSION_BATCH">
+              <MappingFragment StoreEntitySet="DC_EXCLUSION_BATCH">
+                <ScalarProperty Name="APPROVED_DATE" ColumnName="APPROVED_DATE" />
+                <ScalarProperty Name="APPROVED_BY" ColumnName="APPROVED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="EXCLUSION_YEAR" ColumnName="EXCLUSION_YEAR" />
+                <ScalarProperty Name="REGION_ID" ColumnName="REGION_ID" />
+                <ScalarProperty Name="BATCH_ID" ColumnName="BATCH_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SS_APPLICATION">
+            <EntityTypeMapping TypeName="DCModel.SS_APPLICATION">
+              <MappingFragment StoreEntitySet="SS_APPLICATION">
+                <ScalarProperty Name="SERVICE_POINT_ID" ColumnName="SERVICE_POINT_ID" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="QA_AMENDMENTS" ColumnName="QA_AMENDMENTS" />
+                <ScalarProperty Name="FLAG_ADMIN_REVIEW" ColumnName="FLAG_ADMIN_REVIEW" />
+                <ScalarProperty Name="CLIENT_DOB" ColumnName="CLIENT_DOB" />
+                <ScalarProperty Name="PAYMENT_METHOD" ColumnName="PAYMENT_METHOD" />
+                <ScalarProperty Name="DATE_EXPIRY_OF_TEMP_ID" ColumnName="DATE_EXPIRY_OF_TEMP_ID" />
+                <ScalarProperty Name="REFUGEE_GRANT" ColumnName="REFUGEE_GRANT" />
+                <ScalarProperty Name="SOCPEN_REF" ColumnName="SOCPEN_REF" />
+                <ScalarProperty Name="PROOF_BIRTH" ColumnName="PROOF_BIRTH" />
+                <ScalarProperty Name="BIRTH_CERTIFICATE" ColumnName="BIRTH_CERTIFICATE" />
+                <ScalarProperty Name="PROOF_ID" ColumnName="PROOF_ID" />
+                <ScalarProperty Name="ID_DOC" ColumnName="ID_DOC" />
+                <ScalarProperty Name="HOME_AFFAIRS_REF2" ColumnName="HOME_AFFAIRS_REF2" />
+                <ScalarProperty Name="HOME_AFFAIRS_REF1" ColumnName="HOME_AFFAIRS_REF1" />
+                <ScalarProperty Name="ANNEXURE_B" ColumnName="ANNEXURE_B" />
+                <ScalarProperty Name="ANNEXURE_A" ColumnName="ANNEXURE_A" />
+                <ScalarProperty Name="BANKNAME" ColumnName="BANKNAME" />
+                <ScalarProperty Name="COPY_PRINT_DATE" ColumnName="COPY_PRINT_DATE" />
+                <ScalarProperty Name="LETTER_MEMO" ColumnName="LETTER_MEMO" />
+                <ScalarProperty Name="LETTER" ColumnName="LETTER" />
+                <ScalarProperty Name="DC_COMPLETE" ColumnName="DC_COMPLETE" />
+                <ScalarProperty Name="DC_ACTION_DATE" ColumnName="DC_ACTION_DATE" />
+                <ScalarProperty Name="DC_ACTION" ColumnName="DC_ACTION" />
+                <ScalarProperty Name="DC_PERSAL_NO" ColumnName="DC_PERSAL_NO" />
+                <ScalarProperty Name="PAYMENT_DATE" ColumnName="PAYMENT_DATE" />
+                <ScalarProperty Name="ONE_OFF_PAYMENT" ColumnName="ONE_OFF_PAYMENT" />
+                <ScalarProperty Name="APPROVED_AMOUNT" ColumnName="APPROVED_AMOUNT" />
+                <ScalarProperty Name="OLD_POSITION" ColumnName="OLD_POSITION" />
+                <ScalarProperty Name="USER_ID_CREATED" ColumnName="USER_ID_CREATED" />
+                <ScalarProperty Name="WAR_PAPERS" ColumnName="WAR_PAPERS" />
+                <ScalarProperty Name="COURT_ORD" ColumnName="COURT_ORD" />
+                <ScalarProperty Name="BIRTH_CERT" ColumnName="BIRTH_CERT" />
+                <ScalarProperty Name="MEDICAL_CERT" ColumnName="MEDICAL_CERT" />
+                <ScalarProperty Name="ID_BOOK" ColumnName="ID_BOOK" />
+                <ScalarProperty Name="APPLICATION_DOC" ColumnName="APPLICATION_DOC" />
+                <ScalarProperty Name="REGISTRY_REMOVAL" ColumnName="REGISTRY_REMOVAL" />
+                <ScalarProperty Name="MATCH_TYPE" ColumnName="MATCH_TYPE" />
+                <ScalarProperty Name="REASON" ColumnName="REASON" />
+                <ScalarProperty Name="ACTION_RESULT" ColumnName="ACTION_RESULT" />
+                <ScalarProperty Name="ACTION_DATE" ColumnName="ACTION_DATE" />
+                <ScalarProperty Name="DATE_IN" ColumnName="DATE_IN" />
+                <ScalarProperty Name="APPL_STATUS" ColumnName="APPL_STATUS" />
+                <ScalarProperty Name="PERSAL_NO" ColumnName="PERSAL_NO" />
+                <ScalarProperty Name="ON_MUNI" ColumnName="ON_MUNI" />
+                <ScalarProperty Name="ON_GEPF" ColumnName="ON_GEPF" />
+                <ScalarProperty Name="ON_PERSAL" ColumnName="ON_PERSAL" />
+                <ScalarProperty Name="LETTER_SENT_DATE" ColumnName="LETTER_SENT_DATE" />
+                <ScalarProperty Name="LETTER_GEN_DATE" ColumnName="LETTER_GEN_DATE" />
+                <ScalarProperty Name="BOX_TYPE" ColumnName="BOX_TYPE" />
+                <ScalarProperty Name="A_YEAR" ColumnName="A_YEAR" />
+                <ScalarProperty Name="POSITN" ColumnName="POSITN" />
+                <ScalarProperty Name="BOX" ColumnName="BOX" />
+                <ScalarProperty Name="DISTRICT_OFFICE" ColumnName="DISTRICT_OFFICE" />
+                <ScalarProperty Name="SERVICE_ID" ColumnName="SERVICE_ID" />
+                <ScalarProperty Name="REGION_CODE" ColumnName="REGION_CODE" />
+                <ScalarProperty Name="TOWN" ColumnName="TOWN" />
+                <ScalarProperty Name="PAYPOINT" ColumnName="PAYPOINT" />
+                <ScalarProperty Name="RACE" ColumnName="RACE" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="DOC_NAME" ColumnName="DOC_NAME" />
+                <ScalarProperty Name="MED_FORM" ColumnName="MED_FORM" />
+                <ScalarProperty Name="DISABILITY_DESC" ColumnName="DISABILITY_DESC" />
+                <ScalarProperty Name="DISABILITY_TYPE" ColumnName="DISABILITY_TYPE" />
+                <ScalarProperty Name="FORM_TYPE" ColumnName="FORM_TYPE" />
+                <ScalarProperty Name="GRANT_TYPE" ColumnName="GRANT_TYPE" />
+                <ScalarProperty Name="APPLICATION_DATE" ColumnName="APPLICATION_DATE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="ALT_ID_NUMBER_3" ColumnName="ALT_ID_NUMBER_3" />
+                <ScalarProperty Name="ALT_ID_NUMBER_2" ColumnName="ALT_ID_NUMBER_2" />
+                <ScalarProperty Name="ALT_ID_NUMBER_1" ColumnName="ALT_ID_NUMBER_1" />
+                <ScalarProperty Name="SOCPEN_ID_NUMBER" ColumnName="SOCPEN_ID_NUMBER" />
+                <ScalarProperty Name="ID_NUMBER" ColumnName="ID_NUMBER" />
+                <ScalarProperty Name="FORM_NUMBER" ColumnName="FORM_NUMBER" />
+                <ScalarProperty Name="APP_ID" ColumnName="APP_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KUAFs">
+            <EntityTypeMapping TypeName="DCModel.KUAF">
+              <MappingFragment StoreEntitySet="KUAF">
+                <ScalarProperty Name="INTERESTS" ColumnName="INTERESTS" />
+                <ScalarProperty Name="FAVORITES3" ColumnName="FAVORITES3" />
+                <ScalarProperty Name="FAVORITES2" ColumnName="FAVORITES2" />
+                <ScalarProperty Name="FAVORITES1" ColumnName="FAVORITES1" />
+                <ScalarProperty Name="HOMEPAGE" ColumnName="HOMEPAGE" />
+                <ScalarProperty Name="PAGER" ColumnName="PAGER" />
+                <ScalarProperty Name="CELLULARPHONE" ColumnName="CELLULARPHONE" />
+                <ScalarProperty Name="HOMEFAX" ColumnName="HOMEFAX" />
+                <ScalarProperty Name="HOMEPHONE" ColumnName="HOMEPHONE" />
+                <ScalarProperty Name="HOMEADDRESS2" ColumnName="HOMEADDRESS2" />
+                <ScalarProperty Name="HOMEADDRESS1" ColumnName="HOMEADDRESS1" />
+                <ScalarProperty Name="PERSONALEMAIL" ColumnName="PERSONALEMAIL" />
+                <ScalarProperty Name="BIRTHDAY" ColumnName="BIRTHDAY" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="PHOTOID" ColumnName="PHOTOID" />
+                <ScalarProperty Name="TIMEZONE" ColumnName="TIMEZONE" />
+                <ScalarProperty Name="OFFICELOCATION" ColumnName="OFFICELOCATION" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="SETTINGSNUM" ColumnName="SETTINGSNUM" />
+                <ScalarProperty Name="PWDEXPIREMODE" ColumnName="PWDEXPIREMODE" />
+                <ScalarProperty Name="PWDEXPIREDATE" ColumnName="PWDEXPIREDATE" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="CONTACT" ColumnName="CONTACT" />
+                <ScalarProperty Name="MAILADDRESS" ColumnName="MAILADDRESS" />
+                <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+                <ScalarProperty Name="MIDDLENAME" ColumnName="MIDDLENAME" />
+                <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+                <ScalarProperty Name="USERPRIVILEGES" ColumnName="USERPRIVILEGES" />
+                <ScalarProperty Name="GROUPID" ColumnName="GROUPID" />
+                <ScalarProperty Name="USERPWD" ColumnName="USERPWD" />
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
+                <ScalarProperty Name="LEADERID" ColumnName="LEADERID" />
+                <ScalarProperty Name="USERDATA" ColumnName="USERDATA" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="SPACEID" ColumnName="SPACEID" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="OWNERID" ColumnName="OWNERID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

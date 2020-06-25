@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>ClassyQR jQuery plugin | Class.PM</title>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic" />
+        <link rel="stylesheet" href="css/documentation.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="js/jquery.classyqr.min.js"></script>
+    </head>
+    <body>
+        <div id="page-container">
+            <div id="main-container">
+                <div id="page-content">
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>ClassyQR<br><small>QR codes, the easy way!</small></h1>
+                        </div>
+                    </div>
+                    <ul class="breadcrumb breadcrumb-top">
+                        <li><a href="http://www.class.pm/"><i class="fa fa-home"></i> Class.PM</a></li>
+                        <li><a href="http://www.class.pm/#jquery">jQuery plugins</a></li>
+                        <li>ClassyQR</li>
+                    </ul>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="block">
+                                <div class="block-title">
+                                    <h2>Introduction</h2>
+                                </div>
+                                <div class="clearfix">
+                                    <p><abbr>QR codes</abbr> are a popular type of two-dimensional barcode. They are also known as hardlinks or physical world hyperlinks.</p>
+                                    <p><abbr>QR codes</abbr> store up to 4,296 alphanumeric characters of arbitrary text. This text can be anything, for example URL, contact information, a telephone number, even a poem! <abbr>QR codes</abbr> can be read by an optical device with the appropriate software. Such devices range from dedicated <abbr>QR code</abbr> readers to mobile phones.</p>
+                                    <p>For more information check out <a target="_blank" href="http://code.google.com/apis/chart/infographics/docs/qr_codes.html">Google's <abbr>QR codes</abbr> documentation</a>.</p>
+                                    <p>ClassyQR is a <a href="http://www.jquery.com">jQuery</a> plugin written by <a href="http://www.class.pm">Marius Stanciu - Sergiu</a>, a plugin that will allow you to embed QR codes into your web pages.</p>
+                                    <p>
+                                        <a href="http://www.class.pm/files/jquery-classyqr.zip" class="btn btn-primary">
+                                            <i class="fa fa-folder-open"></i> Download it
+                                        </a>
+                                    </p>
+                                    <div class="alert alert-info">
+                                        <h4><i class="fa fa-info-circle"></i> License</h4>
+                                        This jQuery plugin is distributed under the <a href="http://www.class.pm/LICENSE-MIT">MIT license</a>. Enjoy!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="block">
+                                <div class="block-title">
+                                    <h2>Demo</h2>
+                                </div>
+                                <div class="clearfix">
+                                    <div class="qrcode"></div>
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('.qrcode').ClassyQR({
+                                                create: true,
+                                                type: 'text',
+                                                text: 'Welcome to ClassPM!'
+                                            });
+                                        });
+                                    </script>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="block">
+                                <div class="block-title">
+                                    <h2>Installation</h2>
+                                </div>
+                                <div class="clearfix">
+                                    <p>First you need to include the jQuery library, since ClassyQR is a plugin. You can download it from the <a href="http://www.jquery.com">jQuery website</a> or link it directly from the Google CDN.</p>
+                                    <pre>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&gt;&lt;/script&gt;</pre>
+                                    <p>Secondly, you need to include the jQuery ClassyQR javascript file into your page. You can do it by adding the code below to your page.</p>
+                                    <pre>&lt;script src="js/jquery.classyqr.min.js"&gt;&lt;/script&gt;</pre>
+                                    <p>Now, you have two possibilities of embedding a QR code.</p>
+                                    <p><strong>1.</strong> Create the image tag that will be replaced with the QR code image.</p>
+                                    <pre>&lt;img src="#" id="qr1" alt="" /&gt;</pre>
+                                    <p>For the last part you activate the <em>ClassyQR()</em> function on the element you just created, so, we trigger the function on the image with the id <em>qr1</em>.</p>
+                                    <pre>$("#qr1").ClassyQR({
+    type: 'text',
+    text: 'This is the text to embed'
+});</pre>
+                                    <p><strong>2.</strong> Add a div with a specific id to your page, for example :</p>
+                                    <pre>&lt;div id="qr2"&gt;&lt;/div&gt;</pre>
+                                    <p>We trigger the function on the div with the id <em>qr2</em> AND we add the <em>create: true</em> option, which signals the library to create the image tag inside the container div.</p>
+                                    <pre>$("#qr2").ClassyQR({
+    create: true,
+    type: 'text',
+    text: 'This is the text to embed'
+});</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="block">
+                                <div class="block-title">
+                                    <h2>Options</h2>
+                                </div>
+                                <div class="clearfix">
+                                    <ul class="fa-ul">
+                                        <li>
+                                            <h3>Parameters</h3>
+                                            <hr />
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">size</span> - size of the QR code. Can be omitted, default is <span class="label label-primary">230</span>
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">encoding</span> - encoding of the QR. Can be omitted, could be one of: <span class="label label-success">UTF-8</span>, <span class="label label-success">Shift_JIS</span> or<span class="label label-success">ISO-8859-1</span>, default is <span class="label label-primary">UTF-8</span>
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">type</span> - QR type. Can be: <span class="label label-success">text</span>, <span class="label label-success">url</span>, <span class="label label-success">sms</span>, <span class="label label-success">email</span>, <span class="label label-success">call</span>, <span class="label label-success">location</span>, <span class="label label-success">wifi</span> or <span class="label label-success">contact</span>, default is <span class="label label-primary">text</span>
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">create</span> - whether the plugin will create an image tag inside the container or just replace the src of an already existing image tag, can be <span class="label label-success">true</span> or <span class="label label-success">false</span>, default is <span class="label label-primary">false</span>
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">text</span> - the text to encode in the QR. Only needed for text, email or sms QR codes
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">number</span> - the phone number if you want to create a sms or call QR code
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">email</span> - the email address in case you want to create an email QR code
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">subject</span> - the subject in case you want to create an email QR code
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">latitude</span> - the geographical latitude for the geolocation QR code
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">longitude</span> - the geographical longitude for the geolocation QR code
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">address</span> - the home address in case you want to create a contact QR code
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">name</span> - the name of the person in case you want to create a contact QR code
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">url</span> - the URL address in case you want to create an url or contact QR code
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">alt</span> - the alt code for the created/replaced image. Can be omitted
+                                        </li>
+                                        <li>
+                                            <span class="label label-danger">note</span> - a note in case you want to create a contact QR code
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="block">
+                                <div class="block-title">
+                                    <h2>Example</h2>
+                                </div>
+                                <div class="clearfix">
+                                    <pre>$('.qr').ClassyQR({
+    create: true,
+    type: 'location',
+    latitude: '44.437711',
+    longitude: '26.097367'
+});</pre>
+                                    <pre>$('.qr').ClassyQR({
+    create: true,
+    type: 'call',
+    number: '+447455357'
+});</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="clearfix">
+                    <div class="pull-left">
+                        <span>2005 - 2014</span> © <a href="http://www.class.pm" target="_blank">Class.PM</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-30825160-1', 'class.pm');
+            ga('send', 'pageview');
+        </script>
+    </body>
+</html>

@@ -1,0 +1,7 @@
+ALTER TABLE "DC_DESTRUCTION_LIST" ADD ("STATUS" NVARCHAR2(20) DEFAULT 'Selected' NOT NULL);
+
+SELECT * FROM
+(
+SELECT DISTINCT  SUBSTR(D.STATUS_DATE,1,4) AS YEAR,R.REGION_NAME,D.STATUS FROM contentserver.DC_destruction D JOIN contentserver.DC_REGION R ON D.REGION_ID = R.REGION_ID Where R.Region_ID =9 ) PIVOT (  Count(STATUS)  FOR STATUS IN ('Selected', 'Excluded', 'ExistTDW', 'Approved', 'Destroyed', 'Exception') 
+)
+ORDER BY REGION_NAME,YEAR

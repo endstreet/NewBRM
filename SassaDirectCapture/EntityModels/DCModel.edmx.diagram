@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0bbcfe2a834b4ccf88a2ec5e7512d917" Name="Diagram1" ZoomLevel="46">
+        <EntityTypeShape EntityType="DCModel.CUST_DISTRICT" Width="2.125" PointX="3.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.CUST_LOCALOFFICE" Width="2.125" PointX="6.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.CUST_REGIONS" Width="2.125" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_BATCH" Width="2.125" PointX="6.75" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_DOCUMENT_TYPE" Width="2.125" PointX="9.75" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_FILE" Width="2.125" PointX="9.625" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_GRANT_DOC_LINK" Width="2.125" PointX="12.625" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_GRANT_TYPE" Width="2.125" PointX="6.75" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_LOCAL_OFFICE" Width="2.375" PointX="3.625" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_OFFICE_KUAF_LINK" Width="2.125" PointX="6.75" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_REGION" Width="2.125" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_REQ_CATEGORY" Width="2.125" PointX="0.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_REQ_CATEGORY_TYPE" Width="2.125" PointX="0.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_REQ_CATEGORY_TYPE_LINK" Width="2.125" PointX="3.625" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_TRANSACTION_TYPE" Width="2.125" PointX="6.75" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.KUAFCHILDREN" Width="2.125" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="DCModel.SYS_C0010814" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.SYS_C0010815" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_BATCH_LOCAL_OFFICE" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_DC_BATCH" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_DOCUMENT_TYPE_LINK" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_DC_FILE_GRANT" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_DC_FILE_TRANS_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_OFFICE_ID_FILE" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_DC_TRANS_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_GRANT_TYPE_GRANT" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_LOCAL_OFFICE" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_LOCAL_OFFICE_REGION" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_CATEGORY" ManuallyRouted="false" />
+        <AssociationConnector Association="DCModel.FK_CATEGORY_TYPE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DCModel.DC_PICKLIST" Width="2.125" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DCModel.DC_DISTRICT" Width="2.125" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DCModel.DC_BOXPICKED" Width="2.125" PointX="3.75" PointY="8.625" />
+        <EntityTypeShape EntityType="DCModel.DC_BOXPICKLIST" Width="2.125" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DCModel.DC_DISTRICT_EC" Width="2.125" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DCModel.SOCPENBRM" Width="2.125" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DCModel.DC_BOX_TYPE" Width="2.125" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="DCModel.DC_FILE_REQUEST" Width="2.125" PointX="6.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DCModel.DC_STAKEHOLDER" Width="2.125" PointX="3.625" PointY="14.625" />
+        <AssociationConnector Association="DCModel.DC_FILE_REQUEST_FK1" />
+        <AssociationConnector Association="DCModel.FK_FILE_REQUEST_REGION_ID" />
+        <AssociationConnector Association="DCModel.FK_REQUEST_CATEGORY" />
+        <AssociationConnector Association="DCModel.DC_STAKEHOLDER_FK1" />
+        <EntityTypeShape EntityType="DCModel.DC_MERGE" Width="2.125" PointX="12.75" PointY="17.75" />
+        <AssociationConnector Association="DCModel.FK_DC_REGION" />
+        <EntityTypeShape EntityType="DCModel.DC_LC_TYPE" Width="2.125" PointX="15.75" PointY="17.75" />
+        <EntityTypeShape EntityType="DCModel.DC_ACTIVITY" Width="2.25" PointX="12.375" PointY="13.75" />
+        <EntityTypeShape EntityType="DCModel.DC_DESTRUCTION" Width="2.375" PointX="17.25" PointY="3.5" />
+        <EntityTypeShape EntityType="DCModel.DC_EXCLUSIONS" Width="2.375" PointX="17.5" PointY="7.25" />
+        <EntityTypeShape EntityType="DCModel.DC_DESTRUCTION_BATCH" Width="1.5" PointX="20.25" PointY="10.5" />
+        <EntityTypeShape EntityType="DCModel.DC_EXCLUSION_BATCH" Width="1.5" PointX="17.875" PointY="10.625" />
+        <EntityTypeShape EntityType="DCModel.SS_APPLICATION" Width="1.5" PointX="18.375" PointY="13.75" />
+        <EntityTypeShape EntityType="DCModel.KUAF" Width="1.5" PointX="12.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
