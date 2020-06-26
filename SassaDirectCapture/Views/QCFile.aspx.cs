@@ -99,15 +99,15 @@ namespace SASSADirectCapture.Views
                 if (check)
                 {
                     x.NON_COMPLIANT = "N";
-                    x.QC_USER_FN = HttpContext.Current.Session["CSUserID"].ToString();
-                    x.QC_USER_LN = HttpContext.Current.Session["CSUsername"].ToString();
+                    x.QC_USER_FN = "0";
+                    x.QC_USER_LN = UserSession.Name;
                     x.QC_DATE = DateTime.Now;
                 }
                 else
                 {
                     x.NON_COMPLIANT = "Y";
-                    x.QC_USER_FN = HttpContext.Current.Session["CSUserID"].ToString();
-                    x.QC_USER_LN = HttpContext.Current.Session["CSUsername"].ToString();
+                    x.QC_USER_FN = "0";
+                    x.QC_USER_LN = UserSession.Name;
                     x.QC_DATE = DateTime.Now;
                 }
 

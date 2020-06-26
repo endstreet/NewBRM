@@ -54,8 +54,8 @@ namespace SASSADirectCapture.Views
                 divClosedError.Visible = false;
             }
 
-            string lo = HttpContext.Current.Session["CSUserOfficeName"].ToString();
-            string loid = HttpContext.Current.Session["CSUserOfficeID"].ToString();
+            string lo = UserSession.Office.OfficeName;
+            string loid = UserSession.Office.OfficeId;
 
             XmlWriter xmlWriter = XmlWriter.Create(XMLFilePath);
             xmlWriter.WriteStartDocument();

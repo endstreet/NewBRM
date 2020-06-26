@@ -865,7 +865,7 @@ namespace SASSADirectCapture.Views
                             string offid = UserSession.Office.OfficeId; //OFFICE_ID
 
                             // USER
-                            string myUserID = Session["CSUserID"].ToString();
+                            string myUserID = "0";
                             // batch no - thisBatch
 
                             // Temporary Box Number
@@ -2273,8 +2273,8 @@ namespace SASSADirectCapture.Views
 
         private string CreatePicklist(string regionid, string registry_type)
         {
-            string myUserID = Session["CSUserID"].ToString();
-            var uid = int.Parse(myUserID);
+            //string myUserID = Session["CSUserID"].ToString();
+            var uid = 0;
 
             DC_PICKLIST p = new DC_PICKLIST();
             p.UNQ_PICKLIST = string.Empty;

@@ -1,6 +1,7 @@
 ﻿using SASSADirectCapture.EntityModels;
 using SASSADirectCapture.Hub;
 using SASSADirectCapture.Sassa;
+using SASSADirectCapture.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -314,7 +315,7 @@ namespace SASSADirectCapture.Views
                     //'&Pos=' + MISPos;
                     //'&TDW=' + TDWBoxno;
 
-                    txtServBy.Text = Session["CSUsername"] == null ? "" : Session["CSUsername"].ToString();
+                    txtServBy.Text = UserSession.Name == null ? "" : UserSession.Name;
                     if (Request.QueryString["status"].ToString() == "1")
                     {
                         txtIDNo.Text = Request.QueryString["idNo"].ToString();

@@ -129,7 +129,7 @@
                                         </td>
                                         <td id="TDlblSearchBin" runat="server" style="white-space: nowrap">&nbsp;&nbsp;<asp:Label ID="lblSearchBin" class="control-label" runat="server" style="white-space: nowrap" Text="Bin No: "></asp:Label>
                                         </td>
-                                        <td id="TDtxtSearchBin" runat="server">
+                                         <td id="TDtxtSearchBin" runat="server">
                                             <asp:TextBox ID="txtSearchBin" CssClass="form-control" runat="server" Style="width: 100px;" Text=""></asp:TextBox>
                                         </td>
                                         <td style="width: 100%;">&nbsp;
@@ -294,22 +294,23 @@
             </Triggers>
         </asp:UpdatePanel>
     </div>
-    <%--====================================================================================--%>
+    <%--===========================BOX Inventory=========================================================--%>
     <div id="tab-pickbox" style="display: none">
+        <div style="width:1200px;min-width: 800px;" class="subjectArea" >
         <asp:UpdatePanel ID="updPnlPickBox" runat="server" EnableViewState="true" ChildrenAsTriggers="True" UpdateMode="Conditional">
             <ContentTemplate>
                 <table style="width: 100%">
                     <tr>
-                        <td>Picklist Number:</td>
+                        <td style="white-space: nowrap; text-align: right;">Picklist Number:</td>
                         <td>
-                            <asp:TextBox ID="txtPickListNo" runat="server" Enabled="false" CssClass="form-control col-sm-3" Width="150px" Text="" placeholder=""></asp:TextBox></td>
-                        <td>&nbsp;&nbsp;Registry Type:</td>
+                            <asp:TextBox ID="txtPickListNo" runat="server" Enabled="false" CssClass="form-control col-xs-2" Text="" placeholder=""></asp:TextBox>
+                        </td>
+                        <td style="text-align: right;">Registry Type:</td>
                         <td style="text-align: right;">
                             <asp:DropDownList
                                 ID="ddlRegistryType"
                                 runat="server"
-                                CssClass="form-control"
-                                Style="width: 100%;"
+                                CssClass="form-control  col-xs-2"
                                 AutoPostBack="true"
                                 OnSelectedIndexChanged="ddlRegistryType_SelectedIndexChanged">
                                 <asp:ListItem Text="" Value="" Selected="True">--Select--</asp:ListItem>
@@ -318,12 +319,12 @@
                             </asp:DropDownList>
                         </td>
                         <td>
-                            <div id="divAY1" runat="server" visible="false">&nbsp;&nbsp;Archive Year:</div>
+                            <div id="divAY1" runat="server" visible="false" style ="text-align: right; white-space: nowrap;">&nbsp;&nbsp;Archive Year:</div>
                         </td>
                         <td>
                             <div id="divArchYear" runat="server" visible="false">
-                                &nbsp;&nbsp;<asp:TextBox ID="txtArchYear" MaxLength="4" runat="server" Enabled="true"
-                                    CssClass="form-control col-sm-3" Width="100px" placeholder="Eg:2017..." onkeypress="return onlyNumbers();"></asp:TextBox>
+                               <asp:TextBox ID="txtArchYear" MaxLength="4" runat="server" Enabled="true"
+                                    CssClass="form-control  col-xs-2" placeholder="Eg:2017..." onkeypress="return onlyNumbers();"></asp:TextBox>
                             </div>
                         </td>
                         <td>
@@ -334,12 +335,12 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td>&nbsp;&nbsp;Enter MIS Box Number:</td>
-                        <td style="text-align: right">
-                            <asp:TextBox ID="txtBoxPickedNo" runat="server" CssClass="form-control col-sm-3" Width="100px" placeholder="Scan Box No here..."></asp:TextBox></td>
-                        <td>&nbsp;&nbsp;Bin Number:<asp:Image ID="Note" runat="server" ImageUrl="~/Content/images/note.png" ToolTip="Optional" /></td>
+                        <td style="text-align: right;white-space: nowrap;">Enter MIS Box Number:</td>
+                        <td style="text-align: right;">
+                            <asp:TextBox ID="txtBoxPickedNo" runat="server" CssClass="form-control  col-xs-2" placeholder="Scan Box No here..."></asp:TextBox></td>
+                        <td style="text-align: right;">Bin Number:</td>
                         <td>
-                            <asp:TextBox ID="txtBinNo" runat="server" CssClass="form-control col-sm-3" Width="100px" placeholder="Scan Bin No or Type here..."></asp:TextBox></td>
+                            <asp:TextBox ID="txtBinNo" runat="server" CssClass="form-control  col-xs-2"  placeholder="Scan Bin No or Type here..."></asp:TextBox></td>
                         <td>
                             <asp:Button ID="btnAddtoPicklist" runat="server" CssClass="btn btn-primary active" Text="Add to Picklist" OnClick="btnAddtoPicklist_Click" Visible="true" /></td>
                     </tr>
@@ -402,6 +403,7 @@
                 <asp:AsyncPostBackTrigger ControlID="btnPicklistCompleted" EventName="Click" />
             </Triggers>
         </asp:UpdatePanel>
+            </div>
     </div>
     <%--====================================================================================--%>
     <div id="tab-picklists" style="display: none">
