@@ -89,6 +89,14 @@ namespace SASSADirectCapture.Views
                     return;
                 }
 
+                ///dc_file where tdwbox_no = boxno and brmno = brmno
+                if (en.DC_FILE.Where(f => f.BRM_BARCODE == fileno && f.TDW_BOXNO == boxBarcode).Any())
+                {
+                    lblReboxError.Text = "Duplicate !";
+                    divReboxError.Visible = true;
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(fileno))
                 {
                     lblReboxError.Text = "No BRM file number specified.";

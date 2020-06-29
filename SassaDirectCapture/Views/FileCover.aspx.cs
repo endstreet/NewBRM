@@ -41,10 +41,10 @@ namespace SASSADirectCapture.Views
 
         #region Public Methods
 
-        public string createBRMFile(string brmno, string granttype)
+        public string createBRMFile(string brmno, string granttype,string id)
         {
             string localOffice = UserSession.Office.OfficeId;
-            string localRegion = UserSession.Office.RegionCode;
+            string localRegion = UserSession.Office.RegionId;
             decimal batchNo = -1;
             string unqfileno = "";
 
@@ -76,10 +76,12 @@ namespace SASSADirectCapture.Views
 
                     string currentDate = DateTime.Parse(DateTime.Now.ToString()).ToString("dd-MMM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
-                    int noOfRowInserted = context.Database.ExecuteSqlCommand(@"INSERT INTO DC_FILE
-                            (BRM_BARCODE, BATCH_ADD_DATE,TRANS_TYPE,BATCH_NO,GRANT_TYPE,OFFICE_ID,REGION_ID)
+                    string sql = @"INSERT INTO DC_FILE
+                            (APPLICANT_NO, BRM_BARCODE, BATCH_ADD_DATE,TRANS_TYPE,BATCH_NO,GRANT_TYPE,OFFICE_ID,REGION_ID)
                             VALUES
-                            ('" + brmno + "', '" + currentDate + "',0, " + batchNo + ",'" + granttype + "'," + localOffice + "," + localRegion + ")");
+                            ('" + id + "','" + brmno + "', '" + currentDate + "',0, " + batchNo + ",'" + granttype + "'," + localOffice + "," + localRegion + ")";
+
+                    int noOfRowInserted = context.Database.ExecuteSqlCommand(sql);
 
                     DC_FILE dc = en.DC_FILE.Where(k => k.BRM_BARCODE == brmno)
                     .FirstOrDefault();
@@ -1367,7 +1369,14 @@ namespace SASSADirectCapture.Views
             {
                 Session["BRM"] = Request.QueryString["BRM"];
             }
-
+            if(Session["BRM"] == null)
+            {
+                lblMsg.Text = "No BRM cant continue.";
+                divError.Visible = true;
+                btnPrint.Visible = false;
+                btnReprint.Visible = false;
+                return;
+            }
             string pensionNo = Request.QueryString["PensionNo"];
             string CLMno = Request.QueryString["CLM"];
             string addToBatch = Request.QueryString["Batching"];
@@ -1375,7 +1384,7 @@ namespace SASSADirectCapture.Views
             string addToBox = Request.QueryString["boxing"] != null ? Request.QueryString["boxing"] : "Y";
             string boxNo = Request.QueryString["boxNo"];
             //string transactionType = Request.QueryString["trans"] != null ? Request.QueryString["trans"] : "";
-            string BRMBarCode = Request.QueryString["BRM"] != null ? Request.QueryString["BRM"] : Session["BRM"].ToString();
+            string BRMBarCode = Session["BRM"].ToString();
             string grantname = Request.QueryString["gn"];
             string granttype = Request.QueryString["gt"];
             string appdate = Request.QueryString["appdate"];
@@ -1397,7 +1406,7 @@ namespace SASSADirectCapture.Views
             string unqno = "";
             if (!thisBRMExists)
             {
-                unqno = createBRMFile(BRMBarCode, granttype);
+                unqno = createBRMFile(BRMBarCode, granttype,pensionNo);
             }
             else
             {

@@ -40,7 +40,8 @@ namespace SASSADirectCapture.Views
                         CLM_UNIQUE_CODE = f.UNQ_FILE_NO,
                         BRM_BARCODE = f.BRM_BARCODE,
                         APPLICANT_NO = f.APPLICANT_NO,
-                        FULL_NAME = f.USER_FIRSTNAME + " " + f.USER_LASTNAME,
+                        FIRST_NAME = f.USER_FIRSTNAME,
+                        LAST_NAME = f.USER_LASTNAME,
                         GRANT_TYPE_NAME = f.DC_GRANT_TYPE.TYPE_NAME
                     });
             int howmany = x.Count();

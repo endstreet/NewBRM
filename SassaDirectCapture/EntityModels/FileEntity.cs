@@ -18,7 +18,10 @@ namespace SASSADirectCapture.EntityModels
         public Nullable<System.DateTime> BATCH_ADD_DATE { get; set; }
         public string FILE_STATUS { get; set; }
         public string FILE_COMMENT { get; set; }
-        public string FULL_NAME { get; set; }
+        public string FULL_NAME
+        {
+            get { return FIRST_NAME + " " + LAST_NAME; }
+        }
         public string FIRST_NAME { get; set; }
         public string LAST_NAME { get; set; }
         public string CLM_UNIQUE_CODE { get; set; }

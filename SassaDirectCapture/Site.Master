@@ -15,7 +15,7 @@
 </head>
 <body>
 <form runat="server">
-    <link rel="stylesheet" href="../Scripts/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<%=ResolveUrl("~/Scripts/fancybox/jquery.fancybox.css")%>" type="text/css" media="screen" />
     <asp:ScriptManager runat="server" EnablePartialRendering="true">
     
     <Scripts>

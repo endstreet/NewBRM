@@ -118,7 +118,7 @@ namespace SASSADirectCapture.Views
                     //    }
                     //}
 
-                    f.FULL_NAME = f.FIRST_NAME + " " + f.LAST_NAME;
+                    //f.FULL_NAME = f.FIRST_NAME + " " + f.LAST_NAME;
 
                     fe.Add(f);
                 }

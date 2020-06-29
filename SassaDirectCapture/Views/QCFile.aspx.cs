@@ -150,7 +150,8 @@ namespace SASSADirectCapture.Views
                         APPLICANT_NO = f.APPLICANT_NO,
                         CLM_UNIQUE_CODE = f.UNQ_FILE_NO,
                         REGION_NAME = f.DC_LOCAL_OFFICE.DC_REGION.REGION_NAME,
-                        FULL_NAME = f.USER_FIRSTNAME + " " + f.USER_LASTNAME,
+                        FIRST_NAME = f.USER_FIRSTNAME,
+                        LAST_NAME = f.USER_LASTNAME,
                         GRANT_TYPE_NAME = f.DC_GRANT_TYPE.TYPE_NAME,
                         BRM_BARCODE = f.BRM_BARCODE,
                         FILE_COMMENT = f.FILE_COMMENT,
@@ -164,6 +165,7 @@ namespace SASSADirectCapture.Views
                         APP_DATE_DT = f.TRANS_DATE,
                         SRD_NO = f.SRD_NO
                     });
+                ;
 
                 List<FileEntity> fe = new List<FileEntity>();
                 foreach (var item in x)

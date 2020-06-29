@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
-    <title><%: SassaPage.Title %> - SASSA Beneficiary Records Management PICKLIST</title>
+    <title><%: Page.Title %> - SASSA Beneficiary Records Management PICKLIST</title>
     <link href="~/Content/bootstrap.css" rel='stylesheet' type='text/css' />
 </head>
 <body>
