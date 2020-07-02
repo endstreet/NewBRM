@@ -173,8 +173,8 @@
                     <div id="divSearchSRD" runat="server" style="vertical-align:bottom;display:table-cell;padding:0 5px 0 5px; display: none;">
                         <asp:TextBox ID="txtSearchSRD" runat="server" CssClass="form-control" Width="200px" placeholder="Enter here..." onfocus="this.select();"></asp:TextBox>
                     </div>
-                    <div style="vertical-align: middle;display: table-cell;padding:0 5px 0 5px;">
-                        <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" OnClientClick="if (ValidateID()) {myECM.showPleaseWait('Searching...')} else {return false;};" CssClass="btn btn-primary active" />
+                    <div  style="vertical-align: middle;display: table-cell;padding:0 5px 0 5px;">
+                     <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" OnClientClick="if (ValidateID()) {myECM.showPleaseWait('Searching...')} else {return false;};" CssClass="btn btn-primary active" />
                     </div>
                 </div>
             </div>

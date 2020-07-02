@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SASSADirectCapture.Views {
-    
-    
-    public partial class ApplicantSearch {
-        
+namespace SASSADirectCapture.Views
+{
+
+
+    public partial class ApplicantSearch
+    {
+
         /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// divError control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divError;
-        
+
         /// <summary>
         /// lblMsg control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMsg;
-        
+
         /// <summary>
         /// rbIDHidden control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbIDHidden;
-        
+
         /// <summary>
         /// rbSRDHidden control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbSRDHidden;
-        
+
         /// <summary>
         /// rbID control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rbID;
-        
+
         /// <summary>
         /// rbSRD control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rbSRD;
-        
+
         /// <summary>
         /// divSearchID control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSearchID;
-        
+
         /// <summary>
         /// txtSearch control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSearch;
-        
+
         /// <summary>
         /// divSearchSRD control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSearchSRD;
-        
+
         /// <summary>
         /// txtSearchSRD control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSearchSRD;
-        
+
         /// <summary>
         /// btnSearch control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearch;
-        
+
         /// <summary>
         /// gvResults control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace SASSADirectCapture.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvResults;
-        
+
         /// <summary>
         /// gvResultsSRD control.
         /// </summary>

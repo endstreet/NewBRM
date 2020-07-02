@@ -20,8 +20,9 @@ namespace SASSADirectCapture.Views
             {
                 hf_BRM_BARCODE.Value = GetBRMBarcode();
 
+
                 // Get the username of the user that is logged in from session.
-                string authenticatedUsername = UserSession.SamName;
+                //string authenticatedUsername = UserSession.SamName;
 
                 //If no session values are found, redirect to the login screen
                 //if (authenticatedUsername == string.Empty)

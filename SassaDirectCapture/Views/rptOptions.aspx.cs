@@ -1,4 +1,4 @@
-//using ClosedXML.Excel;
+﻿//using ClosedXML.Excel;
 using SASSADirectCapture.BL;
 using SASSADirectCapture.DL;
 using SASSADirectCapture.Sassa;
@@ -100,7 +100,7 @@ namespace SASSADirectCapture.Reports
                     //use selected office
                     office_id = ddOffice.SelectedValue;
 
-                    if (String.IsNullOrEmpty(office_id))
+                    if (!String.IsNullOrEmpty(region_id) && String.IsNullOrEmpty(office_id))
                     {
                         lblMsg.Text = "Please select an office for this report.";
                         divError.Visible = true;

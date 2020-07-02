@@ -29,7 +29,6 @@ namespace SASSADirectCapture.Views
             {
                 query =
                     from fr in en.DC_FILE_REQUEST
-                    from k1 in en.KUAFs.Where(k2 => fr.REQUESTED_BY == k2.ID).DefaultIfEmpty()
                     where fr.CLOSED_DATE == null
                     && fr.REQUESTED_OFFICE_ID == x
                     orderby fr.REQUESTED_DATE, fr.ID_NO
@@ -44,7 +43,7 @@ namespace SASSADirectCapture.Views
                         SURNAME = fr.SURNAME,
                         REGION_ID = fr.REGION_ID,
                         REQUESTED_BY = (long)fr.REQUESTED_BY,
-                        REQUESTER_NAME = fr.REQUESTED_BY_AD == null ? k1.FIRSTNAME + " " + k1.LASTNAME : fr.REQUESTED_BY_AD,
+                        REQUESTER_NAME = UserSession.Name,
                         REQUESTED_DATE = fr.REQUESTED_DATE,
                         SCANNED_BY = fr.SCANNED_BY,
                         SCANNED_DATE = fr.SCANNED_DATE,

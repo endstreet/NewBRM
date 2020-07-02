@@ -473,7 +473,7 @@ namespace SASSADirectCapture.BL
                 //    dict.Add(office.OFFICE_ID.ToString(), office.OFFICE_NAME + isRMC);
                 //}
             }
-            roffices.Insert(0, new DC_LOCAL_OFFICE { OFFICE_NAME = "...Select..", OFFICE_ID = "" });
+            roffices.Insert(0, new DC_LOCAL_OFFICE { OFFICE_NAME = "-- Select --", OFFICE_ID = "" });
             return roffices;
         }
 

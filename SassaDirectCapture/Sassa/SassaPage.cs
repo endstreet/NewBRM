@@ -9,7 +9,12 @@ namespace SASSADirectCapture.Sassa
     {
         public static UserSession UserSession   // property
         {
-            get { return (UserSession)HttpContext.Current.Session["us"]; }   // get method
+            // get method
+            get
+            { 
+                
+                return (UserSession)HttpContext.Current.Session["us"]; 
+            }   
             set
             {
                 HttpContext.Current.Session["us"] = value;
