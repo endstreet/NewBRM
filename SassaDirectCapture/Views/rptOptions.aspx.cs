@@ -102,9 +102,12 @@ namespace SASSADirectCapture.Reports
 
                     if (!String.IsNullOrEmpty(region_id) && String.IsNullOrEmpty(office_id))
                     {
-                        lblMsg.Text = "Please select an office for this report.";
-                        divError.Visible = true;
-                        return;
+                        if (rptOptionIndex != "3")
+                        {
+                            lblMsg.Text = "Please select an office for this report.";
+                            divError.Visible = true;
+                            return;
+                        }
                     }
                     //pull input dates for all but destruction Report
                     if (txtDateFrom.Value == string.Empty || txtDateTo.Value == string.Empty)
@@ -153,13 +156,13 @@ namespace SASSADirectCapture.Reports
                 }
                 if (rptOptionIndex == "3")
                 {
-                    if (ddGrantType.SelectedValue == String.Empty)
-                    {
-                        lblMsg.Text = "Please select a Grant Type";
-                        divError.Visible = true;
+                    //if (ddGrantType.SelectedValue == String.Empty)
+                    //{
+                    //    lblMsg.Text = "Please select a Grant Type";
+                    //    divError.Visible = true;
 
-                        return;
-                    }
+                    //    return;
+                    //}
                 }
                 //result
                 DL.clsBusinessLogic bl = new clsBusinessLogic(dateFrom, dateTo, rptOptionIndex, office_id, localOfficeType, region_id, grant_type, status);
@@ -181,6 +184,7 @@ namespace SASSADirectCapture.Reports
             //populate for missing files and Activity report
             if (ddRegion.SelectedValue == "") return;
             if (drpOptions.SelectedIndex < 2) return;
+            if (drpOptions.SelectedIndex == 3) return;
             ddOffice.DataSource = util.getRegionOffices(ddRegion.SelectedValue.Split(':')[1]);
             ddOffice.DataBind();
             ddOffice.DataTextField = "OFFICE_NAME";

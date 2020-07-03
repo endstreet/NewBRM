@@ -315,72 +315,6 @@ namespace SASSADirectCapture.BL
             return dicLCTypes;
         }
 
-        public void getLocalOffice()
-        {
-
-            if (string.IsNullOrEmpty(UserSession.SamName)) throw new Exception("UserSessioner Unknown");
-            if (UserSession.Office.OfficeName != null) return;
-
-            using (Entities context = new Entities())
-            {
-                //Try local office from database.
-                if ((from lo in context.DC_LOCAL_OFFICE
-                     join lou in context.DC_OFFICE_KUAF_LINK
-                         on lo.OFFICE_ID equals lou.OFFICE_ID
-                     where lou.USERNAME == UserSession.SamName
-                     select lo).Any())
-                {
-                    DC_LOCAL_OFFICE value = (from lo in context.DC_LOCAL_OFFICE
-                                             join lou in context.DC_OFFICE_KUAF_LINK
-                                                 on lo.OFFICE_ID equals lou.OFFICE_ID
-                                             where lou.USERNAME == UserSession.SamName
-                                             select lo).FirstOrDefault();
-
-                    UserSession.Office.OfficeName = value.OFFICE_NAME;
-                    UserSession.Office.OfficeId = value.OFFICE_ID;
-                    UserSession.Office.OfficeType = value.OFFICE_TYPE;
-                    UserSession.Office.RegionId = value.REGION_ID;
-                }
-                else //Attach to first or default office.
-                {
-                    DC_LOCAL_OFFICE ioffice = (from lo in context.DC_LOCAL_OFFICE
-                                               join lou in context.DC_OFFICE_KUAF_LINK
-                                                   on lo.OFFICE_ID equals lou.OFFICE_ID
-                                               select lo).FirstOrDefault();
-
-                    DC_OFFICE_KUAF_LINK kl = new DC_OFFICE_KUAF_LINK
-                    {
-                        KUAF_ID = 0,
-                        OFFICE_ID = ioffice.OFFICE_ID,
-                        SUPERVISOR = "N",
-                        USERNAME = UserSession.SamName
-                    };
-                    context.DC_OFFICE_KUAF_LINK.Add(kl);
-                    context.SaveChanges();
-                    DC_LOCAL_OFFICE nvalue = (from lo in context.DC_LOCAL_OFFICE
-                                              join lou in context.DC_OFFICE_KUAF_LINK
-                                                  on lo.OFFICE_ID equals lou.OFFICE_ID
-                                              where lou.USERNAME == UserSession.SamName
-                                              select lo).FirstOrDefault();
-
-                    UserSession.Office.OfficeName = nvalue.OFFICE_NAME;
-                    UserSession.Office.OfficeId = nvalue.OFFICE_ID;
-                    UserSession.Office.OfficeType = nvalue.OFFICE_TYPE;
-                    UserSession.Office.RegionId = nvalue.REGION_ID;
-                }
-
-
-                DC_REGION reg = context.DC_REGION.Where(k => k.REGION_ID == UserSession.Office.RegionId).FirstOrDefault();
-                UserSession.Office.RegionCode = reg.REGION_CODE;
-                UserSession.Office.RegionName = reg.REGION_NAME;
-
-            }
-            UserSession.Office.OfficeType = UserSession.Office.OfficeType != string.Empty ? UserSession.Office.OfficeType : "LO"; //Default to local office
-            //UserSession.Office.RegionCode = UserSession.Office.RegionCode != string.Empty ? UserSession.Office.RegionCode : "";
-            UserSession.IsIntitialized = true;
-            HttpContext.Current.Session["us"] = UserSession;
-        }
-
         //Todo: cache this
         public Dictionary<string, string> getLocalOffices(string regionID)
         {
@@ -745,12 +679,6 @@ namespace SASSADirectCapture.BL
 
         #region SET Methods
 
-        //public void setLocalOfficeSession(string id, string name)
-        //{
-        //    HttpContext.Current.Session[UserLocalOfficeID] = id;
-        //    HttpContext.Current.Session[UserLocalOfficeName] = name;
-        //}
-
         public void clearBoxSession()
         {
             HttpContext.Current.Session["BoxNo"] = "";
@@ -809,12 +737,6 @@ namespace SASSADirectCapture.BL
             }
         }
 
-        //public string getUserName(int userid)
-        //{
-        //    string usernaam = "";
-
-        //    Dictionary<string, string> dict = new Dictionary<string, string>();
-
         public bool updateBatchDetails(int batchno, string workorderno, string courier)
         {
             Boolean isOK = true;
@@ -847,53 +769,74 @@ namespace SASSADirectCapture.BL
             return isOK;
         }
 
-        //    using (Entities context = new Entities())
-        //    {
-        //        var query = from k in context.KUAF
-        //                    where k.ID == userid
-        //                    select k;
-        //        if (query.Any())
-        //        {
-        //            //usernaam = item.name;
-        //        }
-        //    }
-        //    return usernaam;
-        //}
-        public bool updateUserLocalOffice(int userid, string officeID)
+        public void getLocalOffice()
         {
-            Boolean isNew = false;
 
-            using (Entities db = new Entities())
+            if (string.IsNullOrEmpty(UserSession.SamName)) throw new Exception("UserSessioner Unknown");
+            if (UserSession.Office.OfficeName != null) return;
+
+            using (Entities context = new Entities())
             {
-                DC_OFFICE_KUAF_LINK officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.KUAF_ID == userid).FirstOrDefault();
-
-                if (officeLink == null)
+                //Try local office from database.
+                if ((from lo in context.DC_LOCAL_OFFICE
+                     join lou in context.DC_OFFICE_KUAF_LINK
+                         on lo.OFFICE_ID equals lou.OFFICE_ID
+                     where lou.USERNAME == UserSession.SamName
+                     select lo).Any())
                 {
-                    isNew = true;
-                    officeLink = new DC_OFFICE_KUAF_LINK();
+                    DC_LOCAL_OFFICE value = (from lo in context.DC_LOCAL_OFFICE
+                                             join lou in context.DC_OFFICE_KUAF_LINK
+                                                 on lo.OFFICE_ID equals lou.OFFICE_ID
+                                             where lou.USERNAME == UserSession.SamName
+                                             select lo).FirstOrDefault();
+
+                    UserSession.Office.OfficeName = value.OFFICE_NAME;
+                    UserSession.Office.OfficeId = value.OFFICE_ID;
+                    UserSession.Office.OfficeType = value.OFFICE_TYPE;
+                    UserSession.Office.RegionId = value.REGION_ID;
+                }
+                else //Attach to first or default office.
+                {
+                    DC_LOCAL_OFFICE ioffice = (from lo in context.DC_LOCAL_OFFICE
+                                               join lou in context.DC_OFFICE_KUAF_LINK
+                                                   on lo.OFFICE_ID equals lou.OFFICE_ID
+                                               select lo).FirstOrDefault();
+
+                    DC_OFFICE_KUAF_LINK kl = new DC_OFFICE_KUAF_LINK
+                    {
+                        KUAF_ID = 0,
+                        OFFICE_ID = ioffice.OFFICE_ID,
+                        SUPERVISOR = "N",
+                        USERNAME = UserSession.SamName
+                    };
+                    context.DC_OFFICE_KUAF_LINK.Add(kl);
+                    context.SaveChanges();
+                    DC_LOCAL_OFFICE nvalue = (from lo in context.DC_LOCAL_OFFICE
+                                              join lou in context.DC_OFFICE_KUAF_LINK
+                                                  on lo.OFFICE_ID equals lou.OFFICE_ID
+                                              where lou.USERNAME == UserSession.SamName
+                                              select lo).FirstOrDefault();
+
+                    UserSession.Office.OfficeName = nvalue.OFFICE_NAME;
+                    UserSession.Office.OfficeId = nvalue.OFFICE_ID;
+                    UserSession.Office.OfficeType = nvalue.OFFICE_TYPE;
+                    UserSession.Office.RegionId = nvalue.REGION_ID;
                 }
 
-                officeLink.KUAF_ID = userid;
-                officeLink.OFFICE_ID = officeID;
 
-                if (isNew)
-                {
-                    db.DC_OFFICE_KUAF_LINK.Add(officeLink);
-                }
-                DC_ACTIVITY dca = CreateActivity("Office", "Update User/LocalOffice link");
-                if (dca != null)
-                {
-                    db.DC_ACTIVITY.Add(dca);
-                }
-                db.SaveChanges();
+                DC_REGION reg = context.DC_REGION.Where(k => k.REGION_ID == UserSession.Office.RegionId).FirstOrDefault();
+                UserSession.Office.RegionCode = reg.REGION_CODE;
+                UserSession.Office.RegionName = reg.REGION_NAME;
+
             }
-
-            return true;
+            UserSession.Office.OfficeType = UserSession.Office.OfficeType != string.Empty ? UserSession.Office.OfficeType : "LO"; //Default to local office
+            //UserSession.Office.RegionCode = UserSession.Office.RegionCode != string.Empty ? UserSession.Office.RegionCode : "";
+            UserSession.IsIntitialized = true;
+            HttpContext.Current.Session["us"] = UserSession;
         }
-
         public bool updateUserLocalOffice(string userLogin, string officeID)
         {
-            Boolean isNew = false;
+            Boolean isNewKuafLink = false;
 
             using (Entities db = new Entities())
             {
@@ -901,25 +844,20 @@ namespace SASSADirectCapture.BL
 
                 if (officeLink == null)
                 {
-                    isNew = true;
+                    isNewKuafLink = true;
                     officeLink = new DC_OFFICE_KUAF_LINK();
                 }
 
                 officeLink.USERNAME = userLogin;
                 officeLink.OFFICE_ID = officeID;
 
-                if (isNew)
+                if (isNewKuafLink)
                 {
                     db.DC_OFFICE_KUAF_LINK.Add(officeLink);
                 }
-                else
-                {
-                    DC_ACTIVITY dca = CreateActivity("Office", "Update User/LocalOffice link");
-                    if (dca != null)
-                    {
-                        db.DC_ACTIVITY.Add(dca);
-                    }
-                }
+                db.SaveChanges();
+                getLocalOffice();
+                db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
                 db.SaveChanges();
             }
 

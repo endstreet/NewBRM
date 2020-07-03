@@ -78,7 +78,7 @@
                 <asp:ListItem Text="Western Cape" Value="WC:1:WCA"></asp:ListItem>
             </asp:DropDownList>
             <asp:DropDownList ID="ddOffice" runat="server" CssClass="form-control">
-
+                <asp:ListItem Text="-- All Offices --" Value="" Selected="True"></asp:ListItem>
             </asp:DropDownList>
             <asp:DropDownList runat="server" ID="ddGrantType" CssClass="form-control">
                 <asp:ListItem Text="---Select Grant Type---" Value="" Selected="True"></asp:ListItem>

@@ -103,11 +103,11 @@ namespace SASSADirectCapture.DL
                     //Missing files New
                     if (Index == "3")
                     {
-                        cmd.CommandText = @"select b.PROVINCE as REGION,b.PENSION_NO,b.NAME,b.SURNAME,b.original_Application_date,b.GRANT_TYPE,b.ADDRESS,b.AGE, b.SEC_PAYPOINT, '' as SOURCETBL  from ACTIVE_GRANTS b
+                        cmd.CommandText = @"select b.PROVINCE as REGION,b.PENSION_NO,b.NAME,b.SURNAME,b.original_Application_date,b.GRANT_TYPE,b.ADDRESS,b.AGE, b.SEC_PAYPOINT from ACTIVE_GRANTS b
                                             where NOT EXISTS (Select ID_NUMBER from ALL_FILES a where a.ID_NUMBER = b.PENSION_NO and ((a.GRANT_TYPE = b.GRANT_TYPE) or (a.GRANT_TYPE = '3' and b.GRANT_TYPE = '0')))" +
                                             " and b.original_Application_date  >= to_date('" + dateFrom + "', 'YYYY/mm/dd')" +
                                             " and b.original_Application_date <= to_date('" + dateTo + "', 'YYYY/mm/dd')" +
-                                            " and b.GRANT_TYPE = '" + grant_type + "'";
+                                            (string.IsNullOrEmpty(grant_type) ? "":" and b.GRANT_TYPE = '" + grant_type + "'");
                         //cmd.CommandText += regionSQL + PaypointSQL + " ORDER BY b.Province,b.SEC_PAYPOINT, b.GRANT_TYPE,b.original_Application_date";
                         cmd.CommandText += regionSQL + " ORDER BY b.Province, b.SEC_PAYPOINT, b.GRANT_TYPE,b.original_Application_date";
                     }

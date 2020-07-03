@@ -67,7 +67,7 @@
         <button id="btnReboxing" type="button" class="btn btn-default" onclick="hideShowDiv(this.id);">Reboxing</button>
     </div>
     <br />
-    <%--====================================================================================--%>
+    <%--===========MISBOX=========================================================================--%>
     <div id="tab-misBox">
         <%-- style="display: none"--%>
         <asp:UpdatePanel ID="updPanelMisBox" runat="server" EnableViewState="true">
@@ -294,7 +294,7 @@
             </Triggers>
         </asp:UpdatePanel>
     </div>
-    <%--===========================BOX Inventory=========================================================--%>
+    <%--===========BOX Inventory=========================================================--%>
     <div id="tab-pickbox" style="display: none">
         <div style="width:1200px;min-width: 800px;" class="subjectArea" >
         <asp:UpdatePanel ID="updPnlPickBox" runat="server" EnableViewState="true" ChildrenAsTriggers="True" UpdateMode="Conditional">
@@ -405,7 +405,7 @@
         </asp:UpdatePanel>
             </div>
     </div>
-    <%--====================================================================================--%>
+    <%--===========PICKLISTS=========================================================================--%>
     <div id="tab-picklists" style="display: none">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" EnableViewState="true" ChildrenAsTriggers="True" UpdateMode="Conditional">
             <ContentTemplate>
@@ -464,7 +464,7 @@
             </Triggers>
         </asp:UpdatePanel>
     </div>
-    <%--====================================================================================--%>
+    <%--===========REBOX=========================================================================--%>
     <div id="tab-rebox" style="display: none">
         <%----%>
         <asp:UpdatePanel ID="updPnlRebox" runat="server" EnableViewState="true" ChildrenAsTriggers="True" UpdateMode="Conditional">

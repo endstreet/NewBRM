@@ -1,6 +1,6 @@
-﻿using SASSADirectCapture.Sassa;
-using System;
+﻿using System;
 using System.Web.UI;
+using SASSADirectCapture.Sassa;
 
 namespace SASSADirectCapture.Views
 {
@@ -40,11 +40,7 @@ namespace SASSADirectCapture.Views
             {
                 try
                 {
-                    //Update database with new local office for user.//428
                     util.updateUserLocalOffice(UserSession.SamName, ddlLocalOffice.SelectedValue);
-                    //Clear local office session so that it is refreshed from master page.
-                    util.clearLocalOfficeSession();
-
                     ScriptManager.RegisterStartupScript(this, GetType(), "closeFancyBox", "parent.jQuery.fancybox.close();", true);
                 }
                 catch (Exception ex)

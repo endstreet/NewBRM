@@ -510,6 +510,7 @@ namespace SASSADirectCapture.Views
 
             decimal batchNo = 0;
             batchNo = Get_Bulk_Batch_For_Office(localOffice);
+            //todo: create batch if none exists?
 
             using (Entities context = new Entities())
             {
@@ -683,6 +684,10 @@ namespace SASSADirectCapture.Views
 
                     var brmNumberDictionary = new Dictionary<string, bool>();
                     var brmNumberList = new List<string>();
+                    if(boxGridView.Rows.Count == 0)
+                    {
+                        throw new Exception("No items in this batch.");
+                    }
                     foreach (GridViewRow row in boxGridView.Rows)
                     {
                         // BRM no
@@ -693,7 +698,10 @@ namespace SASSADirectCapture.Views
                             brmNumberList.Add($"'{sBRMNumber}'");
                         }
                     }
-
+                    if (brmNumberList.Count == 0)
+                    {
+                        throw new Exception("No items have brmNo's..");
+                    }
                     var commandText = $@"SELECT BRM_BARCODE FROM DC_FILE WHERE BRM_BARCODE IN ({string.Join(",", brmNumberList)})";
                     using (var connection = new Oracle.ManagedDataAccess.Client.OracleConnection(en.Database.Connection.ConnectionString))
                     {
@@ -1811,23 +1819,6 @@ namespace SASSADirectCapture.Views
                     return;
                 }
 
-                //:Rolled back due to issues.
-                //if (!string.IsNullOrEmpty(x.APPLICATION_STATUS))
-                //{
-                //    if (x.APPLICATION_STATUS.StartsWith("ARCHIVE") && ((int.Parse(boxType) > 18) || (int.Parse(boxType) < 14)))
-                //    {
-                //        lblReboxError.Text = "BRM File Status (" + x.APPLICATION_STATUS + ") does not match boxtype.";
-                //        divReboxError.Visible = true;
-                //        return;
-                //    }
-                //    if (!x.APPLICATION_STATUS.StartsWith("ARCHIVE") && ((int.Parse(boxType) < 19) || (int.Parse(boxType) > 13)))
-                //    {
-                //        lblReboxError.Text = "BRM File Status (" + x.APPLICATION_STATUS + ") does not match boxtype.";
-                //        divReboxError.Visible = true;
-                //        return;
-                //    }
-                //}
-
                 x.MIS_REBOX_DATE = DateTime.Now;
                 x.MIS_REBOX_STATUS = "Completed";
                 x.TDW_BOXNO = barcode;
@@ -1900,9 +1891,9 @@ namespace SASSADirectCapture.Views
                 lblReboxSuccess.Text = "BRM File Number " + BRMNo + " successfully added to TDW box " + barcode + ".";
                 divReboxSuccess.Visible = true;
             }
-            catch
+            catch(Exception ex)
             {
-                lblReboxError.Text = "BRM File Number " + BRMNo + " could not be added to TDW box " + barcode + ".";
+                lblReboxError.Text = "BRM File Number " + BRMNo + " could not be added to TDW box " + barcode + ". " + ex.Message;
                 divReboxError.Visible = true;
             }
         }

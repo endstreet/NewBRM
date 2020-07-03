@@ -139,59 +139,61 @@ namespace SASSADirectCapture.Views
 
         protected void btnUpdateBRM_Click(object sender, EventArgs e)
         {
-            string pensionNo = Request.QueryString["pensionNo"];
-            string boxAudit = Request.QueryString["boxaudit"];
-            string boxNo = Request.QueryString["boxNo"];
-            string batching = Request.QueryString["batching"];
-            string trans = Request.QueryString["trans"];
-            string grantname = Request.QueryString["gn"];
-            string granttype = Request.QueryString["gt"];
-            string appdate = Request.QueryString["appdate"];
-            string SRDNo = Request.QueryString["SRDNo"];
-            string tempBatch = Request.QueryString["tempBatch"];
-            string sMGMerge = Request.QueryString["MGMerge"]; //Multi-grant Merge
-            string sChildID = Request.QueryString["ChildID"];
-            string sIsReview = rbReview.Checked ? "Y" : "N";
-            string sLCType = rbLC.Checked ? ddlLCType.SelectedValue : "";
-
-            hf_PENSION_NUMBER.Value = pensionNo;
-            hf_BATCHING.Value = batching;
-            hf_TRANSACTION.Value = trans;
-            hf_BOX_AUDIT.Value = boxAudit;
-            hf_BOX_NUMBER.Value = boxNo;
-            hf_GRANT_NAME.Value = grantname;
-            hf_APPLICATION_DATE.Value = appdate;
-            hf_GRANT_TYPE.Value = granttype;
-            hf_SRD_NUMBER.Value = SRDNo;
-            hf_TEMP_BATCH.Value = tempBatch;
-            hf_CHILD_ID.Value = sChildID;
-            hf_IS_REVIEW.Value = sIsReview;
-            hf_LC_TYPE.Value = sLCType;
-
+            string barCode = txtBRMBarcode.Text.Trim().ToUpper();
             try
             {
-                if ((txtBRMBarcode.Text.Equals("") || txtBRMBarcode.Text == null))
+
+                string pensionNo = Request.QueryString["pensionNo"];
+                string boxAudit = Request.QueryString["boxaudit"];
+                string boxNo = Request.QueryString["boxNo"];
+                string batching = Request.QueryString["batching"];
+                string trans = Request.QueryString["trans"];
+                string grantname = Request.QueryString["gn"];
+                string granttype = Request.QueryString["gt"];
+                string appdate = Request.QueryString["appdate"];
+                string SRDNo = Request.QueryString["SRDNo"];
+                string tempBatch = Request.QueryString["tempBatch"];
+                string sMGMerge = Request.QueryString["MGMerge"]; //Multi-grant Merge
+                string sChildID = Request.QueryString["ChildID"];
+                string sIsReview = rbReview.Checked ? "Y" : "N";
+                string sLCType = rbLC.Checked ? ddlLCType.SelectedValue : "";
+
+                hf_PENSION_NUMBER.Value = pensionNo;
+                hf_BATCHING.Value = batching;
+                hf_TRANSACTION.Value = trans;
+                hf_BOX_AUDIT.Value = boxAudit;
+                hf_BOX_NUMBER.Value = boxNo;
+                hf_GRANT_NAME.Value = grantname;
+                hf_APPLICATION_DATE.Value = appdate;
+                hf_GRANT_TYPE.Value = granttype;
+                hf_SRD_NUMBER.Value = SRDNo;
+                hf_TEMP_BATCH.Value = tempBatch;
+                hf_CHILD_ID.Value = sChildID;
+                hf_IS_REVIEW.Value = sIsReview;
+                hf_LC_TYPE.Value = sLCType;
+
+                if (string.IsNullOrEmpty(barCode))
                 {
                     ClientScript.RegisterStartupScript(Page.GetType(), "ignore", "alert('Please scan or enter the BRM Barcode.');", true);
                 }
-                else if (util.checkBRMExists(txtBRMBarcode.Text))
+                else if (util.checkBRMExists(barCode))
                 {
                     ClientScript.RegisterStartupScript(Page.GetType(), "BRMAlreadyUsed", "alert('Please scan or enter a different BRM Barcode,\\n" + txtBRMBarcode.Text + " is already in use.'); WebForm_AutoFocus('" + txtBRMBarcode.ClientID + "');", true);
                 }
                 else
                 {
-                    Session["BRM"] = txtBRMBarcode.Text.Trim().ToUpper();
+                    Session["BRM"] = barCode;
                     //HiddenField4.Value = Session["BRM"].ToString();
                     //If this comes from the Box Audit function
                     if (!string.IsNullOrEmpty(boxAudit) && boxAudit.ToUpper() == "Y")
                     {
                         //ClientScript.RegisterStartupScript(Page.GetType(), "localfileCover", "window.opener.openFileCover('" + pensionNo + "', 'Y', '" + boxNo + "', 'N', '" + trans + "', '" + txtBRMBarcode.Text.Trim().ToUpper() + "'); window.close();", true);
                         //ClientScript.RegisterStartupScript(Page.GetType(), "localfileCover", "window.opener.openFileCover('" + pensionNo + "', 'Y', '" + boxNo + "', 'N', '" + txtBRMBarcode.Text.Trim().ToUpper() + "'); window.close();", true);
-                        ClientScript.RegisterStartupScript(Page.GetType(), "SetBRM", "CheckBRMUsedOnParentPage('" + txtBRMBarcode.Text + "', '" + txtBRMBarcode.ClientID + "', '" + sMGMerge + "'); window.opener.SetBRMNumber(); window.close();", true);
+                        ClientScript.RegisterStartupScript(Page.GetType(), "SetBRM", "CheckBRMUsedOnParentPage('" + barCode + "', '" + txtBRMBarcode.ClientID + "', '" + sMGMerge + "'); window.opener.SetBRMNumber(); window.close();", true);
                     }
                     else if (!string.IsNullOrEmpty(sMGMerge) && sMGMerge.ToUpper() == "Y")
                     {
-                        ClientScript.RegisterStartupScript(Page.GetType(), "SetBRM", "CheckBRMUsedOnParentPage('" + txtBRMBarcode.Text + "', '" + txtBRMBarcode.ClientID + "', '" + sMGMerge + "'); openFileCover('" + pensionNo + "','" + grantname + "','" + granttype + "', '" + appdate + "'); window.close();", true);
+                        ClientScript.RegisterStartupScript(Page.GetType(), "SetBRM", "CheckBRMUsedOnParentPage('" + barCode + "', '" + txtBRMBarcode.ClientID + "', '" + sMGMerge + "'); openFileCover('" + pensionNo + "','" + grantname + "','" + granttype + "', '" + appdate + "'); window.close();", true);
                     }
                     else
                     {
