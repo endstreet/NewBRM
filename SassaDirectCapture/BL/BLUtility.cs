@@ -836,30 +836,27 @@ namespace SASSADirectCapture.BL
         }
         public bool updateUserLocalOffice(string userLogin, string officeID)
         {
-            Boolean isNewKuafLink = false;
-
+            DC_OFFICE_KUAF_LINK officeLink;
             using (Entities db = new Entities())
             {
-                DC_OFFICE_KUAF_LINK officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).FirstOrDefault();
-
-                if (officeLink == null)
+                if (db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).Any())
                 {
-                    isNewKuafLink = true;
-                    officeLink = new DC_OFFICE_KUAF_LINK();
+                    officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).First();
+                }
+                else
+                {
+                    officeLink = db.DC_OFFICE_KUAF_LINK.Add(new DC_OFFICE_KUAF_LINK());
                 }
 
                 officeLink.USERNAME = userLogin;
                 officeLink.OFFICE_ID = officeID;
+                //officeLink.DC_LOCAL_OFFICE = db.DC_LOCAL_OFFICE.Where(of => of.OFFICE_ID == officeID).First();
 
-                if (isNewKuafLink)
-                {
-                    db.DC_OFFICE_KUAF_LINK.Add(officeLink);
-                }
+                //db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
                 db.SaveChanges();
-                getLocalOffice();
-                db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
-                db.SaveChanges();
+                //getLocalOffice();
             }
+
 
             return true;
         }
