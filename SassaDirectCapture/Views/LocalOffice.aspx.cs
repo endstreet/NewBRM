@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Web.UI;
+using SASSADirectCapture.BL;
 using SASSADirectCapture.Sassa;
 
 namespace SASSADirectCapture.Views
@@ -33,30 +35,25 @@ namespace SASSADirectCapture.Views
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            lblError.Text = string.Empty;
-            divError.Visible = false;
+            lblError.Text = UserSession.SamName + " " + ddlLocalOffice.SelectedValue;
+            divError.Visible = true;
 
-            if (ddlLocalOffice.SelectedValue != string.Empty)
+            try
             {
-                try
-                {
-                    util.updateUserLocalOffice(UserSession.SamName, ddlLocalOffice.SelectedValue);
-                    ScriptManager.RegisterStartupScript(this, GetType(), "closeFancyBox", "parent.jQuery.fancybox.close();", true);
-                }
-                catch (Exception ex)
-                {
-                    //lblError.Text = ex.Message;
-                    lblError.Text = ex.ToString();
-                    divError.Visible = true;
-                }
+                if (!ddlLocalOffice.SelectedValue.IsNumeric()) throw new Exception("No office selected.");
+                util.updateUserLocalOffice(UserSession.SamName, ddlLocalOffice.SelectedValue);
+                ScriptManager.RegisterStartupScript(this, GetType(), "closeFancyBox", "parent.jQuery.fancybox.close();", true);
+                util.UserSession.IsIntitialized = false;
+                Session["us"] = util.UserSession;
+
             }
-            else
+             catch (Exception ex)
             {
-                lblError.Text = "No local office selected.";
+                //lblError.Text = ex.Message;
+                lblError.Text += ex.Message;
                 divError.Visible = true;
             }
-            UserSession.IsIntitialized = false;
-            Session["us"] = UserSession;
+            
         }
     }
 }

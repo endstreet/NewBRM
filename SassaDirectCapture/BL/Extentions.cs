@@ -7,6 +7,8 @@ namespace SASSADirectCapture.BL
 {
     public static class Extentions
     {
+
+        public static bool IsNumeric(this string text) => double.TryParse(text, out _);
         #region Public Methods
 
         public static string Add60Days(this string date)
