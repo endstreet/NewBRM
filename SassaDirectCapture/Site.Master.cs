@@ -71,7 +71,7 @@ namespace SASSADirectCapture
         protected void Page_Load(object sender, EventArgs e)
         {
             us = (UserSession)Session["us"];
-            if (us == null || !us.IsIntitialized)
+            if (!us.IsIntitialized)
             {
                 us = new UserSession();
 

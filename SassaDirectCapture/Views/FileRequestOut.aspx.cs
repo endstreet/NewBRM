@@ -214,7 +214,7 @@ namespace SASSADirectCapture.Views
                                     , CAST(SRDG.SOCIAL_RELIEF_NO AS VARCHAR(50))  AS MIS_FILE_NO
                                     , CAST(f.BRM_BARCODE AS VARCHAR(50))  AS BRM_BARCODE
                                     , CAST(f.BATCH_NO AS VARCHAR(50)) AS BATCH_NO
-                                    , b.REG_TYPE AS REG_TYPE,
+                                    , b.REG_TYPE AS REG_TYPE
                                     , CAST(SRDG.GRANT_TYPE AS VARCHAR(50))  AS GRANT_TYPE
                                     , CAST(SRDG.GRANT_TYPE AS VARCHAR(50))  AS MIS_GRANT_TYPE
                                     , CAST(SRDB.NAME AS VARCHAR(50))  AS NAME
