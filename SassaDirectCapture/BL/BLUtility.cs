@@ -745,54 +745,39 @@ namespace SASSADirectCapture.BL
         public void getLocalOffice()
         {
 
-            if (string.IsNullOrEmpty(UserSession.SamName)) throw new Exception("UserSessione Unknown");
+            if (string.IsNullOrEmpty(UserSession.SamName)) throw new Exception("UserSessioner Unknown");
+            if (UserSession.Office.OfficeName != null) return;
+
             using (Entities context = new Entities())
             {
                 //Try local office from database.
-                if ((from lo in context.DC_LOCAL_OFFICE
+                if (!(from lo in context.DC_LOCAL_OFFICE
                      join lou in context.DC_OFFICE_KUAF_LINK
                          on lo.OFFICE_ID equals lou.OFFICE_ID
                      where lou.USERNAME == UserSession.SamName
                      select lo).Any())
                 {
-                    DC_LOCAL_OFFICE value = (from lo in context.DC_LOCAL_OFFICE
+                    DC_LOCAL_OFFICE ioffice = (from lo in context.DC_LOCAL_OFFICE
+                                               join lou in context.DC_OFFICE_KUAF_LINK
+                                                   on lo.OFFICE_ID equals lou.OFFICE_ID
+                                               select lo).FirstOrDefault();
+                    //Attach to first or default office.
+                    updateUserLocalOffice(UserSession.SamName, ioffice.OFFICE_ID);
+                    //try again..
+                    getLocalOffice();
+                }
+
+                DC_LOCAL_OFFICE value = (from lo in context.DC_LOCAL_OFFICE
                                              join lou in context.DC_OFFICE_KUAF_LINK
                                                  on lo.OFFICE_ID equals lou.OFFICE_ID
                                              where lou.USERNAME == UserSession.SamName
                                              select lo).FirstOrDefault();
 
-                    UserSession.Office.OfficeName = value.OFFICE_NAME;
-                    UserSession.Office.OfficeId = value.OFFICE_ID;
-                    UserSession.Office.OfficeType = value.OFFICE_TYPE;
-                    UserSession.Office.RegionId = value.REGION_ID;
-                }
-                else //Attach to first or default office.
-                {
-                    DC_LOCAL_OFFICE ioffice = (from lo in context.DC_LOCAL_OFFICE
-                                               join lou in context.DC_OFFICE_KUAF_LINK
-                                                   on lo.OFFICE_ID equals lou.OFFICE_ID
-                                               select lo).FirstOrDefault();
+                UserSession.Office.OfficeName = value.OFFICE_NAME;
+                UserSession.Office.OfficeId = value.OFFICE_ID;
+                UserSession.Office.OfficeType = value.OFFICE_TYPE;
+                UserSession.Office.RegionId = value.REGION_ID;
 
-                    DC_OFFICE_KUAF_LINK kl = new DC_OFFICE_KUAF_LINK
-                    {
-                        KUAF_ID = 0,
-                        OFFICE_ID = ioffice.OFFICE_ID,
-                        SUPERVISOR = "N",
-                        USERNAME = UserSession.SamName
-                    };
-                    context.DC_OFFICE_KUAF_LINK.Add(kl);
-                    context.SaveChanges();
-                    DC_LOCAL_OFFICE nvalue = (from lo in context.DC_LOCAL_OFFICE
-                                              join lou in context.DC_OFFICE_KUAF_LINK
-                                                  on lo.OFFICE_ID equals lou.OFFICE_ID
-                                              where lou.USERNAME == UserSession.SamName
-                                              select lo).FirstOrDefault();
-
-                    UserSession.Office.OfficeName = nvalue.OFFICE_NAME;
-                    UserSession.Office.OfficeId = nvalue.OFFICE_ID;
-                    UserSession.Office.OfficeType = nvalue.OFFICE_TYPE;
-                    UserSession.Office.RegionId = nvalue.REGION_ID;
-                }
 
 
                 DC_REGION reg = context.DC_REGION.Where(k => k.REGION_ID == UserSession.Office.RegionId).FirstOrDefault();
@@ -822,7 +807,6 @@ namespace SASSADirectCapture.BL
 
                 officeLink.USERNAME = userLogin;
                 officeLink.OFFICE_ID = officeID;
-                officeLink.DC_LOCAL_OFFICE = db.DC_LOCAL_OFFICE.Where(of => of.OFFICE_ID == officeID).First();
 
                 db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
                 db.SaveChanges();
