@@ -793,26 +793,48 @@ namespace SASSADirectCapture.BL
 
         public bool updateUserLocalOffice(string userLogin, string officeID)
         {
+
+
             DC_OFFICE_KUAF_LINK officeLink;
             using (Entities db = new Entities())
             {
                 if (db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).Any())
                 {
-                    officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).First();
+                    try
+                    {
+                        officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).First();
+                    }
+                    catch
+                    {
+                        throw new Exception("officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).First();");
+                    }
                 }
                 else
                 {
-                    officeLink = db.DC_OFFICE_KUAF_LINK.Add(new DC_OFFICE_KUAF_LINK());
+                    try
+                    {
+                        officeLink = new DC_OFFICE_KUAF_LINK() { OFFICE_ID = officeID, USERNAME = userLogin };
+                        db.DC_OFFICE_KUAF_LINK.Add(officeLink);
+                        db.SaveChanges();
+                    }
+                    catch(Exception ex)
+                    {
+                        throw new Exception(ex.Message + ex.InnerException);
+                    }
                 }
-
-                officeLink.USERNAME = userLogin;
                 officeLink.OFFICE_ID = officeID;
 
-                db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
-                db.SaveChanges();
-                //getLocalOffice();
-            }
 
+                try
+                {
+                    db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    throw new Exception(@"db.SaveChanges()");
+                }
+            }
 
             return true;
         }

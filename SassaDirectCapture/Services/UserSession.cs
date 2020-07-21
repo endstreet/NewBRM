@@ -27,7 +27,6 @@ namespace SASSADirectCapture.Services
         {
             return Roles.First();
         }
-
         public bool IsIntitialized { get; set; }
 
     }

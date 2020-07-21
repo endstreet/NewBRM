@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.UI;
 using SASSADirectCapture.BL;
 using SASSADirectCapture.Sassa;
@@ -41,10 +42,21 @@ namespace SASSADirectCapture.Views
             try
             {
                 if (!ddlLocalOffice.SelectedValue.IsNumeric()) throw new Exception("Invalid office selected.");
-                util.UserSession.IsIntitialized = false;
-                util.updateUserLocalOffice(UserSession.SamName, ddlLocalOffice.SelectedValue);
+                try
+                {
+                    util.UserSession.IsIntitialized = false;
+                    HttpContext.Current.Session["us"] = util.UserSession;
+                }
+                catch
+                {
+                    throw new Exception("util.UserSession.IsIntitialized = false;");
+                }
+
+
+                util.updateUserLocalOffice(util.UserSession.SamName, ddlLocalOffice.SelectedValue);
+
                 ScriptManager.RegisterStartupScript(this, GetType(), "closeFancyBox", "parent.jQuery.fancybox.close();", true);
-                
+
             }
              catch (Exception ex)
             {
