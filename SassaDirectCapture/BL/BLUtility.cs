@@ -762,7 +762,7 @@ namespace SASSADirectCapture.BL
                                                    on lo.OFFICE_ID equals lou.OFFICE_ID
                                                select lo).FirstOrDefault();
                     //Attach to first or default office.
-                    updateUserLocalOffice(Usersession, ioffice.OFFICE_ID);
+                    updateUserLocalOffice(ioffice.OFFICE_ID);
                     //try again..
                     getLocalOffice();
                 }
@@ -791,16 +791,16 @@ namespace SASSADirectCapture.BL
             HttpContext.Current.Session["us"] = Usersession;
         }
 
-        public bool updateUserLocalOffice(UserSession session, string officeID)
+        public bool updateUserLocalOffice( string officeID)
         {
 
 
-            DC_OFFICE_KUAF_LINK officeLink = new DC_OFFICE_KUAF_LINK() { OFFICE_ID = officeID, USERNAME = session.SamName, SUPERVISOR = session.Roles.First() };
+            DC_OFFICE_KUAF_LINK officeLink = new DC_OFFICE_KUAF_LINK() { OFFICE_ID = officeID, USERNAME = Usersession.SamName, SUPERVISOR = Usersession.Roles.First() };
             using (Entities db = new Entities())
             {
-                if (db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == session.SamName).Any())
+                if (db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == Usersession.SamName).Any())
                 {
-                    officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == session.SamName).First();
+                    officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == Usersession.SamName).First();
                     officeLink.OFFICE_ID = officeID;
                 }
                 else
@@ -811,7 +811,7 @@ namespace SASSADirectCapture.BL
 
                 try
                 {
-                    db.DC_ACTIVITY.Add(CreateActivity(session,"Office", "Update User/LocalOffice link"));
+                    db.DC_ACTIVITY.Add(CreateActivity(Usersession,"Office", "Update User/LocalOffice link"));
                     db.SaveChanges();
                 }
                 catch (Exception ex)

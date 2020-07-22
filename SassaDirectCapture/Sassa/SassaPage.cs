@@ -26,10 +26,9 @@ namespace SASSADirectCapture.Sassa
         {
             get
             {
-                if (_util != null) return _util;
+
                 if (Usersession == null) Usersession = (UserSession)HttpContext.Current.Session["us"];
-                 _util = new BLUtility(Usersession);
-                return _util;
+                return new BLUtility(Usersession);
             }
         }
     }
