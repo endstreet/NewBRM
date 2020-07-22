@@ -15,10 +15,10 @@ namespace SASSADirectCapture.EntityModels
     public partial class DC_OFFICE_KUAF_LINK
     {
         public string OFFICE_ID { get; set; }
-        public decimal KUAF_ID { get; set; }
+        public int KUAF_ID { get; set; }
         public string SUPERVISOR { get; set; }
         public string USERNAME { get; set; }
-        public decimal PK { get; set; }
+        public int PK { get; set; }
     
         public virtual DC_LOCAL_OFFICE DC_LOCAL_OFFICE { get; set; }
     }

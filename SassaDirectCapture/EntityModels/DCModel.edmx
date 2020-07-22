@@ -1346,11 +1346,11 @@ FROM "CONTENTSERVER"."DC_BOXPICKLIST" "DC_BOXPICKLIST"</DefiningQuery>
             <PropertyRef Name="PK" />
           </Key>
           <Property Name="OFFICE_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="KUAF_ID" Type="Decimal" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="KUAF_ID" Type="Int32" Nullable="false" />
           <Property Name="SUPERVISOR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DC_LOCAL_OFFICE" Relationship="Self.FK_LOCAL_OFFICE" FromRole="DC_OFFICE_KUAF_LINK" ToRole="DC_LOCAL_OFFICE" />
           <Property Name="USERNAME" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
-          <Property Name="PK" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="DC_REGION">
           <Key>

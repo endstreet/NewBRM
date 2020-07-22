@@ -42,19 +42,9 @@ namespace SASSADirectCapture.Views
             try
             {
                 if (!ddlLocalOffice.SelectedValue.IsNumeric()) throw new Exception("Invalid office selected.");
-                try
-                {
-                    util.UserSession.IsIntitialized = false;
-                    HttpContext.Current.Session["us"] = util.UserSession;
-                }
-                catch
-                {
-                    throw new Exception("util.UserSession.IsIntitialized = false;");
-                }
-
-
-                util.updateUserLocalOffice(util.UserSession.SamName, ddlLocalOffice.SelectedValue);
-
+                util.UserSession.IsIntitialized = false;
+                HttpContext.Current.Session["us"] = util.UserSession;
+                util.updateUserLocalOffice(util.UserSession, ddlLocalOffice.SelectedValue);
                 ScriptManager.RegisterStartupScript(this, GetType(), "closeFancyBox", "parent.jQuery.fancybox.close();", true);
 
             }

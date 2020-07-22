@@ -762,7 +762,7 @@ namespace SASSADirectCapture.BL
                                                    on lo.OFFICE_ID equals lou.OFFICE_ID
                                                select lo).FirstOrDefault();
                     //Attach to first or default office.
-                    updateUserLocalOffice(UserSession.SamName, ioffice.OFFICE_ID);
+                    updateUserLocalOffice(UserSession, ioffice.OFFICE_ID);
                     //try again..
                     getLocalOffice();
                 }
@@ -791,48 +791,31 @@ namespace SASSADirectCapture.BL
             HttpContext.Current.Session["us"] = UserSession;
         }
 
-        public bool updateUserLocalOffice(string userLogin, string officeID)
+        public bool updateUserLocalOffice(UserSession session, string officeID)
         {
 
-
-            DC_OFFICE_KUAF_LINK officeLink;
+            DC_OFFICE_KUAF_LINK officeLink = new DC_OFFICE_KUAF_LINK() { OFFICE_ID = officeID, USERNAME = session.SamName };
             using (Entities db = new Entities())
             {
-                if (db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).Any())
+                if (db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == session.SamName).Any())
                 {
-                    try
-                    {
-                        officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).First();
-                    }
-                    catch
-                    {
-                        throw new Exception("officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == userLogin).First();");
-                    }
+                   officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == session.SamName).First();
                 }
                 else
                 {
-                    try
-                    {
-                        officeLink = new DC_OFFICE_KUAF_LINK() { OFFICE_ID = officeID, USERNAME = userLogin };
-                        db.DC_OFFICE_KUAF_LINK.Add(officeLink);
-                        db.SaveChanges();
-                    }
-                    catch(Exception ex)
-                    {
-                        throw new Exception(ex.Message + ex.InnerException);
-                    }
+                    db.DC_OFFICE_KUAF_LINK.Add(officeLink);
                 }
                 officeLink.OFFICE_ID = officeID;
-
+                officeLink.SUPERVISOR = session.Roles.First();
 
                 try
                 {
                     db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
                     db.SaveChanges();
                 }
-                catch
+                catch(Exception ex)
                 {
-                    throw new Exception(@"db.SaveChanges()");
+                    throw new Exception(ex.Message);
                 }
             }
 
