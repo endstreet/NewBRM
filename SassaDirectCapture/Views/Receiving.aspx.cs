@@ -318,7 +318,7 @@ namespace SASSADirectCapture.Views
                             if (Decimal.TryParse(batchNrValue, out outValue))
                             {
                                 //lblDeliverySuccess.Text = lblDeliverySuccess.Text + ";111";
-                                var office = UserSession.Office.OfficeId;
+                                var office = Usersession.Office.OfficeId;
                                 //lblDeliverySuccess.Text = lblDeliverySuccess.Text + ";113";
 
                                 var query = from b in context.DC_BATCH
@@ -464,7 +464,7 @@ namespace SASSADirectCapture.Views
 
                     try
                     {
-                        var office = UserSession.Office.OfficeId;
+                        var office = Usersession.Office.OfficeId;
 
                         var query = from b in context.DC_BATCH
                                     join lo in context.DC_LOCAL_OFFICE on b.OFFICE_ID equals lo.OFFICE_ID
@@ -561,7 +561,7 @@ namespace SASSADirectCapture.Views
 
                     try
                     {
-                        var office = UserSession.Office.OfficeId;
+                        var office = Usersession.Office.OfficeId;
 
                         var query = from b in context.DC_BATCH
                                     join lo in context.DC_LOCAL_OFFICE on b.OFFICE_ID equals lo.OFFICE_ID

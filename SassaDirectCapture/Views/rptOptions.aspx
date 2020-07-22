@@ -81,7 +81,7 @@
                 <asp:ListItem Text="-- All Offices --" Value="" Selected="True"></asp:ListItem>
             </asp:DropDownList>
             <asp:DropDownList runat="server" ID="ddGrantType" CssClass="form-control">
-                <asp:ListItem Text="---Select Grant Type---" Value="" Selected="True"></asp:ListItem>
+                <asp:ListItem Text="-- All Grant Types --" Value="" Selected="True"></asp:ListItem>
                 <asp:ListItem Text="Old age grant" Value="0"></asp:ListItem>
                 <asp:ListItem Text="War veteran grant" Value="1"></asp:ListItem>
                 <asp:ListItem Text="Disability grant" Value="3"></asp:ListItem>

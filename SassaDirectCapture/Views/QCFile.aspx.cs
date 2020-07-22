@@ -100,20 +100,20 @@ namespace SASSADirectCapture.Views
                 {
                     x.NON_COMPLIANT = "N";
                     x.QC_USER_FN = "0";
-                    x.QC_USER_LN = UserSession.Name;
+                    x.QC_USER_LN = Usersession.Name;
                     x.QC_DATE = DateTime.Now;
                 }
                 else
                 {
                     x.NON_COMPLIANT = "Y";
                     x.QC_USER_FN = "0";
-                    x.QC_USER_LN = UserSession.Name;
+                    x.QC_USER_LN = Usersession.Name;
                     x.QC_DATE = DateTime.Now;
                 }
 
                 x.UPDATED_DATE = DateTime.Now;
 
-                x.UPDATED_BY_AD = UserSession.SamName;
+                x.UPDATED_BY_AD = Usersession.SamName;
 
                 en.DC_ACTIVITY.Add(util.CreateActivity("QCFile", "Update File QC"));
                 en.SaveChanges();

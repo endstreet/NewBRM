@@ -324,7 +324,7 @@ namespace SASSADirectCapture.Views
                                 {
                                     fileReq.SCANNED_DATE = DateTime.Now;
 
-                                    fileReq.SCANNED_BY_AD = UserSession.SamName;
+                                    fileReq.SCANNED_BY_AD = Usersession.SamName;
 
                                 }
                             }
@@ -350,7 +350,7 @@ namespace SASSADirectCapture.Views
                             fileReq.CLOSED_DATE = DateTime.Now;
 
 
-                            fileReq.CLOSED_BY_AD = UserSession.SamName;
+                            fileReq.CLOSED_BY_AD = Usersession.SamName;
 
 
                             fileReq.PICKLIST_STATUS = "Completed";
@@ -390,7 +390,7 @@ namespace SASSADirectCapture.Views
                                     {
                                         fileReq.SCANNED_DATE = DateTime.Now;
 
-                                        fileReq.SCANNED_BY_AD = UserSession.SamName;
+                                        fileReq.SCANNED_BY_AD = Usersession.SamName;
 
                                     }
                                 }

@@ -30,7 +30,7 @@ namespace SASSADirectCapture.Views
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            var z = UserSession.Office.OfficeId;
+            var z = Usersession.Office.OfficeId;
             decimal batchNo = 0.0M;
             Decimal.TryParse(Request.QueryString["batchNo"].ToString(), out batchNo);
             DC_BATCH batch = en.DC_BATCH
@@ -88,7 +88,7 @@ namespace SASSADirectCapture.Views
             if (!IsPostBack)
             {
                 //Get the username of the user that is logged in from session.
-                string authenticatedUsername = UserSession.SamName;
+                string authenticatedUsername = Usersession.SamName;
 
                 //If no session values are found , redirect to the login screen
                 //if (authenticatedUsername == string.Empty)
@@ -125,7 +125,7 @@ namespace SASSADirectCapture.Views
 
             try
             {
-                var z = UserSession.Office.OfficeId;
+                var z = Usersession.Office.OfficeId;
 
                 foreach (decimal batchno in batchNrs)
                 {

@@ -21,7 +21,7 @@ namespace SASSADirectCapture
         }
         private void Session_Start(object sender, EventArgs e)
         {
-            HttpContext.Current.Session["us"] = new UserSession();
+            //HttpContext.Current.Session["us"] = new UserSession();
         }
         private void Application_Start(object sender, EventArgs e)
         {

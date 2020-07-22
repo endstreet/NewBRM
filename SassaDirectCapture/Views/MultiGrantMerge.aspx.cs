@@ -237,7 +237,7 @@ namespace SASSADirectCapture.Views
                                         .FirstOrDefault();
 
                             dr["BRM_BARCODE"] = (f == null ? "" : f.BRM_BARCODE);
-                            dr["IsRMC"] = UserSession.Office.OfficeType == "RMC" ? "Y" : "N";
+                            dr["IsRMC"] = Usersession.Office.OfficeType == "RMC" ? "Y" : "N";
 
                             DT.Rows.Add(dr);
                         }

@@ -70,7 +70,8 @@ namespace SASSADirectCapture
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            us = (UserSession)Session["us"];
+            us = Session["us"] == null ? new UserSession() : (UserSession)Session["us"];
+
             if (!us.IsIntitialized)
             {
                 us = new UserSession();
@@ -93,7 +94,7 @@ namespace SASSADirectCapture
                     HttpContext.Current.Response.Redirect("~/Default.aspx");
                 }
                 util.getLocalOffice();
-                Session["us"] = util.UserSession;
+                Session["us"] = util.Usersession;
             }
             checkUserOffice();
         }

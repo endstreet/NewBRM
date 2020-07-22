@@ -54,7 +54,7 @@ namespace SASSADirectCapture.Views
                         {
                             fileReq.CLOSED_DATE = DateTime.Now;
 
-                            fileReq.CLOSED_BY_AD = UserSession.SamName;
+                            fileReq.CLOSED_BY_AD = Usersession.SamName;
 
                             en.DC_ACTIVITY.Add(util.CreateActivity("FileRequest", "Close/Cancel File Request"));
                             en.SaveChanges();
@@ -296,7 +296,7 @@ namespace SASSADirectCapture.Views
             if (!IsPostBack)
             {
                 //Get the username of the user that is logged in from session.
-                string authenticatedUsername = UserSession.SamName;
+                string authenticatedUsername = Usersession.SamName;
 
                 //If no session values are found , redirect to the login screen
 
@@ -315,7 +315,7 @@ namespace SASSADirectCapture.Views
                     //'&Pos=' + MISPos;
                     //'&TDW=' + TDWBoxno;
 
-                    txtServBy.Text = UserSession.Name == null ? "" : UserSession.Name;
+                    txtServBy.Text = Usersession.Name == null ? "" : Usersession.Name;
                     if (Request.QueryString["status"].ToString() == "1")
                     {
                         txtIDNo.Text = Request.QueryString["idNo"].ToString();
@@ -407,12 +407,12 @@ namespace SASSADirectCapture.Views
                     fileReq.NAME = txtName.Text;
                     fileReq.SURNAME = txtSurname.Text;
                     fileReq.REGION_ID = txtRegionID.Text;
-                    fileReq.REGION_ID_TO = UserSession.Office.RegionId;
-                    fileReq.REQUESTED_OFFICE_ID = UserSession.Office.OfficeId;
+                    fileReq.REGION_ID_TO = Usersession.Office.RegionId;
+                    fileReq.REQUESTED_OFFICE_ID = Usersession.Office.OfficeId;
                     fileReq.REQUESTED_DATE = DateTime.Now;
 
 
-                    fileReq.REQUESTED_BY_AD = UserSession.SamName;
+                    fileReq.REQUESTED_BY_AD = Usersession.SamName;
 
 
                     fileReq.RELATED_MIS_FILE_NO = getAllRelatedMISNumbers(txtIDNo.Text, txtFileNo.Text);
@@ -445,7 +445,7 @@ namespace SASSADirectCapture.Views
                                                                                     "\"" + fileReq.MIS_FILE_NO + "\"); " +
                                                                                     "window.close()", true);
                     //Todo:this may need to be regionCode
-                    ProgressHub.SendMessage(UserSession.Office.RegionId, "New File Request Added", "15");
+                    ProgressHub.SendMessage(Usersession.Office.RegionId, "New File Request Added", "15");
                 }
                 catch (Exception ex)
                 {

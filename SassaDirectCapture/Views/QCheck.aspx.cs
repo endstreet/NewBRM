@@ -216,7 +216,7 @@ namespace SASSADirectCapture.Views
 
                 try
                 {
-                    var office = UserSession.Office.OfficeId;
+                    var office = Usersession.Office.OfficeId;
 
                     var query = from b in context.DC_BATCH
                                 join lo in context.DC_LOCAL_OFFICE on b.OFFICE_ID equals lo.OFFICE_ID
@@ -325,7 +325,7 @@ namespace SASSADirectCapture.Views
                     decimal outValue = 0.0M;
                     if (Decimal.TryParse(batchNrValue, out outValue))
                     {
-                        var office = UserSession.Office.OfficeId;
+                        var office = Usersession.Office.OfficeId;
 
                         var query = from b in context.DC_BATCH
                                     join lo in context.DC_LOCAL_OFFICE on b.OFFICE_ID equals lo.OFFICE_ID

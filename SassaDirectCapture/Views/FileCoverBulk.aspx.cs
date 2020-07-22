@@ -112,7 +112,7 @@ namespace SASSADirectCapture.Views
             //            using (Entities context = new Entities())
             //            {
             //                DC_FILE file = new DC_FILE();
-            //                string localOffice = UserSession.Office.OfficeId;
+            //                string localOffice = Usersession.Office.OfficeId;
             //                decimal batchNo = -1;
 
             //                //If this is the Batching function, use the batching process
@@ -213,7 +213,7 @@ namespace SASSADirectCapture.Views
             //            using (Entities context = new Entities())
             //            {
             //                DC_FILE file = new DC_FILE();
-            //                string localOffice = UserSession.Office.OfficeId;
+            //                string localOffice = Usersession.Office.OfficeId;
             //                decimal batchNo = -1;
 
             //                //If this is not the Box Audit function, use the batching process
@@ -388,7 +388,7 @@ namespace SASSADirectCapture.Views
         protected void GetFileData(string batch, string boxNo, string sTDWBoxNo)
         {
             int batchNo = int.Parse(batch);
-            string myRegionID = UserSession.Office.RegionId;
+            string myRegionID = Usersession.Office.RegionId;
 
             //divError.Visible = false;
             //lblMsg.Text = string.Empty;
@@ -666,9 +666,9 @@ namespace SASSADirectCapture.Views
             DC_BATCH b = new DC_BATCH();
             b.BATCH_STATUS = "Open";
             b.BATCH_CURRENT = "Y";
-            b.OFFICE_ID = UserSession.Office.OfficeId;
+            b.OFFICE_ID = Usersession.Office.OfficeId;
             b.UPDATED_DATE = DateTime.Now;
-            b.UPDATED_BY_AD = UserSession.SamName;
+            b.UPDATED_BY_AD = Usersession.SamName;
 
             en.DC_BATCH.Add(b);
             en.DC_ACTIVITY.Add(util.CreateActivity("Files", "Add Open Batch"));
@@ -681,7 +681,7 @@ namespace SASSADirectCapture.Views
         {
             //Applicant applicant = new Applicant();
 
-            //string myRegionID = util.BLUtility().UserSession.Office.RegionCode;
+            //string myRegionID = util.BLUtility().Usersession.Office.RegionCode;
 
             //Dictionary<string, string> grantTypes = util.getGrantTypes();
 

@@ -18,13 +18,13 @@ namespace SASSADirectCapture.Views
             {
                 string whichgrid = Request.QueryString["picklist"].ToString();
                 string picklistno = Request.QueryString["picklistno"].ToString();
-                string regid = UserSession.Office.RegionId;
-                string username = UserSession.Name; //Session["CSUsername"].ToString();
+                string regid = Usersession.Office.RegionId;
+                string username = Usersession.Name; //Session["CSUsername"].ToString();
                 string region = string.Empty;
                 Page.Title = string.Empty;
                 //if (regid != null)
                 //{
-                region = UserSession.Office.RegionName;//util.getRegion("name", regid);
+                region = Usersession.Office.RegionName;//util.getRegion("name", regid);
                 //}
 
                 if (whichgrid == "BOX")

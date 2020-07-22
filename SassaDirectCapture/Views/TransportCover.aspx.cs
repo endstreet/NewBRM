@@ -27,7 +27,7 @@ namespace SASSADirectCapture.Views
 
         protected void btnPrintClose_Click(object sender, EventArgs e)
         {
-            //var localoffice = UserSession.Office.OfficeId;
+            //var localoffice = Usersession.Office.OfficeId;
             //int userId = new SASSA_Authentication().getUserID();
             //string sUserLogin = new SASSA_Authentication().getUserLogin();
 
@@ -53,7 +53,7 @@ namespace SASSADirectCapture.Views
 
                         batch.UPDATED_DATE = DateTime.Now;
 
-                        batch.UPDATED_BY_AD = UserSession.SamName;
+                        batch.UPDATED_BY_AD = Usersession.SamName;
 
                     }
                 }

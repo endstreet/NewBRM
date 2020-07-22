@@ -83,8 +83,8 @@ namespace SASSADirectCapture.Views
             if (Request.QueryString.ToString().Contains("batchNo"))
             {
                 Decimal.TryParse(Request.QueryString["batchNo"].ToString(), out batchNo);
-                var z = UserSession.Office.OfficeId;
-                string sUserLogin = UserSession.SamName;
+                var z = Usersession.Office.OfficeId;
+                string sUserLogin = Usersession.SamName;
                 bool bUseADAuth = bool.Parse(System.Web.Configuration.WebConfigurationManager.AppSettings["UseADAuth"].ToString());
 
                 DC_BATCH batch = en.DC_BATCH
@@ -109,7 +109,7 @@ namespace SASSADirectCapture.Views
                         DC_BATCH b = new DC_BATCH();
                         b.BATCH_STATUS = "Open";
                         b.BATCH_CURRENT = "Y";
-                        b.OFFICE_ID = UserSession.Office.OfficeId;
+                        b.OFFICE_ID = Usersession.Office.OfficeId;
                         b.UPDATED_DATE = DateTime.Now;
 
                         b.UPDATED_BY_AD = sUserLogin;
@@ -161,7 +161,7 @@ namespace SASSADirectCapture.Views
                         file.UPDATED_DATE = DateTime.Now;
 
 
-                        file.UPDATED_BY_AD = UserSession.SamName;
+                        file.UPDATED_BY_AD = Usersession.SamName;
 
                     }
                     en.DC_ACTIVITY.Add(util.CreateActivity("Boxing", "Mark files completed"));

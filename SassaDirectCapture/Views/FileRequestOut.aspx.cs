@@ -22,7 +22,7 @@ namespace SASSADirectCapture.Views
 
         public IQueryable<FileRequest> GetFileRequestHistory()
         {
-            var x = UserSession.Office.OfficeId;
+            var x = Usersession.Office.OfficeId;
 
             IQueryable<FileRequest> query;
             try
@@ -43,7 +43,7 @@ namespace SASSADirectCapture.Views
                         SURNAME = fr.SURNAME,
                         REGION_ID = fr.REGION_ID,
                         REQUESTED_BY = (long)fr.REQUESTED_BY,
-                        REQUESTER_NAME = UserSession.Name,
+                        REQUESTER_NAME = Usersession.Name,
                         REQUESTED_DATE = fr.REQUESTED_DATE,
                         SCANNED_BY = fr.SCANNED_BY,
                         SCANNED_DATE = fr.SCANNED_DATE,
@@ -244,7 +244,7 @@ namespace SASSADirectCapture.Views
                         }
                         else
                         {
-                            if (UserSession.Office.RegionId == "2")
+                            if (Usersession.Office.RegionId == "2")
                             {
                                 query = context.Database.SqlQuery<FileRequest>
                                 ($@" SELECT

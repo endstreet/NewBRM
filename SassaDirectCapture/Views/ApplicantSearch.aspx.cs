@@ -269,7 +269,7 @@ namespace SASSADirectCapture.Views
                                 dr["BRM_BARCODE"] = (f == null ? "" : f.BRM_BARCODE);
                                 dr["CLM"] = (f == null ? "" : f.UNQ_FILE_NO);
 
-                                dr["IsRMC"] = UserSession.Office.OfficeType == "RMC" ? "Y" : "N";
+                                dr["IsRMC"] = Usersession.Office.OfficeType == "RMC" ? "Y" : "N";
 
                                 DT.Rows.Add(dr);
                             }
@@ -344,7 +344,7 @@ namespace SASSADirectCapture.Views
                                 dr["BRM_BARCODE"] = (f == null ? "" : f.BRM_BARCODE);
                                 dr["CLM"] = (f == null ? "" : f.UNQ_FILE_NO);
 
-                                dr["IsRMC"] = UserSession.Office.OfficeType == "RMC" ? "Y" : "N";
+                                dr["IsRMC"] = Usersession.Office.OfficeType == "RMC" ? "Y" : "N";
 
                                 DT.Rows.Add(dr);
                             }

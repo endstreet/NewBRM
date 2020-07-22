@@ -19,8 +19,8 @@ namespace SASSADirectCapture.Views
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            RegionId = int.Parse(UserSession.Office.RegionId);
-            UserName = UserSession.Name;
+            RegionId = int.Parse(Usersession.Office.RegionId);
+            UserName = Usersession.Name;
 
 
             dProcess = new DestructionProcess(RegionId, UserName);
@@ -77,7 +77,7 @@ namespace SASSADirectCapture.Views
         public IQueryable<DC_EXCLUSIONS> GetExclusions()
         {
             Entities en = new Entities();
-            int regionId = int.Parse(UserSession.Office.RegionId);
+            int regionId = int.Parse(Usersession.Office.RegionId);
             var x = en.DC_EXCLUSIONS.Where(e => e.REGION_ID == regionId && e.EXCLUSION_BATCH_ID == 0).OrderBy(f => f.EXCL_DATE);
 
             int recordcount = x.Count();

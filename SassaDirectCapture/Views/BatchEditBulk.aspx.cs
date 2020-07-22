@@ -33,7 +33,7 @@ namespace SASSADirectCapture.Views
             string w = txtWayBillNo.Text;
             string c = txtCourierName.Text;
 
-            var z = UserSession.Office.OfficeId;
+            var z = Usersession.Office.OfficeId;
             decimal batchNo = 0.0M;
             Decimal.TryParse(Request.QueryString["batchNo"].ToString(), out batchNo);
             DC_BATCH batch = en.DC_BATCH

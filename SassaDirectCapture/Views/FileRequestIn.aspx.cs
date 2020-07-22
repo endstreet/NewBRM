@@ -22,7 +22,7 @@ namespace SASSADirectCapture.Views
 
         public IQueryable<FileRequest> GetFileRequestHistory()
         {
-            var x = UserSession.Office.OfficeId;
+            var x = Usersession.Office.OfficeId;
 
             // Retrieve all files that have been submitted by local offices in the same region as the RMC office.
             // Only show files that have not been updated or closed.
@@ -95,9 +95,9 @@ namespace SASSADirectCapture.Views
 
         public IQueryable<FileRequest> GetRMCPicklist()
         {
-            var x = UserSession.Office.OfficeId;
+            var x = Usersession.Office.OfficeId;
             string pstatus = "In Progress";
-            string region = UserSession.Office.RegionId;
+            string region = Usersession.Office.RegionId;
 
             // Retrieve all files that have been submitted by local offices in the same region as the RMC office.
             // Only show files that have aRE iN Progress and not sent to TDW.
@@ -162,9 +162,9 @@ namespace SASSADirectCapture.Views
 
         public IQueryable<FileRequest> GetTDWPicklist()
         {
-            var x = UserSession.Office.OfficeId;
+            var x = Usersession.Office.OfficeId;
             string pstatus = "In Progress";
-            string region = UserSession.Office.RegionId;//Session["CSUserOfficeRegion"].ToString();
+            string region = Usersession.Office.RegionId;//Session["CSUserOfficeRegion"].ToString();
             // Retrieve all files that have been submitted by local offices in the same region as the RMC office.
             // Only show files that have aRE iN Progress and not sent to TDW.
 

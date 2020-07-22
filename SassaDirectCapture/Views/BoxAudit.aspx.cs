@@ -170,7 +170,7 @@ namespace SASSADirectCapture.Views
                     {
                         var x = en2.DC_FILE
                         .Where(f => f.TDW_BOXNO == sBoxBarcode).OrderByDescending(g => g.UPDATED_DATE).FirstOrDefault();
-                        switch (UserSession.Office.RegionId)
+                        switch (Usersession.Office.RegionId)
                         {
                             case "1":
                                 sAltBoxNo = "WCA" + en2.Database.SqlQuery<decimal>("select SEQ_DC_ALT_BOX_NO_WCA.NEXTVAL from DUAL ").FirstOrDefault().ToString();
@@ -217,7 +217,7 @@ namespace SASSADirectCapture.Views
 
                         if (bool.Parse(System.Web.Configuration.WebConfigurationManager.AppSettings["UseADAuth"].ToString()))
                         {
-                            x.UPDATED_BY_AD = UserSession.SamName;
+                            x.UPDATED_BY_AD = Usersession.SamName;
                             //}
                             //else
                             //{
@@ -247,7 +247,7 @@ namespace SASSADirectCapture.Views
         protected void btnCheckFile_Click(object sender, EventArgs e)
         {
             bool bFound = false;
-            if (UserSession.Office.RegionId == "2")
+            if (Usersession.Office.RegionId == "2")
             {
                 foreach (GridViewRow row in boxGridView.Rows)
                 {
@@ -426,7 +426,7 @@ namespace SASSADirectCapture.Views
         {
             if (!IsPostBack)
             {
-                string authenticatedUsername = UserSession.SamName;
+                string authenticatedUsername = Usersession.SamName;
 
                 //If no session values are found , redirect to the login screen
                 //if (authenticatedUsername == string.Empty)
@@ -436,7 +436,7 @@ namespace SASSADirectCapture.Views
 
                 showlastPicklistValues();
 
-                if (UserSession.Office.RegionId == "2")
+                if (Usersession.Office.RegionId == "2")
                 {
                     ddlDistrict.DataSource = util.getECDistricts();
                     ddlDistrict.DataBind();
@@ -506,7 +506,7 @@ namespace SASSADirectCapture.Views
 
         protected static decimal Create_Bulk_Batch_For_Office()
         {
-            string localOffice = UserSession.Office.OfficeId;
+            string localOffice = Usersession.Office.OfficeId;
 
             decimal batchNo = 0;
             batchNo = Get_Bulk_Batch_For_Office(localOffice);
@@ -521,10 +521,10 @@ namespace SASSADirectCapture.Views
                         DC_BATCH b = new DC_BATCH();
                         b.BATCH_STATUS = "BULK";
                         b.BATCH_CURRENT = "Y";
-                        b.OFFICE_ID = UserSession.Office.OfficeId;
+                        b.OFFICE_ID = Usersession.Office.OfficeId;
                         b.UPDATED_DATE = DateTime.Now;
 
-                        b.UPDATED_BY_AD = UserSession.SamName;
+                        b.UPDATED_BY_AD = Usersession.SamName;
                         context.DC_BATCH.Add(b);
                         context.DC_ACTIVITY.Add(util.CreateActivity("Boxing", "Create Bulk Batch For Office"));
                         context.SaveChanges();
@@ -680,7 +680,7 @@ namespace SASSADirectCapture.Views
 
                     DateTime nowDate = DateTime.Now;
 
-                    string localRegion = UserSession.Office.RegionCode;
+                    string localRegion = Usersession.Office.RegionCode;
 
                     var brmNumberDictionary = new Dictionary<string, bool>();
                     var brmNumberList = new List<string>();
@@ -878,7 +878,7 @@ namespace SASSADirectCapture.Views
                             if (chkBoxNonComp.Checked) { isNonComp = "Y"; }
 
                             // office id
-                            string offid = UserSession.Office.OfficeId; //OFFICE_ID
+                            string offid = Usersession.Office.OfficeId; //OFFICE_ID
 
                             // USER
                             string myUserID = "0";
@@ -1091,8 +1091,8 @@ namespace SASSADirectCapture.Views
         {
             string Status = "DESTROY";
             string BoxNo = txtSearchBox.Text;
-            string RegID = UserSession.Office.RegionId;
-            string RegName = UserSession.Office.RegionName; //util.getRegion("name", RegID);
+            string RegID = Usersession.Office.RegionId;
+            string RegName = Usersession.Office.RegionName; //util.getRegion("name", RegID);
 
             if (!CheckIfBoxPrinted())
             {
@@ -1125,8 +1125,8 @@ namespace SASSADirectCapture.Views
         {
             string Status = "MISSING";
             string BoxNo = txtSearchBox.Text;
-            string RegID = UserSession.Office.RegionId;
-            string RegName = UserSession.Office.RegionName; //util.getRegion("name", RegID);
+            string RegID = Usersession.Office.RegionId;
+            string RegName = Usersession.Office.RegionName; //util.getRegion("name", RegID);
 
             if (!CheckIfBoxPrinted())
             {
@@ -1159,7 +1159,7 @@ namespace SASSADirectCapture.Views
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "hideLoadingMsg", "myECM.hidePleaseWait();", true);
 
-            if (UserSession.Office.RegionId == "2")
+            if (Usersession.Office.RegionId == "2")
             {
                 int iBoxNumber = 0;
                 if (ddlDistrict.SelectedValue == "")
@@ -1274,7 +1274,7 @@ namespace SASSADirectCapture.Views
             lblBoxNo.Text = string.Empty;
             lblError.Text = string.Empty;
 
-            string myRegionID = UserSession.Office.RegionId;
+            string myRegionID = Usersession.Office.RegionId;
 
             if (string.IsNullOrEmpty(myRegionID))
             {
@@ -1723,7 +1723,7 @@ namespace SASSADirectCapture.Views
 
                     if (boxFile != null)
                     {
-                        string localOffice = UserSession.Office.OfficeId;
+                        string localOffice = Usersession.Office.OfficeId;
 
                         x = new DC_FILE()
                         {
@@ -1747,7 +1747,7 @@ namespace SASSADirectCapture.Views
                 x.FILE_STATUS = fileAction != SocpenFileActions.NONE ? fileAction : string.Empty; //Don't add 'please select' option into table
                 x.UPDATED_DATE = DateTime.Now;
 
-                x.UPDATED_BY_AD = UserSession.SamName;
+                x.UPDATED_BY_AD = Usersession.SamName;
 
 
                 if (addNew)
@@ -1833,7 +1833,7 @@ namespace SASSADirectCapture.Views
                 {
                     using (Entities en2 = new Entities())
                     {
-                        switch (UserSession.Office.RegionId)
+                        switch (Usersession.Office.RegionId)
                         {
                             case "1":
                                 x.ALT_BOX_NO = "WCA" + en2.Database.SqlQuery<decimal>("select SEQ_DC_ALT_BOX_NO_WCA.NEXTVAL from DUAL ").FirstOrDefault().ToString();
@@ -1883,7 +1883,7 @@ namespace SASSADirectCapture.Views
 
                 x.UPDATED_DATE = DateTime.Now;
 
-                x.UPDATED_BY_AD = UserSession.SamName;
+                x.UPDATED_BY_AD = Usersession.SamName;
 
                 en.DC_ACTIVITY.Add(util.CreateActivity("Boxing", "Box Rebox Update File"));
                 en.SaveChanges();
@@ -2166,7 +2166,7 @@ namespace SASSADirectCapture.Views
         private string addBoxToPicklist(string picklistno, string bin, string box, string archiveyear, string registry_type)
         {
             string usedpicklistno = string.Empty;
-            string regionid = UserSession.Office.RegionId;
+            string regionid = Usersession.Office.RegionId;
 
             if ((picklistno == null) || (picklistno == ""))
             {

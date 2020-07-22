@@ -224,7 +224,7 @@ namespace SASSADirectCapture.Views
                     x.TDW_BOXNO = "";
                     x.UPDATED_DATE = DateTime.Now;
 
-                    x.UPDATED_BY_AD = UserSession.SamName;
+                    x.UPDATED_BY_AD = Usersession.SamName;
 
                     en.DC_ACTIVITY.Add(util.CreateActivity("Receiving", "Unbox files (Pending)"));
                     en.SaveChanges();
@@ -379,7 +379,7 @@ namespace SASSADirectCapture.Views
                 x.UPDATED_DATE = DateTime.Now;
 
 
-                x.UPDATED_BY_AD = UserSession.SamName;
+                x.UPDATED_BY_AD = Usersession.SamName;
 
                 en.DC_ACTIVITY.Add(util.CreateActivity("Receiving", "Update File Status(Completed/Pending)"));
                 en.SaveChanges();
@@ -483,7 +483,7 @@ namespace SASSADirectCapture.Views
         private DC_BATCH GetCurrentBatch()
         {
             string batchNrValue = Request.QueryString["batchNo"].ToString();
-            var z = UserSession.Office.OfficeId;
+            var z = Usersession.Office.OfficeId;
             decimal outValue = 0.0M;
             if (Decimal.TryParse(batchNrValue, out outValue))
             {

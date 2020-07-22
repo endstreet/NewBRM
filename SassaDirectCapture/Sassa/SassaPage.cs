@@ -7,7 +7,7 @@ namespace SASSADirectCapture.Sassa
 {
     public class SassaPage : Page
     {
-        public static UserSession UserSession   // property
+        public static UserSession Usersession   // property
         {
             // get method
             get
@@ -27,7 +27,8 @@ namespace SASSADirectCapture.Sassa
             get
             {
                 if (_util != null) return _util;
-                _util = new BLUtility(UserSession);
+                if (Usersession == null) Usersession = (UserSession)HttpContext.Current.Session["us"];
+                 _util = new BLUtility(Usersession);
                 return _util;
             }
         }

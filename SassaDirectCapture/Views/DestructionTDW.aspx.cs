@@ -16,8 +16,8 @@ namespace SASSADirectCapture.Views
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegionId = int.Parse(UserSession.Office.RegionId);
-            UserName = UserSession.Name;
+            RegionId = int.Parse(Usersession.Office.RegionId);
+            UserName = Usersession.Name;
 
             dProcess = new DestructionProcess(RegionId, UserName);
             if (!IsPostBack)

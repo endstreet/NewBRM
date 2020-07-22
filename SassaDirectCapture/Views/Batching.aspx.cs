@@ -54,8 +54,8 @@ namespace SASSADirectCapture.Views
                 divClosedError.Visible = false;
             }
 
-            string lo = UserSession.Office.OfficeName;
-            string loid = UserSession.Office.OfficeId;
+            string lo = Usersession.Office.OfficeName;
+            string loid = Usersession.Office.OfficeId;
 
             XmlWriter xmlWriter = XmlWriter.Create(XMLFilePath);
             xmlWriter.WriteStartDocument();
@@ -274,7 +274,7 @@ namespace SASSADirectCapture.Views
         {
             try
             {
-                var x = UserSession.Office.OfficeId;
+                var x = Usersession.Office.OfficeId;
                 var query = en.DC_BATCH
                     .Where(oid => oid.OFFICE_ID == x)
                     .Where(st => st.BATCH_STATUS.ToLower() == "closed")
@@ -326,7 +326,7 @@ namespace SASSADirectCapture.Views
         {
             try
             {
-                var x = UserSession.Office.OfficeId;
+                var x = Usersession.Office.OfficeId;
                 var query = en.DC_BATCH
                     .Where(oid => oid.OFFICE_ID == x)
                     .Where(st => st.BATCH_STATUS.ToLower() == "transport")
@@ -385,7 +385,7 @@ namespace SASSADirectCapture.Views
                 //    return new List<BatchEntity>().AsQueryable();
                 //}
 
-                var x = UserSession.Office.OfficeId;
+                var x = Usersession.Office.OfficeId;
 
                 var query = en.DC_BATCH
                     .Where(bn => bn.BATCH_CURRENT.ToLower().Trim() == "y")
@@ -439,7 +439,7 @@ namespace SASSADirectCapture.Views
 
         private int NoOfBatchesForCurrentOffice()
         {
-            var x = UserSession.Office.OfficeId;
+            var x = Usersession.Office.OfficeId;
             return en.DC_BATCH.Count(oid => oid.OFFICE_ID == x);
         }
 
@@ -526,11 +526,11 @@ namespace SASSADirectCapture.Views
             DC_BATCH b = new DC_BATCH();
             b.BATCH_STATUS = "Open";
             b.BATCH_CURRENT = "Y";
-            b.OFFICE_ID = UserSession.Office.OfficeId;
+            b.OFFICE_ID = Usersession.Office.OfficeId;
             b.UPDATED_DATE = DateTime.Now;
 
 
-            b.UPDATED_BY_AD = UserSession.SamName;
+            b.UPDATED_BY_AD = Usersession.SamName;
 
             en.DC_BATCH.Add(b);
             en.DC_ACTIVITY.Add(util.CreateActivity("Batching", "Create batch"));
@@ -675,7 +675,7 @@ namespace SASSADirectCapture.Views
                             }
 
                             // added
-                            if (UserSession.GetRole().Equals("Y"))
+                            if (Usersession.GetRole().Equals("Y"))
                             {
                                 chkRow.Visible = true;
                             }
@@ -798,7 +798,7 @@ namespace SASSADirectCapture.Views
                 if (row.RowType == DataControlRowType.DataRow)
                 {
                     CheckBox chkRow = (row.Cells[0].FindControl("chkSelect") as CheckBox);
-                    string sCSUserRole = UserSession.GetRole();
+                    string sCSUserRole = Usersession.GetRole();
                     if (sCSUserRole == "Y" || sCSUserRole == "T")
                     {
                         chkRow.Visible = true;

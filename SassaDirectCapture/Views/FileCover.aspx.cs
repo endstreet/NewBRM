@@ -43,8 +43,8 @@ namespace SASSADirectCapture.Views
 
         public string createBRMFile(string brmno, string granttype,string id)
         {
-            string localOffice = UserSession.Office.OfficeId;
-            string localRegion = UserSession.Office.RegionId;
+            string localOffice = Usersession.Office.OfficeId;
+            string localRegion = Usersession.Office.RegionId;
             decimal batchNo = -1;
             string unqfileno = "";
 
@@ -194,14 +194,14 @@ namespace SASSADirectCapture.Views
                         {
                             DC_FILE file = context.DC_FILE.Where(f => f.UNQ_FILE_NO == txtCLM.InnerText).FirstOrDefault();
 
-                            string localOffice = UserSession.Office.OfficeId;
+                            string localOffice = Usersession.Office.OfficeId;
                             decimal batchNo = -1;
 
                             //If this is the Batching function, use the batching process
                             if (string.IsNullOrEmpty(fileprep.MIS_BOXNO))
                             {
                                 //var authenticationMethod = bool.Parse(System.Web.Configuration.WebConfigurationManager.AppSettings["UseADAuth"].ToString());
-                                var ADUser = UserSession.SamName;
+                                var ADUser = Usersession.SamName;
                                 //var CSUser = new SASSA_Authentication().getUserID();
 
                                 string sRegType = "";
@@ -296,7 +296,7 @@ namespace SASSADirectCapture.Views
                             file.LASTREVIEWDATE = hfReviewDate.Value == "" ? null : (DateTime?)DateTime.Parse(hfReviewDate.Value);
                             file.LCTYPE = hfLCType.Value == "" ? null : (Decimal?)Decimal.Parse(hfLCType.Value);
 
-                            file.UPDATED_BY_AD = UserSession.SamName;
+                            file.UPDATED_BY_AD = Usersession.SamName;
 
 
                             divFileUnqBarcode.Alt = file.UNQ_FILE_NO;
@@ -344,14 +344,14 @@ namespace SASSADirectCapture.Views
                         using (Entities context = new Entities())
                         {
                             DC_FILE file = new DC_FILE();
-                            string localOffice = UserSession.Office.OfficeId;
+                            string localOffice = Usersession.Office.OfficeId;
                             decimal batchNo = -1;
 
                             //If this is not the Box Audit function, use the batching process
                             if (string.IsNullOrEmpty(applicant.MIS_BOXNO))
                             {
                                 //var authenticationMethod = bool.Parse(System.Web.Configuration.WebConfigurationManager.AppSettings["UseADAuth"].ToString());
-                                var ADUser = UserSession.SamName;
+                                var ADUser = Usersession.SamName;
                                 //var CSUser = new SASSA_Authentication().getUserID();
 
                                 string sRegType = "";
@@ -476,7 +476,7 @@ namespace SASSADirectCapture.Views
                             file.LCTYPE = hfLCType.Value == "" ? null : (Decimal?)Decimal.Parse(hfLCType.Value);
 
 
-                            file.UPDATED_BY_AD = UserSession.SamName;
+                            file.UPDATED_BY_AD = Usersession.SamName;
 
 
                             divFileUnqBarcode.Alt = file.UNQ_FILE_NO;
@@ -577,7 +577,7 @@ namespace SASSADirectCapture.Views
         protected void Page_Load(object sender, EventArgs e)
         {
             //Get the username of the user that is logged in from session.
-            string authenticatedUsername = UserSession.SamName;
+            string authenticatedUsername = Usersession.SamName;
 
 
             if (!IsPostBack)
@@ -595,7 +595,7 @@ namespace SASSADirectCapture.Views
 
         private decimal CreateBatchForOffice(string sRegType)
         {
-            string sLocalOfficeID = UserSession.Office.OfficeId;
+            string sLocalOfficeID = Usersession.Office.OfficeId;
 
             DC_BATCH b = new DC_BATCH();
             b.BATCH_STATUS = "Open";
@@ -605,7 +605,7 @@ namespace SASSADirectCapture.Views
 
             if (bool.Parse(System.Web.Configuration.WebConfigurationManager.AppSettings["UseADAuth"].ToString()))
             {
-                b.UPDATED_BY_AD = UserSession.SamName;
+                b.UPDATED_BY_AD = Usersession.SamName;
             }
             //else
             //{
@@ -623,8 +623,8 @@ namespace SASSADirectCapture.Views
             using (Entities context = new Entities())
             {
                 //var authenticationMethod = bool.Parse(System.Web.Configuration.WebConfigurationManager.AppSettings["UseADAuth"].ToString());
-                var ADUser = UserSession.SamName;
-                //var CSUser = UserSession.AdName;
+                var ADUser = Usersession.SamName;
+                //var CSUser = Usersession.AdName;
                 var query = from btc in context.DC_BATCH
                                     .Where(bn => bn.BATCH_CURRENT.ToLower().Trim() == "y")
                                     .Where(oid => oid.OFFICE_ID == sLocalOfficeID)
@@ -679,7 +679,7 @@ namespace SASSADirectCapture.Views
         {
             Applicant applicant = new Applicant();
 
-            string myRegionID = UserSession.Office.RegionId;
+            string myRegionID = Usersession.Office.RegionId;
 
             Dictionary<string, string> grantTypes = util.getGrantTypes();
 

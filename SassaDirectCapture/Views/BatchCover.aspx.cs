@@ -148,7 +148,7 @@ namespace SASSADirectCapture.Views
         {
             decimal batchNo = 0.0M;
             Decimal.TryParse(Request.QueryString["batchNo"].ToString(), out batchNo);
-            var z = UserSession.Office.OfficeId;
+            var z = Usersession.Office.OfficeId;
             DC_BATCH batch = en.DC_BATCH
                 .Where(b => b.BATCH_NO == batchNo)
                 .Where(oid => oid.OFFICE_ID == z)
@@ -195,9 +195,9 @@ namespace SASSADirectCapture.Views
         {
             decimal batchNo = 0.0M;
             Decimal.TryParse(Request.QueryString["batchNo"].ToString(), out batchNo);
-            var z = UserSession.Office.OfficeId;
+            var z = Usersession.Office.OfficeId;
 
-            string sUserLogin = UserSession.SamName;
+            string sUserLogin = Usersession.SamName;
 
             string sActiveLoginName;
             sActiveLoginName = sUserLogin;
@@ -223,7 +223,7 @@ namespace SASSADirectCapture.Views
                     DC_BATCH b = new DC_BATCH();
                     b.BATCH_STATUS = "Open";
                     b.BATCH_CURRENT = "Y";
-                    b.OFFICE_ID = UserSession.Office.OfficeId;
+                    b.OFFICE_ID = Usersession.Office.OfficeId;
                     b.UPDATED_DATE = DateTime.Now;
                     b.UPDATED_BY_AD = sActiveLoginName;
                     b.UPDATED_BY = 0;
@@ -477,7 +477,7 @@ namespace SASSADirectCapture.Views
             decimal outValue = 0.0M;
             if (Decimal.TryParse(batchNo, out outValue))
             {
-                var z = UserSession.Office.OfficeId;
+                var z = Usersession.Office.OfficeId;
                 var x = en.DC_BATCH
                     .Where(bn => bn.BATCH_NO == outValue)
                     .Where(oid => oid.OFFICE_ID == z)
@@ -540,7 +540,7 @@ namespace SASSADirectCapture.Views
             {
                 if (Decimal.TryParse(batchNo, out outValue))
                 {
-                    var z = UserSession.Office.OfficeId;
+                    var z = Usersession.Office.OfficeId;
                     var x = en.DC_BATCH
                         .Where(bn => bn.BATCH_NO == outValue)
                         .Where(oid => oid.OFFICE_ID == z)

@@ -24,9 +24,9 @@ namespace SASSADirectCapture.Reports
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            RegionId = int.Parse(UserSession.Office.RegionId);
+            RegionId = int.Parse(Usersession.Office.RegionId);
 
-            dProcess = new DestructionProcess(RegionId, UserSession.SamName);
+            dProcess = new DestructionProcess(RegionId, Usersession.SamName);
             if (!IsPostBack)
             {
                 Session["pageIndex"] = "";
@@ -93,7 +93,7 @@ namespace SASSADirectCapture.Reports
             try
             {
 
-                localOfficeType = UserSession.Office.OfficeType;
+                localOfficeType = Usersession.Office.OfficeType;
 
                 if (rptOptionIndex != "1" && rptOptionIndex != "2")
                 {
@@ -141,7 +141,7 @@ namespace SASSADirectCapture.Reports
                 else
                 {
                     //Get Office ID from session
-                    office_id = UserSession.Office.OfficeId;
+                    office_id = Usersession.Office.OfficeId;
                     //pull input dates for destruction Report
                     if (ddYears.SelectedValue == string.Empty)
                     {
