@@ -811,7 +811,7 @@ namespace SASSADirectCapture.BL
 
                 try
                 {
-                    db.DC_ACTIVITY.Add(CreateActivity(Usersession,"Office", "Update User/LocalOffice link"));
+                    db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
                     db.SaveChanges();
                 }
                 catch (Exception ex)
@@ -842,10 +842,6 @@ namespace SASSADirectCapture.BL
         public DC_ACTIVITY CreateActivity(string Area, string Activity)
         {
             return new DC_ACTIVITY {ACTIVITY_DATE = DateTime.Now, REGION_ID = Usersession.Office.RegionId, OFFICE_ID = decimal.Parse(Usersession.Office.OfficeId), USERID = 0, USERNAME = Usersession.SamName, AREA = Area, ACTIVITY = Activity, RESULT = "OK" };
-        }
-        public DC_ACTIVITY CreateActivity(UserSession session,string Area, string Activity)
-        {
-            return new DC_ACTIVITY { ACTIVITY_DATE = DateTime.Now, REGION_ID = session.Office.RegionId, OFFICE_ID = decimal.Parse(session.Office.OfficeId), USERID = 0, USERNAME = session.SamName, AREA = Area, ACTIVITY = Activity, RESULT = "OK" };
         }
         #endregion Public Methods
     }
