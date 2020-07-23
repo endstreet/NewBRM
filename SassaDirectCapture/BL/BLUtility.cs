@@ -745,7 +745,7 @@ namespace SASSADirectCapture.BL
         public void getLocalOffice()
         {
 
-            if (string.IsNullOrEmpty(Usersession.SamName)) throw new Exception("Usersessioner Unknown");
+            if (string.IsNullOrEmpty(Usersession.SamName)) throw new Exception("Usersession Unknown");
             using (Entities context = new Entities())
             {
                 //Try local office from database.
