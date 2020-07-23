@@ -71,27 +71,23 @@ namespace SASSADirectCapture
         protected void Page_Load(object sender, EventArgs e)
         {
             us = Session["us"] == null ? new UserSession() : (UserSession)Session["us"];
-
+            util = new BLUtility(us);
             if (!us.IsIntitialized)
             {
-                us = new UserSession();
-
-                PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "SASSA");
-                UserPrincipal user = UserPrincipal.FindByIdentity(ctx, HttpContext.Current.Request.LogonUserIdentity.Name);
-                //string xx = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                //string xy=  HttpContext.Current.Request.LogonUserIdentity.Name;
-                //UserPrincipal user = UserPrincipal.Current;
-
-                us.SamName = user.SamAccountName;
-                us.Name = user.Name;
-                us.Surname = user.Surname;
-                us.AdName = user.UserPrincipalName;
-                Session["us"] = us;
-                util = new BLUtility(us);
-                bool bIsInGroups = util.setUserGroup(us.SamName);/* "SASSA\\VelemseniM"*/
-                if (!bIsInGroups)
+                if (string.IsNullOrEmpty(us.SamName))
                 {
-                    HttpContext.Current.Response.Redirect("~/Default.aspx");
+                    PrincipalContext ctx = new PrincipalContext(ContextType.Domain, "SASSA");
+                    UserPrincipal user = UserPrincipal.FindByIdentity(ctx, HttpContext.Current.Request.LogonUserIdentity.Name);
+                    us.SamName = user.SamAccountName;
+                    us.Name = user.Name;
+                    us.Surname = user.Surname;
+                    us.AdName = user.UserPrincipalName;
+                    Session["us"] = us;
+                    bool bIsInGroups = util.setUserGroup(us.SamName);/* "SASSA\\VelemseniM"*/
+                    if (!bIsInGroups)
+                    {
+                        HttpContext.Current.Response.Redirect("~/Default.aspx");
+                    }
                 }
                 util.getLocalOffice();
                 Session["us"] = util.Usersession;

@@ -18,16 +18,12 @@ namespace SASSADirectCapture.Sassa
             set
             {
                 HttpContext.Current.Session["us"] = value;
-                _util = new BLUtility(value);
             }  // set method
         }
-        private static BLUtility _util = null;
         public static BLUtility util
         {
             get
             {
-
-                if (Usersession == null) Usersession = (UserSession)HttpContext.Current.Session["us"];
                 return new BLUtility(Usersession);
             }
         }
