@@ -800,6 +800,7 @@ namespace SASSADirectCapture.BL
                 {
                     officeLink = db.DC_OFFICE_KUAF_LINK.Where(okl => okl.USERNAME == Usersession.SamName).First();
                     officeLink.OFFICE_ID = officeID;
+                    var x = db.Entry(officeLink);
                 }
                 else
                 {
@@ -809,15 +810,19 @@ namespace SASSADirectCapture.BL
 
                 try
                 {
-                    db.DC_ACTIVITY.Add(CreateActivity("Office", "Update User/LocalOffice link"));
+                    //this does nothing  but does prevent object reference error from being thrown in aracle manageddataaccess client.
+                    foreach (var err in db.GetValidationErrors())
+                    {
+                        var x = err;
+                    }
                     db.SaveChanges();
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(ex.Message);
+                    throw new Exception(ex.Message + Environment.NewLine + officeLink.ToString() + Usersession.ToString());
                 }
             }
-
+            PostActivity("Office", "Update User/LocalOffice link");
             return true;
         }
 
@@ -841,6 +846,23 @@ namespace SASSADirectCapture.BL
         {
             return new DC_ACTIVITY {ACTIVITY_DATE = DateTime.Now, REGION_ID = Usersession.Office.RegionId, OFFICE_ID = decimal.Parse(Usersession.Office.OfficeId), USERID = 0, USERNAME = Usersession.SamName, AREA = Area, ACTIVITY = Activity, RESULT = "OK" };
         }
+
+        public void PostActivity(string Area, string Activity)
+        {
+            try 
+            {
+                using (Entities db = new Entities())
+                {
+                    db.DC_ACTIVITY.Add(CreateActivity(Area, Activity));
+                    db.SaveChanges();
+                }
+            }
+            catch
+            {
+                //just ignoring activity post errors for now.
+            }
+        }
+
         #endregion Public Methods
     }
 }
